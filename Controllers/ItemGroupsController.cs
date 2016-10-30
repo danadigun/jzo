@@ -108,7 +108,8 @@ namespace jzo.Controllers
                 }
             }
 
-            return CreatedAtAction("GetItemGroup", new { id = itemGroup.Id }, itemGroup);
+            //return CreatedAtAction("GetItemGroup", new { id = itemGroup.Id }, itemGroup);
+            return Json(new { id = itemGroup.Id, status = "success" });
         }
 
         // DELETE: api/ItemGroups/5
