@@ -8,8 +8,8 @@ using jzo.Data;
 namespace jzo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161028131951_Added-Order-Table")]
-    partial class AddedOrderTable
+    [Migration("20161030203357_changed_relationship_bw_item_itemGroup")]
+    partial class changed_relationship_bw_item_itemGroup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,18 +66,110 @@ namespace jzo.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("jzo.Models.Order", b =>
+            modelBuilder.Entity("jzo.Models.Checkout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<DateTime>("dateCreated");
+
+                    b.Property<bool>("isSold");
+
+                    b.Property<decimal>("totalPrice");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Checkout");
+                });
+
+            modelBuilder.Entity("jzo.Models.Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("dateCreated");
+
+                    b.Property<string>("description");
+
+                    b.Property<string>("image_url");
+
+                    b.Property<int?>("itemGroupId");
+
+                    b.Property<string>("name");
+
+                    b.Property<decimal>("price");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("itemGroupId");
+
+                    b.ToTable("Item");
+                });
+
+            modelBuilder.Entity("jzo.Models.ItemGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("description");
 
-                    b.Property<bool>("isProcessed");
+                    b.Property<string>("name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.ToTable("ItemGroup");
+                });
+
+            modelBuilder.Entity("jzo.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("dateCreated");
+
+                    b.Property<DateTime>("dateShipped");
+
+                    b.Property<string>("description");
+
+                    b.Property<bool>("isPending");
+
+                    b.Property<bool>("isShipped");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("jzo.Models.SelectedItems", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("CheckoutId");
+
+                    b.Property<DateTime>("dateCreated");
+
+                    b.Property<bool>("isCheckedOut");
+
+                    b.Property<int?>("itemId");
+
+                    b.Property<int?>("orderId");
+
+                    b.Property<int>("quantity");
+
+                    b.Property<decimal>("totalPrice");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CheckoutId");
+
+                    b.HasIndex("itemId");
+
+                    b.HasIndex("orderId");
+
+                    b.ToTable("SelectedItem");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -185,6 +277,28 @@ namespace jzo.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("jzo.Models.Item", b =>
+                {
+                    b.HasOne("jzo.Models.ItemGroup", "itemGroup")
+                        .WithMany()
+                        .HasForeignKey("itemGroupId");
+                });
+
+            modelBuilder.Entity("jzo.Models.SelectedItems", b =>
+                {
+                    b.HasOne("jzo.Models.Checkout")
+                        .WithMany("Items")
+                        .HasForeignKey("CheckoutId");
+
+                    b.HasOne("jzo.Models.Item", "item")
+                        .WithMany()
+                        .HasForeignKey("itemId");
+
+                    b.HasOne("jzo.Models.Order", "order")
+                        .WithMany()
+                        .HasForeignKey("orderId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

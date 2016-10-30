@@ -14,7 +14,12 @@ namespace jzo.Data
             : base(options)
         {
         }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<SelectedItems> SelectedItem { get; set; }
+        public DbSet<ItemGroup> ItemGroup { get; set; }
+        public DbSet<Item>Item { get; set; }
+        public DbSet<Checkout> Checkout { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

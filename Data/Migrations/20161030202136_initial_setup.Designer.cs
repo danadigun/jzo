@@ -8,9 +8,10 @@ using jzo.Data;
 namespace jzo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161030202136_initial_setup")]
+    partial class initial_setup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -88,13 +89,13 @@ namespace jzo.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("ItemGroupId");
+
                     b.Property<DateTime>("dateCreated");
 
                     b.Property<string>("description");
 
                     b.Property<string>("image_url");
-
-                    b.Property<int?>("itemGroupId");
 
                     b.Property<string>("name");
 
@@ -102,7 +103,7 @@ namespace jzo.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("itemGroupId");
+                    b.HasIndex("ItemGroupId");
 
                     b.ToTable("Item");
                 });
@@ -280,9 +281,9 @@ namespace jzo.Data.Migrations
 
             modelBuilder.Entity("jzo.Models.Item", b =>
                 {
-                    b.HasOne("jzo.Models.ItemGroup", "itemGroup")
-                        .WithMany()
-                        .HasForeignKey("itemGroupId");
+                    b.HasOne("jzo.Models.ItemGroup")
+                        .WithMany("Items")
+                        .HasForeignKey("ItemGroupId");
                 });
 
             modelBuilder.Entity("jzo.Models.SelectedItems", b =>

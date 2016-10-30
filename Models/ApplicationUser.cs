@@ -9,5 +9,10 @@ namespace jzo.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        //public string firstname { get; set; }
+        //public string lastname { get; set; }
+        //public string mailingAddress { get; set; }
+        //public string phone { get; set; }
+        //public string email { get; set; } 
     }
 }
