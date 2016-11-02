@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using jzo.Data;
 using jzo.Models;
+using jzo.Models.ItemViewModels;
 
 namespace jzo.Controllers
 {
@@ -23,9 +24,22 @@ namespace jzo.Controllers
 
         // GET: api/ItemGroups
         [HttpGet]
-        public IEnumerable<ItemGroup> GetItemGroup()
+        public IEnumerable<GetAllItemGroupViewModel> GetItemGroup()
         {
-            return _context.ItemGroup;
+            var  itemGroupViewModel = new List<GetAllItemGroupViewModel>();
+
+            var itemGroups = _context.ItemGroup.ToList();
+
+            foreach(var group in itemGroups)
+            {
+                var itemInItemGroup = _context.Item.Where(x => x.itemGroup.Id == group.Id).ToList();
+                itemGroupViewModel.Add(new GetAllItemGroupViewModel
+                {
+                    group = group,
+                    items = itemInItemGroup
+                });
+            }
+            return itemGroupViewModel;
         }
 
         // GET: api/ItemGroups/5
@@ -38,13 +52,14 @@ namespace jzo.Controllers
             }
 
             ItemGroup itemGroup = await _context.ItemGroup.SingleOrDefaultAsync(m => m.Id == id);
+            List<Item> items =  _context.Item.Where(x => x.itemGroup.Id == id).ToList();
 
             if (itemGroup == null)
             {
                 return NotFound();
             }
 
-            return Ok(itemGroup);
+            return Json(new {id = id, itemGroup = itemGroup, items = items });
         }
 
         // PUT: api/ItemGroups/5
@@ -108,7 +123,6 @@ namespace jzo.Controllers
                 }
             }
 
-            //return CreatedAtAction("GetItemGroup", new { id = itemGroup.Id }, itemGroup);
             return Json(new { id = itemGroup.Id, status = "success" });
         }
 

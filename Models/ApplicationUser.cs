@@ -11,7 +11,7 @@ namespace jzo.Models
     {
         //public string firstname { get; set; }
         //public string lastname { get; set; }
-        //public string mailingAddress { get; set; }
+        public string mailingAddress { get; set; }
         //public string phone { get; set; }
         //public string email { get; set; } 
     }
