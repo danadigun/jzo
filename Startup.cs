@@ -63,9 +63,9 @@ namespace jzo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, InitializeUsers seedData )
         {
-            //seed user data
-            seedData.SeedAdminUser();
-            seedData.SeedCustomer();
+            //seed user data - run once
+            //seedData.SeedAdminUser();
+            //seedData.SeedCustomer();
 
             //logger
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));

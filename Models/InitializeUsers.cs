@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace jzo.Models
 {
+    /// <summary>
+    /// NOTE: this class' method should be called only once to seed data.
+    ///       afterwhich is begins to fail
+    /// </summary>
     public class InitializeUsers
     {
         private ApplicationDbContext _context;
