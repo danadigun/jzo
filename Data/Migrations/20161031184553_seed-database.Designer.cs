@@ -8,9 +8,10 @@ using jzo.Data;
 namespace jzo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161031184553_seed-database")]
+    partial class seeddatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -80,11 +81,7 @@ namespace jzo.Data.Migrations
 
                     b.Property<decimal>("totalPrice");
 
-                    b.Property<string>("userId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("userId");
 
                     b.ToTable("Checkout");
                 });
@@ -142,11 +139,7 @@ namespace jzo.Data.Migrations
 
                     b.Property<bool>("isShipped");
 
-                    b.Property<string>("userId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("userId");
 
                     b.ToTable("Order");
                 });
@@ -170,8 +163,6 @@ namespace jzo.Data.Migrations
 
                     b.Property<decimal>("totalPrice");
 
-                    b.Property<string>("userId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CheckoutId");
@@ -179,8 +170,6 @@ namespace jzo.Data.Migrations
                     b.HasIndex("itemId");
 
                     b.HasIndex("orderId");
-
-                    b.HasIndex("userId");
 
                     b.ToTable("SelectedItem");
                 });
@@ -292,25 +281,11 @@ namespace jzo.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("jzo.Models.Checkout", b =>
-                {
-                    b.HasOne("jzo.Models.ApplicationUser", "user")
-                        .WithMany()
-                        .HasForeignKey("userId");
-                });
-
             modelBuilder.Entity("jzo.Models.Item", b =>
                 {
                     b.HasOne("jzo.Models.ItemGroup", "itemGroup")
                         .WithMany()
                         .HasForeignKey("itemGroupId");
-                });
-
-            modelBuilder.Entity("jzo.Models.Order", b =>
-                {
-                    b.HasOne("jzo.Models.ApplicationUser", "user")
-                        .WithMany()
-                        .HasForeignKey("userId");
                 });
 
             modelBuilder.Entity("jzo.Models.SelectedItems", b =>
@@ -326,10 +301,6 @@ namespace jzo.Data.Migrations
                     b.HasOne("jzo.Models.Order", "order")
                         .WithMany()
                         .HasForeignKey("orderId");
-
-                    b.HasOne("jzo.Models.ApplicationUser", "user")
-                        .WithMany()
-                        .HasForeignKey("userId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

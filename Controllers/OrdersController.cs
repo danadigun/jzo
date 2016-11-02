@@ -38,13 +38,14 @@ namespace jzo.Controllers
             }
 
             Order order = await _context.Order.SingleOrDefaultAsync(m => m.Id == id);
+            List<SelectedItems> orderItems = _context.SelectedItem.Where(x => x.order.Id == id).ToList();
 
             if (order == null)
             {
                 return NotFound();
             }
 
-            return Ok(order);
+            return Json(new { id = order.Id, orderItems = orderItems });
         }
 
         // PUT: api/Orders/5
@@ -107,8 +108,7 @@ namespace jzo.Controllers
                     throw;
                 }
             }
-
-            return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+            return Json(new { id = order.Id, status = "success" });
         }
 
         // DELETE: api/Orders/5
