@@ -84,7 +84,7 @@ namespace jzo.Controllers
 
         // POST: api/Items
         [HttpPost]
-        public async Task<IActionResult> PostItem([FromBody] Item item)
+        public async Task<IActionResult> PostItem( Item item)
         {
             if (!ModelState.IsValid)
             {

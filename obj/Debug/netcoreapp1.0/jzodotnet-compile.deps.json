@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "ba74a80877e7be270dd1ad2e3f968c12be116014"
+    "signature": "ee48755aaa039b3f7e7fc7179d335a6f72e9afae"
   },
   "compilationOptions": {
     "defines": [
@@ -35,10 +35,17 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+          "jQuery.Validation": "1.15.1"
         },
         "compile": {
           "jzo.dll": {}
+        }
+      },
+      "jQuery/1.4.4": {},
+      "jQuery.Validation/1.15.1": {
+        "dependencies": {
+          "jQuery": "1.4.4"
         }
       },
       "Libuv/1.9.0": {
@@ -2895,10 +2902,17 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+          "jQuery.Validation": "1.15.1"
         },
         "runtime": {
           "jzo.dll": {}
+        }
+      },
+      "jQuery/1.4.4": {},
+      "jQuery.Validation/1.15.1": {
+        "dependencies": {
+          "jQuery": "1.4.4"
         }
       },
       "Libuv/1.9.0": {
@@ -5637,6 +5651,16 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "jQuery/1.4.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kexCeYIZehR5fRjo8CK1sngN5SZEQRFNfCYZHMS1RxwEEiSKetBw/gliYJcLJdJEBB+e9aHqleLCjuaSI7u23g=="
+    },
+    "jQuery.Validation/1.15.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dXq+3w0tW7l33fm+MPmlTEVI0DLuY6C/VzlVZDVRUjxgXtRO/1Y0ibg5MjQr1eWPBdMcyftMIiPHZRijX4XUug=="
     },
     "Libuv/1.9.0": {
       "type": "package",

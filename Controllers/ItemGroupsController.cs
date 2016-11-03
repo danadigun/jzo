@@ -11,7 +11,7 @@ using jzo.Models.ItemViewModels;
 
 namespace jzo.Controllers
 {
-    [Produces("application/json")]
+    //[Produces("application/json")]
     [Route("api/ItemGroups")]
     public class ItemGroupsController : Controller
     {
@@ -21,6 +21,7 @@ namespace jzo.Controllers
         {
             _context = context;
         }
+
 
         // GET: api/ItemGroups
         [HttpGet]
@@ -99,7 +100,7 @@ namespace jzo.Controllers
 
         // POST: api/ItemGroups
         [HttpPost]
-        public async Task<IActionResult> PostItemGroup([FromBody] ItemGroup itemGroup)
+        public async Task<IActionResult> PostItemGroup(ItemGroup itemGroup)
         {
             if (!ModelState.IsValid)
             {

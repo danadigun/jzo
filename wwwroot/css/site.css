@@ -7,5 +7,7 @@
 /* min-width 1441px, xlarge screens */
 /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
 /* min-width 1921px, xxlarge screens */
+.error {
+  color: red; }
 
 /*# sourceMappingURL=site.css.map */

@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-jzo-965b2879-61ad-4ecb-99b4-ac626b512983",
 
   "dependencies": {
@@ -41,10 +41,11 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc":  {
+    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "jQuery.Validation": "1.15.1"
   },
 
   "tools": {
