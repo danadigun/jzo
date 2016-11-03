@@ -20,5 +20,17 @@
     "inputFiles": [
       "wwwroot/js/group.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/item.min.js",
+    "inputFiles": [
+      "wwwroot/js/item.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jsonSerialize.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jsonSerialize.js"
+    ]
   }
 ]

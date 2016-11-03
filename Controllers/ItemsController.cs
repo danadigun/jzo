@@ -84,13 +84,14 @@ namespace jzo.Controllers
 
         // POST: api/Items
         [HttpPost]
-        public async Task<IActionResult> PostItem( Item item)
+        public async Task<IActionResult> PostItem(Item item)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            item.dateCreated = DateTime.Now;
             _context.Item.Add(item);
             try
             {

@@ -31,6 +31,7 @@ namespace jzo.Models
         public string description { get; set; }
         public DateTime dateCreated { get; set; }
         public ItemGroup itemGroup { get; set; }
+        public int quantity { get; set; }
 
     }
 
