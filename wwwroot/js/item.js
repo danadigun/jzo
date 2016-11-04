@@ -28,11 +28,13 @@ $(function () {
         },
         
         submitHandler: function (form) {
-            addItem(form);
+            addItem(form)
         }
     })
 
     function addItem(form) {
+
+        $('.save-item').html('please wait..');
 
         var _data = $(form).serializeFormJSON();
 
@@ -40,11 +42,26 @@ $(function () {
             name: _data.name,
             price: _data.price,
             description: _data.description,
-            itemGroup: {
-
-            },
+            ItemGroupId: _data.group_id,
         }
 
-        alert(_data.description);
+        addToGroup(item_data);
+     }
+
+    function addToGroup(data) {
+   
+        $.ajax({
+            url: 'api/items',
+            type: 'POST',
+            data: data
+        }).done(function (callback) {
+            $('.save-item').html('Save changes');
+            alert('successfully added new item')
+
+        }).fail(function (error) {
+            alert('unable to add new item');
+            console.log(erro);
+        });
+       
     }
 })

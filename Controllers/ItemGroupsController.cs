@@ -33,7 +33,7 @@ namespace jzo.Controllers
 
             foreach(var group in itemGroups)
             {
-                var itemInItemGroup = _context.Item.Where(x => x.itemGroup.Id == group.Id).ToList();
+                var itemInItemGroup = _context.Item.Where(x => x.ItemGroupId == group.Id).ToList();
                 itemGroupViewModel.Add(new GetAllItemGroupViewModel
                 {
                     group = group,
@@ -53,7 +53,7 @@ namespace jzo.Controllers
             }
 
             ItemGroup itemGroup = await _context.ItemGroup.SingleOrDefaultAsync(m => m.Id == id);
-            List<Item> items =  _context.Item.Where(x => x.itemGroup.Id == id).ToList();
+            List<Item> items =  _context.Item.Where(x => x.ItemGroupId == id).ToList();
 
             if (itemGroup == null)
             {

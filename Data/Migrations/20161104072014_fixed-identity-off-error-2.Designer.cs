@@ -8,9 +8,10 @@ using jzo.Data;
 namespace jzo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161104072014_fixed-identity-off-error-2")]
+    partial class fixedidentityofferror2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -92,15 +93,15 @@ namespace jzo.Data.Migrations
             modelBuilder.Entity("jzo.Models.Item", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ItemGroupId");
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<DateTime>("dateCreated");
 
                     b.Property<string>("description");
 
                     b.Property<string>("image_url");
+
+                    b.Property<int?>("itemGroupId");
 
                     b.Property<string>("name");
 
@@ -110,13 +111,15 @@ namespace jzo.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("itemGroupId");
+
                     b.ToTable("Item");
                 });
 
             modelBuilder.Entity("jzo.Models.ItemGroup", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("description");
 
@@ -297,6 +300,13 @@ namespace jzo.Data.Migrations
                     b.HasOne("jzo.Models.ApplicationUser", "user")
                         .WithMany()
                         .HasForeignKey("userId");
+                });
+
+            modelBuilder.Entity("jzo.Models.Item", b =>
+                {
+                    b.HasOne("jzo.Models.ItemGroup", "itemGroup")
+                        .WithMany()
+                        .HasForeignKey("itemGroupId");
                 });
 
             modelBuilder.Entity("jzo.Models.Order", b =>

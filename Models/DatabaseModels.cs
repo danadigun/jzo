@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace jzo.Models
 {
@@ -30,7 +31,7 @@ namespace jzo.Models
         public string name { get; set; }
         public string description { get; set; }
         public DateTime dateCreated { get; set; }
-        public ItemGroup itemGroup { get; set; }
+        public int ItemGroupId { get; set; }
         public int quantity { get; set; }
 
     }
