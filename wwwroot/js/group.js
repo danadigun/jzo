@@ -38,4 +38,7 @@ $(function () {
             alert('unable to add group')
         })
     }
+
+    //dropzone
+    
 })

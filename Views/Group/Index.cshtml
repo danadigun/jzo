@@ -31,6 +31,19 @@
                     <label class="control-label">description of items</label>
                     <input name="description" class="form-control" type="text" placeholder="Description... e.g Tunic Shirts for men" />
                 </div>
+                <div class="dropzone col s12" id="my-dropzone" name="mainFileUploader">
+
+                    <div class="dz-message" data-dz-message>
+                        <span style="font-size:18pt; text-align:center">
+                            <i class="ion ion-ios-cloud-upload-outline"></i><br />
+                            Click to upload or drag/drop scanned copies of loan application documents
+                        </span><br />
+                        <span><i>Max file Size: 5mb</i></span><br />
+                    </div>
+                    <div class="fallback">
+                        <input name="file" type="file" multiple required />
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
