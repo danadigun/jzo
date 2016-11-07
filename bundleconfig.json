@@ -32,5 +32,11 @@
     "inputFiles": [
       "wwwroot/lib/jsonSerialize.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/dropzonejs/dropzone.min.js",
+    "inputFiles": [
+      "wwwroot/lib/dropzonejs/dropzone.js"
+    ]
   }
 ]

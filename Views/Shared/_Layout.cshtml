@@ -8,12 +8,14 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link href="~/lib/dropzone/dist/dropzone.css" rel="stylesheet" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link href="~/lib/dropzone/dist/min/dropzone.min.css" rel="stylesheet" />
     </environment>
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
 </head>
@@ -43,7 +45,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2016 - jzo</p>
+            <p>&copy; 2016 - Jzo Fashion Nigeria Limited.</p>
         </footer>
     </div>
 
@@ -52,6 +54,7 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
         <script src="~/lib/jsonSerialize.js"></script>
+        <script src="~/lib/dropzone/dist/dropzone.js"></script>
 
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/group.js" asp-append-version="true"></script>
@@ -69,6 +72,7 @@
         </script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
         <script src="~/lib/jsonSerialize.min.js"></script>
+        <script src="~/lib/dropzone/dist/min/dropzone.min.js"></script>
 
         <script src="~/js/site.min.js" asp-append-version="true"></script>
         <script src="~/js/group.min.js" asp-append-version="true"></script>

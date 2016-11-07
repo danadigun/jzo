@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using jzo.Data;
 using jzo.Models;
 using jzo.Models.ItemViewModels;
+using Microsoft.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace jzo.Controllers
 {
@@ -153,4 +156,56 @@ namespace jzo.Controllers
             return _context.ItemGroup.Any(e => e.Id == id);
         }
     }
+
+    [Route("api/ItemGroupImage")]
+    public class ItemGroupImageController : Controller
+    {
+        private IHostingEnvironment hostingEnv;
+        private ApplicationDbContext _context;
+
+        public ItemGroupImageController(IHostingEnvironment env, ApplicationDbContext context)
+        {
+            this.hostingEnv = env;
+            this._context = context;
+        }
+        [HttpPost]
+        public IActionResult Add()
+        {
+            long size = 0;
+            var files = Request.Form.Files;
+
+            string header = Request.Headers["Origin"].ToString();
+            int group_id = Convert.ToInt32(Request.Form["group_id"].ToString());
+
+            if(!_context.ItemGroup.Any(x=>x.Id == group_id))
+            {
+                return Json(new { error = "this group hasn't been created" });
+            }
+
+            var group = _context.ItemGroup.SingleOrDefault(x => x.Id == group_id);
+
+            foreach (var file in files)
+            {
+                var filename = ContentDispositionHeaderValue
+                                .Parse(file.ContentDisposition)
+                                .FileName
+                                .Trim('"');
+                group.imageUrl = header + $@"\groupsImg\{filename}";
+                
+                filename = hostingEnv.WebRootPath + $@"\groupsImg\{filename}";
+                size += file.Length;
+                using (FileStream fs = System.IO.File.Create(filename))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+            }
+            _context.SaveChanges();
+            string message = $"{files.Count} file(s) /{size} bytes uploaded successfully!";
+
+            return Json(new { message = message, group_id = group_id, image_url = group.imageUrl });
+        }
+    }
+
+    
 }
