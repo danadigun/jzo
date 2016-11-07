@@ -48,10 +48,10 @@ $(function () {
 
     function next() {
         $('.form-group input').prop('disabled', true);
-        $('.dropzone').show();
+        $('#my-dropzone').show();
         $('.save-changes').hide();
         $('.complete').show();
-
+        $('.item-add').show();
                 $('.drop-message')
                      .html(
                          "<div class =\"alert alert-info\">" +
@@ -64,13 +64,15 @@ $(function () {
     }
 
     function start() {
-        $('.dropzone').hide();
+        $('#my-dropzone').hide();
         $('.complete').hide();
+        $('.item-add').hide();
     }
 
     $('.complete').click(function () {
         complete();
     });
+
     function complete() {
         $('.form-group input').val('');
         $('.form-group input').prop('disabled', false);
@@ -79,6 +81,7 @@ $(function () {
         $(location).attr("href", "/group");
     }
 
+    
     //dropzone
     Dropzone.options.myDropzone = {
 
@@ -89,8 +92,7 @@ $(function () {
         uploadMultiple: false,
 
         init: function () {
-            //init here
-
+        
             this.on('sending', function (data, xhr, formData) {
                 //get form data here 
                 formData.append("group_id", group_id);
@@ -105,7 +107,7 @@ $(function () {
                 $('.drop-message')
                     .html(
                         "<div class =\"alert alert-success\">" +
-                        "<b>Success! </b>You have successfully created an item group. click <b>complete</b> to finish!" +
+                        "<b>Success! </b>You have successfully created a new group. Click <b>exit</b> to finish!" +
                         "</div>"+
                         "<div class=\"alert alert-info \">"+
                         "You can simply replace image by uploading a new one"+
@@ -114,11 +116,11 @@ $(function () {
                 $('.complete').prop('disabled', false);
                 $('.close-dismiss').hide();
             })
-
             this.on('error', function (file) {
                 //get error here
             })
         }
     }
 
+   
 })
