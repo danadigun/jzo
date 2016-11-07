@@ -57,6 +57,7 @@ namespace jzo
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IUpload, FileUploadService>();
             services.AddTransient<InitializeUsers>();
         }
 
