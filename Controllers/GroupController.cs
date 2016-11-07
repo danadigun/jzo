@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using jzo.Data;
 using jzo.Models.ItemViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace jzo.Controllers
 {
@@ -16,6 +17,8 @@ namespace jzo.Controllers
         {
             _context = context;
         }
+
+        //[Authorize(Roles = "admin")]
         public IActionResult Index()
         {
             var viewModelList = new List<GetAllItemGroupViewModel>();
