@@ -52,6 +52,7 @@ $(function () {
             price: _data.price,
             description: _data.description,
             ItemGroupId: _data.group_id,
+            quantity : _data.quantity,
         }
 
         addToGroup(item_data);
