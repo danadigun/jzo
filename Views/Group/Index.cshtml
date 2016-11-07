@@ -33,8 +33,7 @@
                 <div class="form-group">
                     <label class="control-label">description of items</label>
                     <input name="description" class="form-control" type="text" placeholder="Description... e.g Tunic Shirts for men" />
-                </div>
-                
+                </div>               
                 <div class="dropzone col s12" id="my-dropzone" name="mainFileUploader">
 
                     <div class="dz-message" data-dz-message>
@@ -52,7 +51,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default close-dismiss" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary save-changes">Next</button>
-                <button type="button" class="btn btn-primary complete">complete</button>
+              @*  <button type="button" class="btn btn-success item-add" data-toggle="modal" data-target="#add-item-group-modal">+ add new items to this group</button>*@
+                <button type="button" class="btn btn-primary complete">finish</button>
             </div>
         </form>
     </div>
@@ -69,9 +69,13 @@
                 <h4 class="modal-title" id="myModalLabel">Create new items</h4>
             </div>
             <div class="modal-body">
+                <div class="item-drop-message">
+
+                </div>
                 <div class="form-group">
                     <label class="control-label">Item Group</label>
                     <select name="group_id" class="form-control">
+                        <option selected disabled>Select group </option>
                         @{
                             foreach (var group in Model)
                             {
@@ -97,10 +101,25 @@
                     <label class="control-label">Quantity</label>
                     <input name="quantity" class="form-control" type="text" placeholder="quantity of items" />
                 </div>
+                <div class="dropzone col s12" id="item-dropzone" name="itemFileUploader">
+
+                    <div class="dz-message" data-dz-message>
+                        <span style="font-size:10pt; text-align:center">
+                            <i class="ion ion-ios-cloud-upload-outline"></i><br />
+                            Click to upload or drag/drop an image of this item
+                        </span><br />
+                        <span><i>Max file Size: 1.5mb</i></span><br />
+                    </div>
+                    <div class="fallback">
+                        <input name="file" type="file" required />
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary save-item">Save changes</button>
+                <button type="button" class="btn btn-default item_close-dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary item_save-changes">Next</button>
+                @*  <button type="button" class="btn btn-success item-add" data-toggle="modal" data-target="#add-item-group-modal">+ add new items to this group</button>*@
+                <button type="button" class="btn btn-primary item_complete">finish</button>
             </div>
         </form>
     </div>
