@@ -270,6 +270,8 @@ C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Data\
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Data\Migrations\20161104072014_fixed-identity-off-error-2.Designer.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Data\Migrations\20161104133956_fixed-identity-off-error-3.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Data\Migrations\20161104133956_fixed-identity-off-error-3.Designer.cs
+C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Data\Migrations\20161107095205_add-fileupload-api.cs
+C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Data\Migrations\20161107095205_add-fileupload-api.Designer.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Data\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\ApplicationUser.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\DatabaseModels.cs
@@ -291,6 +293,8 @@ C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Model
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\ManageViewModels\RemoveLoginViewModel.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\ManageViewModels\SetPasswordViewModel.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\ManageViewModels\VerifyPhoneNumberViewModel.cs
+C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Services\FileUploadService.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Services\IEmailSender.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Services\ISmsSender.cs
+C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Services\IUpload.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Services\MessageServices.cs

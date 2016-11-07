@@ -23,6 +23,9 @@
                 <h4 class="modal-title" id="myModalLabel">Create a new group of Items</h4>
             </div>
             <div class="modal-body">
+                <div class="drop-message">
+
+                </div>
                 <div class="form-group">
                     <label class="control-label">Title</label>
                     <input name="name" class="form-control" type="text" placeholder="Item Group title... e.g Tunic Shirts" />
@@ -31,23 +34,25 @@
                     <label class="control-label">description of items</label>
                     <input name="description" class="form-control" type="text" placeholder="Description... e.g Tunic Shirts for men" />
                 </div>
+                
                 <div class="dropzone col s12" id="my-dropzone" name="mainFileUploader">
 
                     <div class="dz-message" data-dz-message>
-                        <span style="font-size:18pt; text-align:center">
+                        <span style="font-size:10pt; text-align:center">
                             <i class="ion ion-ios-cloud-upload-outline"></i><br />
-                            Click to upload or drag/drop scanned copies of loan application documents
+                            Click to upload or drag/drop an image here that describes this group of items
                         </span><br />
-                        <span><i>Max file Size: 5mb</i></span><br />
+                        <span><i>Max file Size: 1.5mb</i></span><br />
                     </div>
                     <div class="fallback">
-                        <input name="file" type="file" multiple required />
+                        <input name="file" type="file" required />
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default close-dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary save-changes">Next</button>
+                <button type="button" class="btn btn-primary complete">complete</button>
             </div>
         </form>
     </div>

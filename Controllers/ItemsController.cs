@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using jzo.Data;
 using jzo.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Net.Http.Headers;
+using System.IO;
 
 namespace jzo.Controllers
 {
@@ -138,4 +141,55 @@ namespace jzo.Controllers
             return _context.Item.Any(e => e.Id == id);
         }
     }
+
+    [Route("api/ItemImage")]
+    public class ItemImageController : Controller
+    {
+        private IHostingEnvironment hostingEnv;
+        private ApplicationDbContext _context;
+
+        public ItemImageController(IHostingEnvironment env, ApplicationDbContext context)
+        {
+            this.hostingEnv = env;
+            this._context = context;
+        }
+        [HttpPost]
+        public IActionResult Add()
+        {
+            long size = 0;
+            var files = Request.Form.Files;
+
+            string header = Request.Headers["Origin"].ToString();
+            int item_id = Convert.ToInt32(Request.Form["item_id"].ToString());
+
+            if (!_context.Item.Any(x => x.Id == item_id))
+            {
+                return Json(new { error = "this item hasn't been created" });
+            }
+
+            var item = _context.Item.SingleOrDefault(x => x.Id == item_id);
+
+            foreach (var file in files)
+            {
+                var filename = ContentDispositionHeaderValue
+                                .Parse(file.ContentDisposition)
+                                .FileName
+                                .Trim('"');
+                item.image_url = header + $@"\ItemsImg\{filename}";
+
+                filename = hostingEnv.WebRootPath + $@"\ItemsImg\{filename}";
+                size += file.Length;
+                using (FileStream fs = System.IO.File.Create(filename))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+            }
+            _context.SaveChanges();
+            string message = $"{files.Count} file(s) /{size} bytes uploaded successfully!";
+
+            return Json(new { message = message, group_id = item_id, image_url = item.image_url });
+        }
+    }
+
 }
