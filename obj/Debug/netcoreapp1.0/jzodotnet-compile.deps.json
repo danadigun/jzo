@@ -36,7 +36,8 @@
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-          "jQuery.Validation": "1.15.1"
+          "jQuery.Validation": "1.15.1",
+          "Microsoft.AspNetCore.Authorization": "1.0.0"
         },
         "compile": {
           "jzo.dll": {}
@@ -2903,7 +2904,8 @@
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-          "jQuery.Validation": "1.15.1"
+          "jQuery.Validation": "1.15.1",
+          "Microsoft.AspNetCore.Authorization": "1.0.0"
         },
         "runtime": {
           "jzo.dll": {}

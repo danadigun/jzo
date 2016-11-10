@@ -46,7 +46,8 @@
                                     <td>Name</td>
                                     <td>description</td>
                                     <td>Unit price (NGN)</td>
-                                    <td>Quantity</td>
+                                    <td>Quantity in stock</td>
+                                    <td>&nbsp;</td>
                                 </tr>
                                 @{
                                     foreach (var store_item in item.items)
@@ -57,6 +58,10 @@
                                             <td>@store_item.description</td>
                                             <td>@store_item.price</td>
                                             <td>@store_item.quantity</td>
+                                            <td>
+                                                <a href="#" style="text-decoration:none; margin-right:1em;"><i class="ion ion-trash-a"></i></a>
+                                                <a href="#" style="text-decoration:none"><i class="ion ion-edit"></i></a>
+                                            </td>
                                         </tr>
 
                                     }
