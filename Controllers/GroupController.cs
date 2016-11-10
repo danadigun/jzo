@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace jzo.Controllers
 {
+    [Authorize]
     public class GroupController : Controller
     {
         private ApplicationDbContext _context;
@@ -18,7 +19,7 @@ namespace jzo.Controllers
             _context = context;
         }
 
-        //[Authorize(Roles = "admin")]
+
         public IActionResult Index()
         {
             var viewModelList = new List<GetAllItemGroupViewModel>();
@@ -36,5 +37,7 @@ namespace jzo.Controllers
             }
             return View(viewModelList);
         }
+
+        
     }
 }
