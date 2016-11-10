@@ -38,6 +38,18 @@ namespace jzo.Controllers
             return View(viewModelList);
         }
 
-        
+        public IActionResult details(int itemId)
+        {
+            var getItemViewModel = new GetItemViewModel();
+            var item = _context.Item.SingleOrDefault(x => x.Id == itemId);
+            var relatedItem = _context.Item.OrderBy(x=>x.Id).Take(4).ToList();
+
+            getItemViewModel.item = item;
+            getItemViewModel.relatedItems = relatedItem;
+
+            return View(getItemViewModel);
+        }
+
+       
     }
 }
