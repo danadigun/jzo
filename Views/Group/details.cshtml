@@ -1,0 +1,107 @@
+@model jzo.Models.ItemViewModels.GetItemViewModel
+
+@{
+    ViewData["Title"] = "Product details for " + Model.item.name;
+}
+
+<div class="container" style="padding-top:15em;">
+    <div class="row">
+        <div class="col-lg-7">
+            <div>
+                <img src="@Model.item.image_url" style="width:30em; height:auto;" />
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div>
+                <p>
+                    <a class="btn btn-default" href="#" style="text-decoration:none"><i class="ion ion-reply"></i>&nbsp; Continue shopping</a>
+                    <a class="btn btn-info" href="#" style="text-decoration:none"><i class="ion ion-plus"></i>&nbsp; share</a>
+                </p>
+            </div>
+            <div style="margin-top:5em;">
+                <h1>@Model.item.name <br /> <span style="font-size:15pt;">@Model.item.price (NGN)</span></h1><hr />
+                <p>
+                    @Model.item.description
+                </p><hr />
+                <div class="form-inline">
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option disabled selected="selected">Size</option>
+                            <option>Small</option>
+                            <option>Medium</option>
+                            <option>Big</option>
+                        </select>
+                        <input type="number" placeholder="quantity" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Add to cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:10em;">
+        <div>
+            <h4>Related Products</h4><hr />
+            <div class="row">
+                @{
+                    foreach (var _model in Model.relatedItems)
+                    {
+                        <div class="col-lg-3">
+                            <div>
+                                <img src="@_model.image_url" style="width:15em; height:auto;" />
+                            </div>
+                        </div>
+                    }
+                }
+              
+            </div>
+        </div>
+    </div>
+</div>
+@*<h2>details</h2>
+
+    <div>
+        <h4>Item</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.image_url)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.image_url)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.quantity)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.quantity)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@
