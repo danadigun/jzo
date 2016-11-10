@@ -1,18 +1,77 @@
-﻿@model IEnumerable<jzo.Models.ItemGroup>
+﻿@model IEnumerable<jzo.Models.ItemViewModels.GetAllItemGroupViewModel>
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-} 
-<br /><br />
-<h1>Group Controller </h1>
+}
 
-<ul>
-    <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Create-group-modal">Create Group</button></li>
-    <li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-item-group-modal">Add items to group</button></li>
-    <li>View All groups</li>
-    <li>Save Changes</li>
-</ul>
+<h1 style="margin-top:4em; margin-bottom:2em;">
+    <i class="ion ion-bag"></i>&nbsp;My Store
+    <span style="font-size:12pt; float:right;">
+        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#Create-group-modal">+ Create Group</button>
+        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#add-item-group-modal">+ Add new items to store</button>
+    </span>
+</h1>
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    @{
+        foreach (var item in Model)
+        {
+          <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne_@item.group.Id">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.group.Id" aria-expanded="true" aria-controls="collapseOne">
+                            <img style="width:100px; height:auto; margin-right:2em;" src="@item.group.imageUrl" />
+                            @item.group.name
+                        </a>
+                        <span style="float:right; font-size:12pt;">
+                            <b><i>No of Items:</i>&nbsp;@item.items.Count</b>
+                        </span>
+                    </h4>
+                </div>
+                <div id="collapse_@item.group.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_@item.group.Id">
+                    <div class="panel-body">
+                        <p style="padding-left:1em;">
+                            <b>Description</b><br />
+                            <span>
+                                @item.group.description
+                            </span>
+                        </p>
+                        <!--table here-->
+                        <div style="padding-left:1em;">
+                            <table class="table table-bordered table-striped table-condensed">
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>Name</td>
+                                    <td>description</td>
+                                    <td>Unit price (NGN)</td>
+                                    <td>Quantity</td>
+                                </tr>
+                                @{
+                                    foreach (var store_item in item.items)
+                                    {
+                                        <tr>
+                                            <td><img src="@store_item.image_url" style="width:50px; height:auto;" /></td>
+                                            <td>@store_item.name</td>
+                                            <td>@store_item.description</td>
+                                            <td>@store_item.price</td>
+                                            <td>@store_item.quantity</td>
+                                        </tr>
+
+                                    }
+                                }
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+   
+   
+</div>
 
 <!-- Create Group Modal -->
 <div class="modal fade" id="Create-group-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -20,7 +79,7 @@
         <form name="add-group" class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Create a new group of Items</h4>
+                <h4 class="modal-title" id="myModalLabel">+ Create a new group of Items</h4>
             </div>
             <div class="modal-body">
                 <div class="drop-message">
@@ -33,7 +92,7 @@
                 <div class="form-group">
                     <label class="control-label">description of items</label>
                     <input name="description" class="form-control" type="text" placeholder="Description... e.g Tunic Shirts for men" />
-                </div>               
+                </div>
                 <div class="dropzone col s12" id="my-dropzone" name="mainFileUploader">
 
                     <div class="dz-message" data-dz-message>
@@ -51,12 +110,11 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default close-dismiss" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary save-changes">Next</button>
-              @*  <button type="button" class="btn btn-success item-add" data-toggle="modal" data-target="#add-item-group-modal">+ add new items to this group</button>*@
+                @*  <button type="button" class="btn btn-success item-add" data-toggle="modal" data-target="#add-item-group-modal">+ add new items to this group</button>*@
                 <button type="button" class="btn btn-primary complete">finish</button>
             </div>
         </form>
     </div>
-   
 </div>
 
 
@@ -66,7 +124,7 @@
         <form name="add-item" class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Create new items</h4>
+                <h4 class="modal-title" id="myModalLabel">+ Add new items to store</h4>
             </div>
             <div class="modal-body">
                 <div class="item-drop-message">
@@ -77,9 +135,9 @@
                     <select name="group_id" class="form-control">
                         <option selected disabled>Select group </option>
                         @{
-                            foreach (var group in Model)
+                            foreach (var item in Model)
                             {
-                                <option value="@group.Id">@group.name</option>
+                                <option value="@item.group.Id">@item.group.name</option>
 
                             }
                         }
@@ -123,5 +181,4 @@
             </div>
         </form>
     </div>
-
 </div>
