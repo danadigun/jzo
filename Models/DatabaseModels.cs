@@ -40,8 +40,9 @@ namespace jzo.Models
     public class SelectedItems
     {
         public int Id { get; set; }
+        public string CartId { get; set; }
+        public int ItemId { get; set; }
         public DateTime dateCreated { get; set; }
-        public Item item { get; set; }
         public int quantity { get; set; }     
         public decimal totalPrice { get; set; }
         public bool isCheckedOut{ get; set; }

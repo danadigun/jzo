@@ -53,6 +53,7 @@ namespace jzo
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddSession();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -90,6 +91,7 @@ namespace jzo
             app.UseStaticFiles();
 
             app.UseIdentity();
+            app.UseSession();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
