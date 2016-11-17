@@ -31,17 +31,33 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">jzo</a>
+               @* <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">jzo</a>*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="ion ion-social-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="About">
+                            <i class="ion ion-social-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Contact">
+                            <i class="ion ion-social-instagram"></i>
+                        </a>
+                    </li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
+            
         </div>
+    </div>
+    <div class="top-bar container">
+        <h1>Welcome</h1>
     </div>
     <div class="container body-content">
         @RenderBody()
