@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace jzo.Controllers
 {
-    [Authorize]
     public class GroupController : Controller
     {
         private ApplicationDbContext _context;
@@ -24,7 +23,7 @@ namespace jzo.Controllers
             _context = context;
         }
 
-
+        [Authorize]
         public IActionResult Index()
         {
             var viewModelList = new List<GetAllItemGroupViewModel>();
@@ -43,6 +42,7 @@ namespace jzo.Controllers
             return View(viewModelList);
         }
 
+        [Authorize]
         public IActionResult details(int itemId)
         {
             ViewData["CartId"] = GetCartId();
@@ -57,7 +57,9 @@ namespace jzo.Controllers
             return View(getItemViewModel);
         }
 
-        public IActionResult addToCart(int itemId)
+        [HttpPost]
+        //[Authorize]
+        public IActionResult addToCart(int itemId, int? quantity, string size)
         {
             // Retrieve the product from the database.           
             ShoppingCartId = GetCartId();
@@ -66,8 +68,15 @@ namespace jzo.Controllers
                 x => x.CartId == ShoppingCartId
                 && x.ItemId == itemId);
 
+            var item = _context.Item.SingleOrDefault(x => x.Id == itemId);
+
             if(cartItem == null)
             {
+                //set quantity
+                if (!quantity.HasValue)
+                {
+                    quantity = 1;
+                }
                 //create a new cart item if no cart item exists
                 cartItem = new Models.SelectedItems
                 {
@@ -75,7 +84,10 @@ namespace jzo.Controllers
                     CartId = ShoppingCartId,
                     dateCreated = DateTime.Now,
                     isCheckedOut = false,
-                    quantity = 1,
+                    quantity = quantity.Value,
+                    totalPrice = item.price * quantity.Value,
+                    user = HttpContext.User.Identity.Name,
+                    size = size
                 };
                 _context.Add(cartItem);
             }else
@@ -102,7 +114,10 @@ namespace jzo.Controllers
             {
                 if (!string.IsNullOrWhiteSpace(HttpContext.User.Identity.Name))
                 {
-                    HttpContext.Session.SetString("CartId", HttpContext.User.Identity.Name);
+                    // Generate a new random GUID using System.Guid class.     
+                    Guid tempCartId = Guid.NewGuid();
+                    HttpContext.Session.SetString("CartId", tempCartId.ToString());
+                    //HttpContext.Session.SetString("CartId", HttpContext.User.Identity.Name);
                 }
                 else
                 {

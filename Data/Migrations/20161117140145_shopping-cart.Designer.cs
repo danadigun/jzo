@@ -8,9 +8,10 @@ using jzo.Data;
 namespace jzo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161117140145_shopping-cart")]
+    partial class shoppingcart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -172,17 +173,17 @@ namespace jzo.Data.Migrations
 
                     b.Property<int>("quantity");
 
-                    b.Property<string>("size");
-
                     b.Property<decimal>("totalPrice");
 
-                    b.Property<string>("user");
+                    b.Property<string>("userId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CheckoutId");
 
                     b.HasIndex("orderId");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("SelectedItem");
                 });
@@ -317,6 +318,10 @@ namespace jzo.Data.Migrations
                     b.HasOne("jzo.Models.Order", "order")
                         .WithMany()
                         .HasForeignKey("orderId");
+
+                    b.HasOne("jzo.Models.ApplicationUser", "user")
+                        .WithMany()
+                        .HasForeignKey("userId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

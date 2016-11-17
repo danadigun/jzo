@@ -24,20 +24,22 @@
                 <p>
                     @Model.item.description
                 </p><hr />
-                <div class="form-inline">
+                <form name="add-to-cart" class="form-inline">
                     <div class="form-group">
-                        <select class="form-control">
+                        <input type="hidden" name="itemId" value="@Model.item.Id" />
+                        <select name="size" class="form-control">
                             <option disabled selected="selected">Size</option>
-                            <option>Small</option>
-                            <option>Medium</option>
-                            <option>Big</option>
+                            <option value="Small">Small</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Large">Large</option>
+                            <option value="XLarge">Extra Large</option>
                         </select>
-                        <input type="number" placeholder="quantity" class="form-control" />
+                        <input name="quantity" type="number" placeholder="quantity" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary">Add to cart</button>
+                        <button class="btn btn-primary" type="submit">Add to cart</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

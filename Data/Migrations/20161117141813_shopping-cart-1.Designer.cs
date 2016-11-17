@@ -8,9 +8,10 @@ using jzo.Data;
 namespace jzo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161117141813_shopping-cart-1")]
+    partial class shoppingcart1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -171,8 +172,6 @@ namespace jzo.Data.Migrations
                     b.Property<int?>("orderId");
 
                     b.Property<int>("quantity");
-
-                    b.Property<string>("size");
 
                     b.Property<decimal>("totalPrice");
 

@@ -47,7 +47,10 @@ namespace jzo.Models
         public decimal totalPrice { get; set; }
         public bool isCheckedOut{ get; set; }
         public Order order { get; set; }
-        public ApplicationUser user { get; set; }
+        public string user { get; set; }
+
+        //size of dress ordered
+        public string size { get; set; }
     }
 
     public class Checkout
