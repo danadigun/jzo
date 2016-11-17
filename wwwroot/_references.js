@@ -1,4 +1,5 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="js/addtocart.js" />
 /// <reference path="js/group.js" />
 /// <reference path="js/item.js" />
 /// <reference path="js/landing.min.js" />
