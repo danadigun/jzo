@@ -1,5 +1,6 @@
 ﻿
 @import "_responsive.scss";
+@import "_variables.scss";
 
 .error{
     color:red;
@@ -21,6 +22,6 @@
 }
 
 .top-bar ul li a:hover{
-    background:#0047AB ;
+    background:$primary-color;
     color:white;
 }
