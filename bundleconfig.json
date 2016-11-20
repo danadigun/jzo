@@ -38,5 +38,11 @@
     "inputFiles": [
       "wwwroot/lib/dropzonejs/dropzone.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/addToCart.min.js",
+    "inputFiles": [
+      "wwwroot/js/addToCart.js"
+    ]
   }
 ]

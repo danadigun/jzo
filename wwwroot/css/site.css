@@ -10,4 +10,13 @@
 .error {
   color: red; }
 
+.top-bar {
+  height: 150px;
+  background: whitesmoke;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 16.5%;
+  padding-right: 20%; }
+
 /*# sourceMappingURL=site.css.map */

@@ -31,17 +31,53 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">jzo</a>
+                @* <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">jzo</a>*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="ion ion-social-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="About">
+                            <i class="ion ion-social-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Contact">
+                            <i class="ion ion-social-instagram"></i>
+                        </a>
+                    </li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
+
         </div>
+    </div>
+    <div class="top-bar container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img alt="Logo" src="...">
+            </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Shop</a></li>
+            @*<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </li>*@
+        </ul>
     </div>
     <div class="container body-content">
         @RenderBody()
@@ -61,6 +97,7 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/group.js" asp-append-version="true"></script>
         <script src="~/js/item.js" asp-append-version="true"></script>
+        <script src="~/js/addToCart.js" asp-append-version="true"></script>
 
     </environment>
     <environment names="Staging,Production">
@@ -79,8 +116,7 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
         <script src="~/js/group.min.js" asp-append-version="true"></script>
         <script src="~/js/item.min.js" asp-append-version="true"></script>
-
-
+        <script src="~/js/addToCart.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("scripts", required: false)
