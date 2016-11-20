@@ -86,7 +86,6 @@ left: 0;*/ }
   border: 2px solid #0047AB; }
 
 .btn:hover {
-  /*box-shadow: 2px 2px 2px whitesmoke;*/
   transition-property: all .2s linear 0s;
   -moz-transition: all .2s linear 0s;
   -webkit-transition: all .2s linear 0s;
@@ -103,6 +102,16 @@ left: 0;*/ }
 .call-to-action-1 .btn, .call-to-action-2 .btn {
   font-size: 15pt;
   padding: 10px; }
+
+.call-to-action-1 .btn:hover, .call-to-action-2 .btn:hover {
+  font-size: 15pt;
+  padding: 12px;
+  background: gainsboro; }
+
+.call-to-action-1 .btn-primary:hover, .call-to-action-2 .btn-primary:hover {
+  padding: 12px;
+  color: white;
+  background: #0047AB; }
 
 .call-to-action-1 .btn-default, .call-to-action-2 .btn-default {
   border: 2px solid #0047AB;
@@ -129,5 +138,27 @@ left: 0;*/ }
 
 #myCarousel .right {
   margin-right: -7%; }
+
+/*Featured Collection**/
+.featured-collection {
+  padding-top: 8em;
+  min-height: 100vh; }
+
+hr {
+  border-top: 3px solid #eee; }
+
+.featured-content {
+  padding-top: 5em; }
+
+.image-overlay {
+  width: 300px;
+  height: 350px;
+  background-color: #0047AB;
+  border-radius: 0;
+  /*z-index: 1;*/
+  opacity: 0.5;
+  /*position: fixed;*/
+  margin-top: -350px;
+  display: none; }
 
 /*# sourceMappingURL=site.css.map */
