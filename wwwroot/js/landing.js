@@ -1,0 +1,6 @@
+﻿
+//landing page.js
+
+$(function () {
+
+});

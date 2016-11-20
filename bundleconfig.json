@@ -44,5 +44,11 @@
     "inputFiles": [
       "wwwroot/js/addToCart.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/landing.min.js",
+    "inputFiles": [
+      "wwwroot/js/landing.js"
+    ]
   }
 ]
