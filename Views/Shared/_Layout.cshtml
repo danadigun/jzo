@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="~/css/site.css" />
         <link href="~/lib/dropzone/dist/dropzone.css" rel="stylesheet" />
         <link href="~/lib/ionicons-2.0.1/css/ionicons.css" rel="stylesheet" />
+        <link href="~/lib/animate.css/animate.css" rel="stylesheet" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -18,6 +19,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         <link href="~/lib/dropzone/dist/min/dropzone.min.css" rel="stylesheet" />
         <link href="~/lib/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet" />
+        <link href="~/lib/animate.css/animate.min.css" rel="stylesheet" />
     </environment>
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
 </head>
@@ -63,11 +65,16 @@
             </a>
         </div>
         <ul class="nav navbar-nav navbar-right">
+            <li><a href="~/">Home</a></li>
             <li><a href="#">Men</a></li>
             <li><a href="#">Women</a></li>
             <li><a href="#">Collections</a></li>
-            <li><a href="#">Product Category</a></li>
-            <li><a href="#">Shop</a></li>
+            <li class="product-cat"><a href="#">Product Category</a></li>
+            <li class="store-link">
+                <a href="#">
+                    <i class="ion ion-bag"></i>Shop
+                </a>
+            </li>
             @*<li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -99,7 +106,7 @@
         <script src="~/js/group.js" asp-append-version="true"></script>
         <script src="~/js/item.js" asp-append-version="true"></script>
         <script src="~/js/addToCart.js" asp-append-version="true"></script>
-
+        <script src="~/js/landing.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -118,6 +125,8 @@
         <script src="~/js/group.min.js" asp-append-version="true"></script>
         <script src="~/js/item.min.js" asp-append-version="true"></script>
         <script src="~/js/addToCart.min.js" asp-append-version="true"></script>
+        <script src="~/js/landing.min.js" asp-append-version="true"></script>
+
     </environment>
 
     @RenderSection("scripts", required: false)
