@@ -2,6 +2,7 @@
 /// <reference path="js/addtocart.min.js" />
 /// <reference path="js/group.js" />
 /// <reference path="js/item.js" />
+/// <reference path="js/landing.min.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
 /// <reference path="lib/dropzone/dist/min/dropzone.min.js" />
