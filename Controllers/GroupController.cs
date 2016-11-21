@@ -102,7 +102,9 @@ namespace jzo.Controllers
             {
                 if (!string.IsNullOrWhiteSpace(HttpContext.User.Identity.Name))
                 {
-                    HttpContext.Session.SetString("CartId", HttpContext.User.Identity.Name);
+                    //HttpContext.Session.SetString("CartId", HttpContext.User.Identity.Name);
+                    Guid tempCartId = Guid.NewGuid();
+                    HttpContext.Session.SetString("CartId", tempCartId.ToString());
                 }
                 else
                 {
