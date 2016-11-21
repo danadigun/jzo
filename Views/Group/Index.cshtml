@@ -5,77 +5,86 @@
 @{
 }
 
-<h1 style="margin-top:4em; margin-bottom:2em;">
-    <i class="ion ion-bag"></i>&nbsp;My Store
-    <span style="font-size:12pt; float:right;">
-        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#Create-group-modal">+ Create Group</button>
-        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#add-item-group-modal">+ Add new items to store</button>
-    </span>
-</h1>
+<div class="container">
+    <h1 style="margin-top:4em; margin-bottom:2em;">
+        <i class="ion ion-bag"></i>&nbsp;My Store
+        <span style="font-size:12pt; float:right;">
+            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#Create-group-modal">+ Create Group</button>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-item-group-modal">+ Add new items to store</button>
+        </span>
+    </h1>
 
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    @{
-        foreach (var item in Model)
-        {
-          <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne_@item.group.Id">
-                    <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.group.Id" aria-expanded="true" aria-controls="collapseOne">
-                            <img style="width:100px; height:auto; margin-right:2em;" src="@item.group.imageUrl" />
-                            @item.group.name
-                        </a>
-                        <span style="float:right; font-size:12pt;">
-                            <b><i>No of Items:</i>&nbsp;@item.items.Count</b>
-                        </span>
-                    </h4>
-                </div>
-                <div id="collapse_@item.group.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_@item.group.Id">
-                    <div class="panel-body">
-                        <p style="padding-left:1em;">
-                            <b>Description</b><br />
-                            <span>
-                                @item.group.description
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @{
+            if (Model.Count() == 0)
+            {
+                <p class="container" style="text-align:center; font-size:16pt; padding-top:2em;">
+                    <i>**You do not have any items or product category in your store**</i>
+                </p>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                 <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne_@item.group.Id">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.group.Id" aria-expanded="true" aria-controls="collapseOne">
+                                <img style="width:100px; height:auto; margin-right:2em;" src="@item.group.imageUrl" />
+                                @item.group.name
+                            </a>
+                            <span style="float:right; font-size:12pt;">
+                                <b><i>No of Items:</i>&nbsp;@item.items.Count</b>
                             </span>
-                        </p>
-                        <!--table here-->
-                        <div style="padding-left:1em;">
-                            <table class="table table-bordered table-striped table-condensed">
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>Name</td>
-                                    <td>description</td>
-                                    <td>Unit price (NGN)</td>
-                                    <td>Quantity in stock</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                @{
-                                    foreach (var store_item in item.items)
-                                    {
-                                        <tr>
-                                            <td><img src="@store_item.image_url" style="width:50px; height:auto;" /></td>
-                                            <td><a href="~/group/details?itemId=@store_item.Id">@store_item.name</a></td>
-                                            <td>@store_item.description</td>
-                                            <td>@store_item.price</td>
-                                            <td>@store_item.quantity</td>
-                                            <td>
-                                                <a href="#" style="text-decoration:none; margin-right:1em;"><i class="ion ion-trash-a"></i></a>
-                                                <a href="#" style="text-decoration:none"><i class="ion ion-edit"></i></a>
-                                            </td>
-                                        </tr>
+                        </h4>
+                    </div>
+                    <div id="collapse_@item.group.Id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_@item.group.Id">
+                        <div class="panel-body">
+                            <p style="padding-left:1em;">
+                                <b>Description</b><br />
+                                <span>
+                                    @item.group.description
+                                </span>
+                            </p>
+                            <!--table here-->
+                            <div style="padding-left:1em;">
+                                <table class="table table-bordered table-striped table-condensed">
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>Name</td>
+                                        <td>description</td>
+                                        <td>Unit price (NGN)</td>
+                                        <td>Quantity in stock</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    @{
+                                        foreach (var store_item in item.items)
+                                        {
+                                            <tr>
+                                                <td><img src="@store_item.image_url" style="width:50px; height:auto;" /></td>
+                                                <td><a href="~/group/details?itemId=@store_item.Id">@store_item.name</a></td>
+                                                <td>@store_item.description</td>
+                                                <td>@store_item.price</td>
+                                                <td>@store_item.quantity</td>
+                                                <td>
+                                                    <a href="#" style="text-decoration:none; margin-right:1em;"><i class="ion ion-trash-a"></i></a>
+                                                    <a href="#" style="text-decoration:none"><i class="ion ion-edit"></i></a>
+                                                </td>
+                                            </tr>
 
+                                        }
                                     }
-                                }
-                            </table>
+                                </table>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-    }
-   
-   
+                }
+            }
+         }
+    </div>
 </div>
 
 <!-- Create Group Modal -->
