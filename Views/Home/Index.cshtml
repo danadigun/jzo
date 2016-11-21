@@ -1,4 +1,6 @@
-﻿@{
+﻿@model jzo.Models.ItemViewModels.SalesViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,7 +8,7 @@
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
-      
+
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
@@ -14,20 +16,20 @@
             <div class="carousel-caption" role="option">
                 <p class="call-to-action-1 animated slideInDown">
                     <button class="btn btn-default">Buy now &nbsp; <i class="ion ion-chevron-right"></i></button>
-                   <button class="btn btn-primary">Customize order</button>
+                    <button class="btn btn-primary">Customize order</button>
                 </p>
             </div>
         </div>
         <div class="item">
             <img src="~/images/Babatunde-20161120T180657Z/Babatunde/Babatunde4.jpg" alt="BABATUNDE" class="img-responsive" />
             <div class="carousel-caption" role="option">
-                <p class="call-to-action-2 animated slideInUp" >
+                <p class="call-to-action-2 animated slideInUp">
                     <button class="btn btn-primary">Buy now</button>
                     <button class="btn btn-default">Customize order</button>
                 </p>
             </div>
         </div>
-      
+
     </div>
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <i class="glyphicon glyphicon-chevron-left" aria-hidden="true"></i>
@@ -43,24 +45,57 @@
 <div class="container featured-collection">
     <h2>Featured Collection</h2><hr />
     <div class="featured-content">
-        <div class="row">
-            <div class="col-lg-4 wrap">
-              
+        @*<div class="row">
+                <div class="col-lg-4 wrap">
+
                     <img style="width:300px; height:auto;" src="~/images/Babatunde-20161120T180657Z/Babatunde/IMG_5069.jpg" />
                     <div class="image-overlay animated fadeIn">
 
                     </div>
-            </div>
-            <div class="col-lg-4 ">
-              
+                </div>
+                <div class="col-lg-4 ">
+
                     <img style="width:300px; height:auto;" src="~/images/Babatunde-20161120T180657Z/Babatunde/IMG_5069.jpg" />
-              
-            </div>
-            <div class="col-lg-4">
-               
+
+                </div>
+                <div class="col-lg-4">
+
                     <img style="width:300px; height:auto;" src="~/images/Babatunde-20161120T180657Z/Babatunde/IMG_5069.jpg" />
-               
-            </div>
+
+                </div>
+            </div>*@
+        <div class="row">
+            @{
+                foreach (var item in Model.featuredCollections)
+                {
+                    <div class="col-lg-4">
+                        <a href="#">
+                            <img style="width:300px; height:auto;" src="@item.imageUrl" />
+                        </a>
+                        <br />
+                        <h3 style="color:#808080">@item.name</h3>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <h2 style="padding-top:4em;">Featured Products</h2><hr />
+    <div class="featured-content" style="padding-bottom:5em;">
+        <div class="row">
+            @{
+                foreach (var item in Model.featuredItems)
+                {
+                    <div class="col-lg-4">
+                        <a href="#">
+                            <img style="width:300px; height:auto;" src="@item.image_url" />
+                        </a>
+                        <br />
+                        <h3 style="color:#808080">@item.name</h3>
+
+                    </div>
+                }
+            }
         </div>
     </div>
 </div>
