@@ -4,6 +4,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+<!--Main carousel-->
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -69,10 +70,15 @@
                 foreach (var item in Model.featuredCollections)
                 {
                     <div class="col-lg-4">
-                        <a href="#">
-                            <img style="width:300px; height:auto;" src="@item.imageUrl" />
+                        <a href="#" style="text-decoration:none;">
+                            <img style="width:300px; height:auto;  border-bottom:2px solid #0047AB" src="@item.imageUrl" />                          
                         </a>
                         <br />
+                        <span style="display:block; padding-top:1em;">
+                            <button class="btn btn-default" style="width:46.5%">See collection </button>
+                            <button class="btn btn-primary">Customize order </button>
+
+                        </span>
                         <h3 style="color:#808080">@item.name</h3>
                     </div>
                 }
@@ -81,21 +87,33 @@
     </div>
 
     <h2 style="padding-top:4em;">Featured Products</h2><hr />
-    <div class="featured-content" style="padding-bottom:5em;">
+    <div class="featured-content" style="padding-bottom:15em;">
         <div class="row">
             @{
                 foreach (var item in Model.featuredItems)
                 {
                     <div class="col-lg-4">
-                        <a href="#">
-                            <img style="width:300px; height:auto;" src="@item.image_url" />
+                        <a href="#"  style="text-decoration:none;">
+                            <img style="width:300px; height:auto; " src="@item.image_url" />
                         </a>
                         <br />
+                        <span style="display:block; padding-top:1em;">
+                            <a href="~/group/details?itemId=@item.Id" class="btn btn-default" style="width:46.5%">Buy <i style="float:right;" class="ion ion-chevron-right"></i> </a>
+                            <button class="btn btn-primary">Customize order </button>
+                        </span>
                         <h3 style="color:#808080">@item.name</h3>
-
+                       
                     </div>
                 }
             }
         </div>
     </div>
+</div>
+
+<!--View more-->
+<div style="padding-bottom:20em;">
+  <p style="text-align:center">
+      You are welcome to visit our store for more.. <br /><br />
+      <a href="#" class="btn btn-default"> <i class="ion ion-bag"></i> Visit store now</a>
+  </p>
 </div>
