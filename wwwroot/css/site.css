@@ -161,4 +161,8 @@ hr {
   margin-top: -350px;
   display: none; }
 
+.form-control {
+  border-radius: 0px !important;
+  border: 2px solid #ccc; }
+
 /*# sourceMappingURL=site.css.map */
