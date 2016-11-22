@@ -52,14 +52,21 @@ namespace jzo
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
             services.AddSession();
+            services.AddMvc();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IUpload, FileUploadService>();
             services.AddTransient<InitializeUsers>();
+
+            //Authorization
+            //user -> ikejoseph@gmail.com, Pass119#
+            services.AddAuthorization(
+                options => options.AddPolicy("CanViewStore",
+                policy => policy.RequireUserName("daniel.adigun@digitalforte.ng")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
