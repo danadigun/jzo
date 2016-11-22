@@ -24,7 +24,7 @@ namespace jzo.Controllers
             _context = context;
         }
 
-
+        [Authorize(Policy = "CanViewStore")]
         public IActionResult Index()
         {
             var viewModelList = new List<GetAllItemGroupViewModel>();
