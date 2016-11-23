@@ -16,9 +16,10 @@
     ".NETCoreApp,Version=v1.0": {
       "jzo/1.0.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": "1.0.1",
+          "jQuery.Validation": "1.15.1",
           "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+          "Microsoft.AspNetCore.Authorization": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
@@ -26,6 +27,7 @@
           "Microsoft.AspNetCore.Routing": "1.0.1",
           "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
           "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
+          "Microsoft.AspNetCore.Session": "1.0.0",
           "Microsoft.AspNetCore.StaticFiles": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
@@ -35,10 +37,8 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0",
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-          "jQuery.Validation": "1.15.1",
-          "Microsoft.AspNetCore.Authorization": "1.0.0",
-          "Microsoft.AspNetCore.Session": "1.0.0"
+          "Microsoft.NETCore.App": "1.0.1",
+          "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
         },
         "runtime": {
           "jzo.dll": {}

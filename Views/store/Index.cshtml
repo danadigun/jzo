@@ -1,0 +1,57 @@
+﻿@using jzo.Data;
+@model IEnumerable<jzo.Models.Item>
+@inject ApplicationDbContext _context;
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+<div class="container" style="padding-top:5em; padding-bottom:20em;">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Product Categories</h3><hr />
+            <div>
+                <p>
+                    <b>
+                        <a class="btn btn-default" href="~/store" style="text-decoration:none;">+ All categories</a>
+                    </b>
+                </p>
+                @{
+                    foreach (var group in _context.ItemGroup.ToList())
+                    {
+                        var count = _context.Item.Where(x => x.ItemGroupId == group.Id).ToList().Count();
+                        <p>
+                            <b>
+                                <a class="btn btn-default" href="~/store?groupId=@group.Id" style="text-decoration:none;">+ @group.name (@count)</a>
+                            </b>
+                        </p>
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                @{
+                    foreach (var item in Model)
+                    {
+                        <div class="col-md-3" style="padding-right:2em; padding-top:4em;">
+
+                            <a href="~/group/details?itemId=@item.Id"><img src="@item.image_url" style="width:200px; height:auto" /></a><br />
+                            <p style="padding-top:2em;">
+                                <span style="font-size:large">@item.name</span><br />
+                                <b style="font-size:larger">
+                                    @item.price [NGN]<br /><br />
+                                    <a href="~/group/details?itemId=@item.Id" class="btn btn-default">order <i class="ion ion-chevron-right"></i></a>
+                                </b>
+                            </p>
+
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

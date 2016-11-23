@@ -14,8 +14,8 @@
         <div class="col-lg-5">
             <div>
                 <p>
-                    <a class="btn btn-default" href="#" style="text-decoration:none"><i class="ion ion-reply"></i>&nbsp; Continue shopping</a>
-                    <a class="btn btn-info" href="#" style="text-decoration:none"><i class="ion ion-plus"></i>&nbsp; share</a>
+                    <a class="btn btn-default" href="~/store" style="text-decoration:none"><i class="ion ion-reply"></i>&nbsp; Continue shopping</a>
+                  @*  <a class="btn btn-info" href="#" style="text-decoration:none"><i class="ion ion-plus"></i>&nbsp; share</a>*@
                 </p>
             </div>
             <div style="margin-top:5em;">
@@ -51,12 +51,21 @@
                     {
                         <div class="col-lg-3">
                             <div>
-                                <img src="@_model.image_url" style="width:15em; height:auto;" />
+                                @*   <img src="@_model.image_url" style="width:15em; height:auto;" />*@
+                                <a href="~/group/details?itemId=@_model.Id"><img src="@_model.image_url" style="width:200px; height:auto" /></a><br />
+                                <p style="padding-top:2em;">
+                                    <span style="font-size:large">@_model.name</span><br />
+                                    <b style="font-size:larger">
+                                        @_model.price [NGN]<br /><br />
+                                        <a href="~/group/details?itemId=@_model.Id" class="btn btn-default">order <i class="ion ion-chevron-right"></i></a>
+                                    </b>
+                                </p>
+
                             </div>
                         </div>
                     }
                 }
-              
+
             </div>
         </div>
     </div>
