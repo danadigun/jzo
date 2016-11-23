@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using jzo.Data;
 using jzo.Models;
 using jzo.Services;
+using System.IO;
 
 namespace jzo
 {
@@ -79,7 +80,7 @@ namespace jzo
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, InitializeUsers seedData )
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, InitializeUsers seedData, IWebHostBuilder host)
         {
             //seed user data - run once
             //seedData.SeedAdminUser();
@@ -108,6 +109,14 @@ namespace jzo
 
             app.UseIdentity();
             app.UseSession();
+
+            //hosting IIS Setup
+            host.UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .Build();
+
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
