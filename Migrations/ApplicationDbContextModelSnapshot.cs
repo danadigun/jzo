@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using jzo.Data;
 
-namespace jzo.Data.Migrations
+namespace jzo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161030203357_changed_relationship_bw_item_itemGroup")]
-    partial class changed_relationship_bw_item_itemGroup
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -54,6 +53,20 @@ namespace jzo.Data.Migrations
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
 
+                    b.Property<string>("city");
+
+                    b.Property<string>("country");
+
+                    b.Property<string>("firstname");
+
+                    b.Property<string>("lastname");
+
+                    b.Property<string>("mailingAddress");
+
+                    b.Property<string>("phone");
+
+                    b.Property<string>("state");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -79,7 +92,11 @@ namespace jzo.Data.Migrations
 
                     b.Property<decimal>("totalPrice");
 
+                    b.Property<string>("userId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("Checkout");
                 });
@@ -89,21 +106,21 @@ namespace jzo.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("ItemGroupId");
+
                     b.Property<DateTime>("dateCreated");
 
                     b.Property<string>("description");
 
                     b.Property<string>("image_url");
 
-                    b.Property<int?>("itemGroupId");
-
                     b.Property<string>("name");
 
                     b.Property<decimal>("price");
 
-                    b.HasKey("Id");
+                    b.Property<int>("quantity");
 
-                    b.HasIndex("itemGroupId");
+                    b.HasKey("Id");
 
                     b.ToTable("Item");
                 });
@@ -114,6 +131,8 @@ namespace jzo.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("description");
+
+                    b.Property<string>("imageUrl");
 
                     b.Property<string>("name");
 
@@ -137,7 +156,11 @@ namespace jzo.Data.Migrations
 
                     b.Property<bool>("isShipped");
 
+                    b.Property<string>("userId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("Order");
                 });
@@ -147,25 +170,29 @@ namespace jzo.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("CartId");
+
                     b.Property<int?>("CheckoutId");
+
+                    b.Property<int>("ItemId");
 
                     b.Property<DateTime>("dateCreated");
 
                     b.Property<bool>("isCheckedOut");
 
-                    b.Property<int?>("itemId");
-
                     b.Property<int?>("orderId");
 
                     b.Property<int>("quantity");
 
+                    b.Property<string>("size");
+
                     b.Property<decimal>("totalPrice");
+
+                    b.Property<string>("user");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CheckoutId");
-
-                    b.HasIndex("itemId");
 
                     b.HasIndex("orderId");
 
@@ -279,11 +306,18 @@ namespace jzo.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("jzo.Models.Item", b =>
+            modelBuilder.Entity("jzo.Models.Checkout", b =>
                 {
-                    b.HasOne("jzo.Models.ItemGroup", "itemGroup")
+                    b.HasOne("jzo.Models.ApplicationUser", "user")
                         .WithMany()
-                        .HasForeignKey("itemGroupId");
+                        .HasForeignKey("userId");
+                });
+
+            modelBuilder.Entity("jzo.Models.Order", b =>
+                {
+                    b.HasOne("jzo.Models.ApplicationUser", "user")
+                        .WithMany()
+                        .HasForeignKey("userId");
                 });
 
             modelBuilder.Entity("jzo.Models.SelectedItems", b =>
@@ -291,10 +325,6 @@ namespace jzo.Data.Migrations
                     b.HasOne("jzo.Models.Checkout")
                         .WithMany("Items")
                         .HasForeignKey("CheckoutId");
-
-                    b.HasOne("jzo.Models.Item", "item")
-                        .WithMany()
-                        .HasForeignKey("itemId");
 
                     b.HasOne("jzo.Models.Order", "order")
                         .WithMany()

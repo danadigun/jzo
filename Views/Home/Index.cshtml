@@ -42,36 +42,50 @@
     </a>
 </div>
 
-<!--Featured category-->
-<div class="container featured-collection">
-    <h2>Featured Collection</h2><hr />
-    <div class="featured-content">
-        @*<div class="row">
-                <div class="col-lg-4 wrap">
+@{
+    if (Model.featuredCollections.Count() == 0)
+    {
+        <div style="padding-bottom:20em; padding-top:20em;">
+            <p style="text-align:center; font-size:18pt;">
+                <i style="color:#0047AB; font-size:25pt" class="ion ion-bag"></i><br /><br />
+                Thank you for visiting our store. We are currently loading the store. <br />
+                Please check back in a few minutes..<br /><br />
+                <button class="btn btn-default" data-toggle="modal" data-target="#message-group-modal"> <i class="ion ion-ios-email-outline"></i> Drop a message and we'll respond to you ASAP</button>
+            </p>
+        </div>
+    }
+    else
+    {
+        <!--Featured category-->
+        <div class="container featured-collection">
+            <h2>Featured Collection</h2><hr />
+            <div class="featured-content">
+                @*<div class="row">
+                        <div class="col-lg-4 wrap">
 
-                    <img style="width:300px; height:auto;" src="~/images/Babatunde-20161120T180657Z/Babatunde/IMG_5069.jpg" />
-                    <div class="image-overlay animated fadeIn">
+                            <img style="width:300px; height:auto;" src="~/images/Babatunde-20161120T180657Z/Babatunde/IMG_5069.jpg" />
+                            <div class="image-overlay animated fadeIn">
 
-                    </div>
-                </div>
-                <div class="col-lg-4 ">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
 
-                    <img style="width:300px; height:auto;" src="~/images/Babatunde-20161120T180657Z/Babatunde/IMG_5069.jpg" />
+                            <img style="width:300px; height:auto;" src="~/images/Babatunde-20161120T180657Z/Babatunde/IMG_5069.jpg" />
 
-                </div>
-                <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-4">
 
-                    <img style="width:300px; height:auto;" src="~/images/Babatunde-20161120T180657Z/Babatunde/IMG_5069.jpg" />
+                            <img style="width:300px; height:auto;" src="~/images/Babatunde-20161120T180657Z/Babatunde/IMG_5069.jpg" />
 
-                </div>
-            </div>*@
-        <div class="row">
-            @{
-                foreach (var item in Model.featuredCollections)
-                {
+                        </div>
+                    </div>*@
+                <div class="row">
+                    @{
+                        foreach (var item in Model.featuredCollections)
+                        {
                     <div class="col-lg-4">
                         <a href="#" style="text-decoration:none;">
-                            <img style="width:300px; height:auto;  border-bottom:2px solid #0047AB" src="@item.imageUrl" />                          
+                            <img style="width:300px; height:auto;  border-bottom:2px solid #0047AB" src="@item.imageUrl" />
                         </a>
                         <br />
                         <span style="display:block; padding-top:1em;">
@@ -81,19 +95,19 @@
                         </span>
                         <h3 style="color:#808080">@item.name</h3>
                     </div>
-                }
-            }
-        </div>
-    </div>
+                        }
+                    }
+                </div>
+            </div>
 
-    <h2 style="padding-top:4em;">Featured Products</h2><hr />
-    <div class="featured-content" style="padding-bottom:15em;">
-        <div class="row">
-            @{
-                foreach (var item in Model.featuredItems)
-                {
+            <h2 style="padding-top:4em;">Featured Products</h2><hr />
+            <div class="featured-content" style="padding-bottom:15em;">
+                <div class="row">
+                    @{
+                        foreach (var item in Model.featuredItems)
+                        {
                     <div class="col-lg-4">
-                        <a href="#"  style="text-decoration:none;">
+                        <a href="#" style="text-decoration:none;">
                             <img style="width:300px; height:auto; " src="@item.image_url" />
                         </a>
                         <br />
@@ -102,18 +116,66 @@
                             <button class="btn btn-primary">Customize order </button>
                         </span>
                         <h3 style="color:#808080">@item.name</h3>
-                       
-                    </div>
-                }
-            }
-        </div>
-    </div>
-</div>
 
-<!--View more-->
-<div style="padding-bottom:20em;">
-  <p style="text-align:center">
-      You are welcome to visit our store for more.. <br /><br />
-      <a href="#" class="btn btn-default"> <i class="ion ion-bag"></i> Visit store now</a>
-  </p>
-</div>
+                    </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!--View more-->
+        <div style="padding-bottom:20em;">
+                            <p style="text-align:center">
+                                You are welcome to visit our store for more.. <br /><br />
+                                <a href="#" class="btn btn-default"> <i class="ion ion-bag"></i> Visit store now</a>
+                            </p>
+                        </div>
+
+    }
+
+    <!-- Create Group Modal -->
+     <div class="modal fade" id="message-group-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+              <form name="add-group" class="modal-content">
+                     <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">+ Send Message</h4>
+                                    </div>
+                     <div class="modal-body">
+                                        <div class="drop-message">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Email</label>
+                                            <input name="email"  class="form-control" type="email" placeholder="Email address ...yourname@email.com" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Phone</label>
+                                            <input name="description" class="form-control" type="text" placeholder="Description... e.g Tunic Shirts for men" />
+                                        </div>
+                                        <div class="dropzone col s12" id="my-dropzone" name="mainFileUploader">
+
+                                            <div class="dz-message" data-dz-message>
+                                                <span style="font-size:10pt; text-align:center">
+                                                    <i class="ion ion-ios-cloud-upload-outline"></i><br />
+                                                    Click to upload or drag/drop an image here that describes this group of items
+                                                </span><br />
+                                                <span><i>Max file Size: 1.5mb</i></span><br />
+                                            </div>
+                                            <div class="fallback">
+                                                <input name="file" type="file" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                     <div class="modal-footer">
+                                        <button type="button" class="btn btn-default close-dismiss" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary save-changes">Next</button>
+                                        @*  <button type="button" class="btn btn-success item-add" data-toggle="modal" data-target="#add-item-group-modal">+ add new items to this group</button>*@
+                                        <button type="button" class="btn btn-primary complete">finish</button>
+                                    </div>
+               </form>
+        </div>
+     </div>
+
+}
