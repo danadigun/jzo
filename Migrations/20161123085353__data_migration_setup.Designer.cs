@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using jzo.Data;
 
-namespace jzo.Data.Migrations
+namespace jzo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161122212439_application-user-data")]
-    partial class applicationuserdata
+    [Migration("20161123085353__data_migration_setup")]
+    partial class _data_migration_setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -50,6 +50,13 @@ namespace jzo.Controllers
             return View();
         }
 
+        //send message
+        public IActionResult send(string message)
+        {
+            //api
+
+            return Json(new { message = "Successfully sent message" });
+        }
       
     }
 }
