@@ -70,6 +70,7 @@ namespace jzo
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IUpload, FileUploadService>();
             services.AddTransient<InitializeUsers>();
+            services.AddTransient<IWebHostBuilder, WebHostBuilder>();
 
             //Authorization
             //user -> ikejoseph@gmail.com, Pass119#
@@ -101,6 +102,14 @@ namespace jzo
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+
+                //hosting IIS Setup
+                host.UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>()
+                    .Build();
+
             }
 
             app.UseApplicationInsightsExceptionTelemetry();
@@ -110,13 +119,7 @@ namespace jzo
             app.UseIdentity();
             app.UseSession();
 
-            //hosting IIS Setup
-            host.UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
-
+          
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
