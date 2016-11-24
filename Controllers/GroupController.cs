@@ -43,9 +43,13 @@ namespace jzo.Controllers
             return View(viewModelList);
         }
 
+        /// <summary>
+        /// Vies details of an item to add to cart or order
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <returns></returns>
         public IActionResult details(int itemId)
         {
-            ViewData["CartId"] = GetCartId();
 
             var getItemViewModel = new GetItemViewModel();
             var item = _context.Item.SingleOrDefault(x => x.Id == itemId);
@@ -57,7 +61,12 @@ namespace jzo.Controllers
             return View(getItemViewModel);
         }
 
-        public IActionResult addToCart(int itemId)
+        /// <summary>
+        /// Adds an item to cart
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <returns></returns>
+        public IActionResult addToCart(int itemId, int? quantity)
         {
             // Retrieve the product from the database.           
             ShoppingCartId = GetCartId();
@@ -68,15 +77,33 @@ namespace jzo.Controllers
 
             if(cartItem == null)
             {
-                //create a new cart item if no cart item exists
-                cartItem = new Models.SelectedItems
+                if (!quantity.HasValue)
                 {
-                    ItemId = itemId,
-                    CartId = ShoppingCartId,
-                    dateCreated = DateTime.Now,
-                    isCheckedOut = false,
-                    quantity = 1,
-                };
+                    //create a new cart item if no cart item exists
+                    cartItem = new Models.SelectedItems
+                    {
+                        ItemId = itemId,
+                        CartId = ShoppingCartId,
+                        dateCreated = DateTime.Now,
+                        isCheckedOut = false,
+                        quantity = 1,
+
+                    };
+
+                }else
+                {
+                    //create a new cart item if no cart item exists
+                    cartItem = new Models.SelectedItems
+                    {
+                        ItemId = itemId,
+                        CartId = ShoppingCartId,
+                        dateCreated = DateTime.Now,
+                        isCheckedOut = false,
+                        quantity = quantity.Value,
+
+                    };
+
+                }
                 _context.Add(cartItem);
             }else
             {
@@ -89,11 +116,15 @@ namespace jzo.Controllers
             return Json(new {CartItem = cartItem });
         }
 
+        /// <summary>
+        /// Get Cart items or view cart items 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult getCartItems()
         {
             ShoppingCartId = GetCartId();
 
-            var cartItems = _context.SelectedItem.Where(x => x.CartId == ShoppingCartId).ToList();
+            var cartItems = _context.SelectedItem.Where(x => x.CartId == ShoppingCartId && x.isCheckedOut == false).ToList();
             return View(cartItems);
         }
         public string GetCartId()
@@ -117,5 +148,19 @@ namespace jzo.Controllers
 
         }
 
+
+        /// <summary>
+        /// API to return cart id
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult getCart()
+        {
+            ShoppingCartId = GetCartId();
+
+            var cartItems = _context.SelectedItem.Where(x => x.CartId == ShoppingCartId && x.isCheckedOut == false).ToList();
+
+            return Json(new { cartId = ShoppingCartId, noOfItems = cartItems.Count });
+        }
     }
 }

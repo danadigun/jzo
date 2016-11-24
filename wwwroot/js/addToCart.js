@@ -24,13 +24,37 @@ $(function () {
             $.ajax({
                 url: '/group/addToCart',
                 type : 'POST',
-                data : $(form).serialize()
+                data: $(form).serialize()
+
             }).done(function (callback) {
-                alert('added to cart. cartId: ' + callback.cartItem.cartId);
+                alert('item has successfully been added to cart');
+
+                $(location).attr('href', '/store');
+
             }).fail(function (error) {
+
                 alert('unable to add to cart');
                 console.log(error);
             })
         }
     })
+
+    //on page load update cart_item count
+
+    $.ajax({
+
+        url: '/group/getCart',
+        type: 'POST'
+
+    }).done(function (callback) {
+
+        $('#cart_count').html(callback.noOfItems);
+        console.log(callback);
+
+    }).fail(function (error) {
+
+        console.log(error);
+
+    })
+
 })

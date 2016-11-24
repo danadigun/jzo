@@ -1,0 +1,54 @@
+﻿@using jzo.Data;
+
+@model IEnumerable<jzo.Models.SelectedItems>
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@inject ApplicationDbContext _context
+<div class="container" style="padding-top:2em;">
+    @{
+        if (Model.Count() == 0)
+        {
+            <p>** You have no items in your shopping cart**</p>
+
+        }
+        else
+        {
+            <p class="alert alert-success" style="text-align:center">You have @Model.Count() item(s) in your shopping cart</p>
+            <br />
+            <table class="table table-responsive table-condensed table-striped">
+                <tr style="background:#808080; color:white">
+                    <td>&nbsp;</td>
+                    <td>Product Name</td>
+                    <td>Price</td>
+                    <td>Quanity</td>
+                    <td>Subtotal</td>
+                </tr>
+                @{ decimal total_cost = 0m;}
+                @foreach (var item in Model)
+                {
+                    var item_selected = _context.Item.SingleOrDefault(x => x.Id == item.ItemId);
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <img src="@item_selected.image_url" style="width:50px; height:auto" />   @item_selected.name
+                         </td>
+                        <td>@item_selected.price</td>
+                        <td>@item.quantity</td>
+                        <td>@(item.quantity * item_selected.price)</td>
+
+                    </tr>
+                    total_cost = (item.quantity * item_selected.price) + total_cost;
+
+                }
+               
+            </table>
+            <p style="text-align:right">
+                <b>Total: </b><span style="font-size:larger">@total_cost [NGN]</span><br /><br />
+                <button class="btn btn-default">Cancel</button>
+                <button class="btn btn-primary">Checkout</button>
+            </p>
+        }
+    }
+</div>

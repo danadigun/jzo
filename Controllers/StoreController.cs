@@ -20,6 +20,7 @@ namespace jzo.Controllers
             //return all items in store
             if (groupId.HasValue)
             {
+                ViewData["CollectionName"] = _context.ItemGroup.SingleOrDefault(x => x.Id == groupId.Value).name + " collections";
                 return View(_context.Item.Where(x => x.ItemGroupId == groupId.Value).ToList());
             }
             return View(_context.Item.ToList());

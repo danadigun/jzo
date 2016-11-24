@@ -15,7 +15,7 @@
             <div>
                 <p>
                     <a class="btn btn-default" href="~/store" style="text-decoration:none"><i class="ion ion-reply"></i>&nbsp; Continue shopping</a>
-                  @*  <a class="btn btn-info" href="#" style="text-decoration:none"><i class="ion ion-plus"></i>&nbsp; share</a>*@
+                    <a class="btn btn-primary" href="#" style="text-decoration:none"><i class="ion ion-plus"></i>&nbsp; Customize this order</a>
                 </p>
             </div>
             <div style="margin-top:5em;">
@@ -23,19 +23,21 @@
                 <p>
                     @Model.item.description
                 </p><hr />
-                <form name="add-to-cart" class="form-inline">
+                <form name="add-to-cart" >
                     <div class="form-group">
                         <input type="hidden" name="itemId" value="@Model.item.Id" />
-                        <select name="size" class="form-control">
+                        <select name="size" class="form-control" style="width:45%">
                             <option disabled selected="selected">Size</option>
                             <option value="Small">Small</option>
                             <option value="Medium">Medium</option>
                             <option value="Large">Large</option>
                             <option value="XLarge">Extra Large</option>
                         </select>
-                        <input name="quantity" type="number" placeholder="quantity" class="form-control" />
                     </div>
                     <div class="form-group">
+                        <input style="width:45%" name="quantity" type="number" placeholder="quantity" class="form-control" />
+                    </div>
+                    <div class="form-group ">
                         <button class="btn btn-primary" type="submit">Add to cart</button>
                     </div>
                 </form>
@@ -44,7 +46,7 @@
     </div>
     <div class="row" style="margin-top:10em;">
         <div>
-            <h4>Related Products</h4><hr />
+            <h4>You might also like</h4><hr />
             <div class="row">
                 @{
                     foreach (var _model in Model.relatedItems)
