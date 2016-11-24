@@ -1,10 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Authorization;
 @using jzo.Models
+@using jzo.Data;
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @inject IAuthorizationService AuthorizationService
+@inject ApplicationDbContext _context
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -13,19 +15,26 @@
             @{
                 if (await AuthorizationService.AuthorizeAsync(User, "CanViewStore"))
                 {
-
                     <li>
                         <a asp-area="" asp-controller="Group" asp-action="Index" class="btn btn-primary" style="color:white">Manage store</a>
                     </li>
                 }
             }
             <li>
+                <a asp-area="" asp-controller="Group" asp-action="getCartItems" title="GetCartItems" class="btn btn-warning">
+                    <i class="ion ion-ios-cart" style="font-size:large; color:white"></i>
+                    <b id="cart_count" style="color:white">
+                        
+                    </b>
+                </a>
+            </li>
+            <li>
                 <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello, @UserManager.GetUserName(User)!</a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Sign out</button>
             </li>
-            
+
         </ul>
     </form>
 }
@@ -41,3 +50,4 @@ else
 
     </ul>
 }
+

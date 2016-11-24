@@ -25,7 +25,7 @@ namespace jzo.Controllers
             salesViewModel.featuredCollections = featuredCollections;
 
             //top three featured items 
-            var featuredItems = _context.Item.Take(3).ToList();
+            var featuredItems = _context.Item.Take(12).ToList();
             salesViewModel.featuredItems = featuredItems;
 
             return View(salesViewModel);
