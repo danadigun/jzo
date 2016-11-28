@@ -84,10 +84,19 @@
     }
   },
 
+  //"publishOptions": {
+  //  "include": [
+  //    "wwwroot",
+  //    "**/*.cshtml",
+  //    "appsettings.json",
+  //    "web.config"
+  //  ]
+  //},
   "publishOptions": {
     "include": [
       "wwwroot",
-      "**/*.cshtml",
+      "Views",
+      "Areas/**/Views",
       "appsettings.json",
       "web.config"
     ]

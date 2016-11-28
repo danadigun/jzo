@@ -8,4 +8,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\BUILDS\jzofashion.com_builds</_PublishTargetUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=89.107.58.21,49170;Initial Catalog=jzofashion;User ID=sa;Password=psalm!!9</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
 </Project>
