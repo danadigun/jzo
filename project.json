@@ -79,9 +79,7 @@
   },
 
   "runtimeOptions": {
-    "configProperties": {
-      "System.GC.Server": true
-    }
+    "Win81-x64": {}
   },
 
   //"publishOptions": {
@@ -98,12 +96,14 @@
       "Views",
       "Areas/**/Views",
       "appsettings.json",
-      "web.config"
+      "web.config",
+      "bundleconfig.json",
+      "project.json"
     ]
   },
 
   "scripts": {
-    "prepublish": [ "bower install", "dotnet bundle" ],
+    "prepublish": ["bower install", "dotnet bundle" ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
 }

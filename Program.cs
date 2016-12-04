@@ -16,6 +16,7 @@ namespace jzo
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseEnvironment("Production")
                 .Build();
 
             host.Run();
