@@ -26,6 +26,7 @@
                 <form name="add-to-cart" >
                     <div class="form-group">
                         <input type="hidden" name="itemId" value="@Model.item.Id" />
+                        <input type="hidden" name="price" value="@Model.item.price" />
                         <select name="size" class="form-control" style="width:45%">
                             <option disabled selected="selected">Size</option>
                             <option value="Small">Small</option>

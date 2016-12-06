@@ -66,7 +66,7 @@ namespace jzo.Controllers
         /// </summary>
         /// <param name="itemId"></param>
         /// <returns></returns>
-        public IActionResult addToCart(int itemId, int? quantity)
+        public IActionResult addToCart(int itemId, int? quantity, decimal price, string size)
         {
             // Retrieve the product from the database.           
             ShoppingCartId = GetCartId();
@@ -87,12 +87,15 @@ namespace jzo.Controllers
                         dateCreated = DateTime.Now,
                         isCheckedOut = false,
                         quantity = 1,
-
+                        totalPrice = price,
+                        size = size,
+                        user = User.Identity.Name
                     };
 
                 }else
                 {
                     //create a new cart item if no cart item exists
+                    int qty = quantity.Value;
                     cartItem = new Models.SelectedItems
                     {
                         ItemId = itemId,
@@ -100,7 +103,9 @@ namespace jzo.Controllers
                         dateCreated = DateTime.Now,
                         isCheckedOut = false,
                         quantity = quantity.Value,
-
+                        totalPrice = qty * price,
+                        size = size,
+                        user = User.Identity.Name
                     };
 
                 }
