@@ -149,12 +149,8 @@ namespace jzo.Controllers
         {
            // get total items purchased
             var order = _context.SelectedItem.Where(x => x.CartId == cartId).ToList();
-            decimal amount = 0m;
-            foreach (var item in order)
-            {
-                amount = amount + (_context.Item.SingleOrDefault(x => x.Id == item.Id).price) * item.quantity;
-            }
-
+            decimal amount = _context.SelectedItem.Where(x=>x.CartId == cartId).Select(x=>x.totalPrice).Sum();
+           
             //process Paystack payment
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(paymentUrl);
@@ -171,7 +167,7 @@ namespace jzo.Controllers
             {
                 new KeyValuePair<string, string>("reference", new Random().Next().ToString()),
                 new KeyValuePair<string, string>("email", User.Identity.Name),
-                new KeyValuePair<string, string>("amount", amount.ToString())
+                new KeyValuePair<string, string>("amount", (amount * 100).ToString())
             });
 
             var response = await client.PostAsync(paymentUrl, content);
@@ -180,6 +176,7 @@ namespace jzo.Controllers
             if(jsonResponse != null)
             {
                 var transaction = JsonConvert.DeserializeObject<Jsonresponse>(jsonResponse);
+
                 return Json(new { url = transaction.data.authorization_url });
 
             }

@@ -22,7 +22,11 @@ $(function () {
                     //callback here
                     $('.checkout').html('Checkout')
 
-                    alert('Paystack URL: ' + callback.url)
+                    //alert('Paystack URL: ' + callback.url)
+                    //redirect to paystack payment url
+
+                    $(location).attr('href', callback.url);
+
                 }).fail(function (error) {
                     //error callbaack here
                     alert(error);

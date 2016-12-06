@@ -73,7 +73,7 @@ namespace jzo.Controllers
 
             var cartItem = _context.SelectedItem.SingleOrDefault(
                 x => x.CartId == ShoppingCartId
-                && x.ItemId == itemId);
+                && x.ItemId == itemId && x.isCheckedOut == false);
 
             if(cartItem == null)
             {
@@ -89,7 +89,8 @@ namespace jzo.Controllers
                         quantity = 1,
                         totalPrice = price,
                         size = size,
-                        user = User.Identity.Name
+                        user = User.Identity.Name,
+                        
                     };
 
                 }else
