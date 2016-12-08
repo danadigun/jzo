@@ -252,13 +252,13 @@ namespace jzo.Controllers
 
 
                     //send sms to customer
-                    var _phone = _context.Users.Where(x => x.UserName == User.Identity.Name)
-                        .Select(x => x.phone)
+                    var _user = _context.Users.Where(x => x.UserName == User.Identity.Name)
+                       
                         .FirstOrDefault();
 
-                  bool status = InfoBipService.sendMessage(_phone,
-                        "Hello name, " + "\n\n" +
-                        "Thanks for your Order referenced: " + reference + " made on jzofashion.com.").Result;
+                  bool status = InfoBipService.sendMessage(_user.PhoneNumber,
+                        $"Hello {_user.firstname}, " + "\n\n" +
+                        "Thanks for your making an Order on jzofashion.com. Here is your reference number: " + reference + " ").Result;
 
 
                     //send email/sms to admin/store manager
@@ -291,7 +291,11 @@ namespace jzo.Controllers
         [HttpGet]
         public IActionResult send()
         {
-            return Json(new { status = InfoBipService.sendMessage("2347038025189", "this is test").Result });
+            return Json(new {
+                status = InfoBipService.sendMessage("2347038025189", "this is test").Result,
+                user = User.Identity.Name,
+                phone = _context.Users.Where(x=>x.UserName == User.Identity.Name).Select(x=>x.PhoneNumber).SingleOrDefault()
+            });
         }
     }
 }
