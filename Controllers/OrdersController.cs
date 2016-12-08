@@ -142,7 +142,7 @@ namespace jzo.Controllers
                 new KeyValuePair<string, string>("reference", _reference),
                 new KeyValuePair<string, string>("email", User.Identity.Name),
                 new KeyValuePair<string, string>("amount", (amount * 100).ToString()),
-                new KeyValuePair<string, string>("callback_url", "http://jzofashion.com?cartId="+cartId+"&reference="+_reference)
+                new KeyValuePair<string, string>("callback_url", "http://jzofashion.com/Orders/paystackCallback?cartId="+cartId+"&reference="+_reference)
             });
 
             var response = await client.PostAsync(paymentUrl, content);
