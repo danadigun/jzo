@@ -24,7 +24,7 @@ namespace jzo.Controllers
             _context = context;
         }
 
-        [Authorize(Policy = "CanViewStore")]
+        [Authorize(Policy = "CanManageStore")]
         public IActionResult Index()
         {
             var viewModelList = new List<GetAllItemGroupViewModel>();
@@ -66,14 +66,14 @@ namespace jzo.Controllers
         /// </summary>
         /// <param name="itemId"></param>
         /// <returns></returns>
-        public IActionResult addToCart(int itemId, int? quantity)
+        public IActionResult addToCart(int itemId, int? quantity, decimal price, string size)
         {
             // Retrieve the product from the database.           
             ShoppingCartId = GetCartId();
 
             var cartItem = _context.SelectedItem.SingleOrDefault(
                 x => x.CartId == ShoppingCartId
-                && x.ItemId == itemId);
+                && x.ItemId == itemId && x.isCheckedOut == false);
 
             if(cartItem == null)
             {
@@ -87,12 +87,16 @@ namespace jzo.Controllers
                         dateCreated = DateTime.Now,
                         isCheckedOut = false,
                         quantity = 1,
-
+                        totalPrice = price,
+                        size = size,
+                        user = User.Identity.Name,
+                        
                     };
 
                 }else
                 {
                     //create a new cart item if no cart item exists
+                    int qty = quantity.Value;
                     cartItem = new Models.SelectedItems
                     {
                         ItemId = itemId,
@@ -100,7 +104,9 @@ namespace jzo.Controllers
                         dateCreated = DateTime.Now,
                         isCheckedOut = false,
                         quantity = quantity.Value,
-
+                        totalPrice = qty * price,
+                        size = size,
+                        user = User.Identity.Name
                     };
 
                 }
@@ -127,6 +133,25 @@ namespace jzo.Controllers
             var cartItems = _context.SelectedItem.Where(x => x.CartId == ShoppingCartId && x.isCheckedOut == false).ToList();
             return View(cartItems);
         }
+
+        /// <summary>
+        /// Get total amount of cart items
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult getTotal()
+        {
+            ShoppingCartId = GetCartId();
+
+            var cartItems = _context.SelectedItem.Where(x => x.CartId == ShoppingCartId && x.isCheckedOut == false).ToList();
+
+            return Json(new { total = cartItems.Select(x => x.totalPrice).Sum(), noOfItems = cartItems.Count });
+        }
+
+        /// <summary>
+        /// returns cart id
+        /// </summary>
+        /// <returns></returns>
         public string GetCartId()
         {
             if (HttpContext.Session.GetString(CartSessionKey) == null)

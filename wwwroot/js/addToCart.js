@@ -21,6 +21,7 @@ $(function () {
         },
 
         submitHandler: function (form) {
+            $('.add-to-cart').html("Please wait....")
             $.ajax({
                 url: '/group/addToCart',
                 type : 'POST',
@@ -28,6 +29,7 @@ $(function () {
 
             }).done(function (callback) {
                 alert('item has successfully been added to cart');
+                $('.add-to-cart').html("Add to cart")
 
                 $(location).attr('href', '/store');
 

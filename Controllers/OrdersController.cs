@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using jzo.Data;
 using jzo.Models;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using jzo.Models.PaystackModels;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace jzo.Controllers
 {
@@ -15,6 +20,7 @@ namespace jzo.Controllers
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private string paymentUrl = "https://api.paystack.co/transaction/initialize";
 
         public OrdersController(ApplicationDbContext context)
         {
@@ -84,32 +90,32 @@ namespace jzo.Controllers
         }
 
         // POST: api/Orders
-        [HttpPost]
-        public async Task<IActionResult> PostOrder([FromBody] Order order)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[HttpPost]
+        //public async Task<IActionResult> PostOrder([FromBody] Order order)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            _context.Order.Add(order);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (OrderExists(order.Id))
-                {
-                    return new StatusCodeResult(StatusCodes.Status409Conflict);
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return Json(new { id = order.Id, status = "success" });
-        }
+        //    _context.Order.Add(order);
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (OrderExists(order.Id))
+        //        {
+        //            return new StatusCodeResult(StatusCodes.Status409Conflict);
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+        //    return Json(new { id = order.Id, status = "success" });
+        //}
 
         // DELETE: api/Orders/5
         [HttpDelete("{id}")]
@@ -135,6 +141,51 @@ namespace jzo.Controllers
         private bool OrderExists(int id)
         {
             return _context.Order.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> PostOrder(string cartId)
+        {
+           // get total items purchased
+            var order = _context.SelectedItem.Where(x => x.CartId == cartId).ToList();
+            decimal amount = _context.SelectedItem.Where(x=>x.CartId == cartId).Select(x=>x.totalPrice).Sum();
+           
+            //process Paystack payment
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(paymentUrl);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+            //add authorization header for paystack
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk_test_f26f77b1e6f0890258f40bec1026de5d9733ca9d");
+
+            //post payment request
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("reference", new Random().Next().ToString()),
+                new KeyValuePair<string, string>("email", User.Identity.Name),
+                new KeyValuePair<string, string>("amount", (amount * 100).ToString())
+            });
+
+            var response = await client.PostAsync(paymentUrl, content);
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            if(jsonResponse != null)
+            {
+                var transaction = JsonConvert.DeserializeObject<Jsonresponse>(jsonResponse);
+
+                return Json(new { url = transaction.data.authorization_url });
+
+            }
+            else
+            {
+                return Json(new { message = "unable to generate transaction url" });
+
+            }
+
         }
     }
 }

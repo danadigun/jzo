@@ -75,13 +75,19 @@ namespace jzo
             //Authorization
             //user -> ikejoseph@gmail.com, Pass119#
             services.AddAuthorization(
-                options => options.AddPolicy("CanViewStore",
+                options => options.AddPolicy("CanManageStore",
                 policy => policy.RequireUserName("daniel.adigun@digitalforte.ng")));
+
+            //IISOPtions
+            services.Configure<IISOptions>(options =>
+            {
+                options.AutomaticAuthentication = true;
+            });
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, InitializeUsers seedData, IWebHostBuilder host)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, InitializeUsers seedData)
         {
             //seed user data - run once
             //seedData.SeedAdminUser();
@@ -103,13 +109,7 @@ namespace jzo
             {
                 app.UseExceptionHandler("/Home/Error");
 
-                //hosting IIS Setup
-                host.UseKestrel()
-                    .UseContentRoot(Directory.GetCurrentDirectory())
-                    .UseIISIntegration()
-                    .UseStartup<Startup>()
-                    .Build();
-
+               
             }
 
             app.UseApplicationInsightsExceptionTelemetry();

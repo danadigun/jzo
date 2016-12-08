@@ -6,6 +6,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\BUILDS\jzofashion.com_builds</_PublishTargetUrl>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAkeIxYxujbkmQHBitzwKhrAAAAAACAAAAAAAQZgAAAAEAACAAAAC5R/Gf5yd41zDRHt/T3LndNeZgjCkRFE4OaEnwN3BzwgAAAAAOgAAAAAIAACAAAAC/D9Numcu5pI2JTOd0iHE/qupVpWbnosQd+67R9ZXcbzAAAABCrh0zYhSfhw/h8wrqtvuzcP234WU91xpQDF21y1kwKgpNVX8HOfiqljgb6xHC/gBAAAAAgscOKxaOO/hMT+Gyrk6s8SybnofyszUjbP4a+6pWsnW581elWLk+/MTDjoJ2D/wSWhWNRDugfYDaHClfcV2uZg==</EncryptedPassword>
   </PropertyGroup>
 </Project>

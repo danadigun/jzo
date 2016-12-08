@@ -11,6 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>jzo.Data.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
     <ShowAllFiles>false</ShowAllFiles>
-    <NameOfLastUsedPublishProfile>jzofashion.com</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>Default Settings</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
