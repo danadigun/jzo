@@ -24,7 +24,7 @@ namespace jzo.Services
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_base_url + "/sms/1/text/single");
+                client.BaseAddress = new Uri("https://api.infobip.com/sms/1/text/single");
 
                 // Add an Accept header for JSON format.
                 client.DefaultRequestHeaders.Accept.Add(
@@ -42,7 +42,7 @@ namespace jzo.Services
                 });
 
                 //do a POST
-                var response = await client.PostAsync(_base_url + "/sms/1/text/single", content);
+                var response = await client.PostAsync("https://api.infobip.com/sms/1/text/single", content);
 
                 var jsonResponse = await response.Content.ReadAsStringAsync();
                 if(jsonResponse != null)
