@@ -16,7 +16,7 @@ namespace jzo.Services
 
         public PaystackService()
         {
-             paystack_uri_header = "https://api.paystack.co/";
+             paystack_uri_header = "https://api.paystack.co/transaction/";
              paystack_key = "sk_test_f26f77b1e6f0890258f40bec1026de5d9733ca9d";
         }
         public static async Task<bool> IsPaymentExist(string payment_reference)
@@ -24,7 +24,7 @@ namespace jzo.Services
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(paystack_uri_header + "verify/" + payment_reference);
+                client.BaseAddress = new Uri($"https://api.paystack.co/transaction/verify/{payment_reference}");
 
                 // Add an Accept header for JSON format.
                 client.DefaultRequestHeaders.Accept.Add(
@@ -34,7 +34,7 @@ namespace jzo.Services
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", paystack_key);
 
                 //do a GET
-                var response = await client.GetAsync(paystack_uri_header + "verify/" + payment_reference);
+                var response = await client.GetAsync($"https://api.paystack.co/transaction/verify/{payment_reference}");
                 var jsonResponse = await response.Content.ReadAsStringAsync();
 
                 if(jsonResponse != null)

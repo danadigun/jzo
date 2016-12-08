@@ -142,7 +142,7 @@ namespace jzo.Controllers
                 new KeyValuePair<string, string>("reference", _reference),
                 new KeyValuePair<string, string>("email", User.Identity.Name),
                 new KeyValuePair<string, string>("amount", (amount * 100).ToString()),
-                new KeyValuePair<string, string>("callback_url", "http://jzofashion.com/Orders/paystackCallback?cartId="+cartId+"&reference="+_reference)
+                new KeyValuePair<string, string>("callback_url", $"http://jzofashion.com/Group/paystackCallback?cartId={cartId}&reference={_reference}")
             });
 
             var response = await client.PostAsync(paymentUrl, content);
@@ -163,84 +163,6 @@ namespace jzo.Controllers
 
         }
 
-        [Authorize]
-        public async Task<IActionResult> paystackCallback(string cartId, string reference)
-        {
-            //verify if reference exists
-            if(await PaystackService.IsPaymentExist(reference) == false)
-            {
-                ViewData["status"] = "invalid transaction";
-                return View();
-            }
-
-            else
-            {
-                //verify if the transaction has been checked out
-                var _cart = _context.SelectedItem.Where(x => x.CartId == cartId).ToList();
-                if(_cart.First().isCheckedOut == true)
-                {
-                    ViewData["status"] = "invalid transaction";
-                    return View();
-                }
-
-                else
-                {
-                    ViewData["status"] = "valid transaction";
-
-                    //set order reference Id
-                    foreach(var item in _cart)
-                    {
-                        //set isCheckout to true
-                        item.isCheckedOut = true;
-                        item.order = new Order
-                        {
-                            dateCreated = DateTime.Now,
-                            Id = Convert.ToInt32(reference),
-                            isPending = true,
-                            isShipped = false,                            
-                        };
-                        
-                    }
-                    var checkout = new Checkout
-                    {
-                        Items = _cart,
-                        dateCreated = DateTime.Now,
-                        isSold = true,
-                        totalPrice = _cart.Select(x => x.totalPrice).Sum()
-                    };
-                    _context.Checkout.Add(checkout);
-                    _context.SaveChanges();
-
-
-                    //send sms to customer
-                    var _phone = _context.Users.Where(x => x.UserName == User.Identity.Name)
-                        .Select(x => x.phone)
-                        .FirstOrDefault();
-
-                    await new AuthMessageSender().SendSmsAsync(_phone,
-                        "Hello name, " + "\n\n" +
-                        "Thanks for your Order referenced: " + reference + " made on jzofashion.com.");
-
-
-                    //send email/sms to admin/store manager
-                    var _allAdmins = _context.Admins.ToList();
-
-                    foreach(var admin in _allAdmins)
-                    {
-                        await new AuthMessageSender().SendSmsAsync(admin.phone,
-                              " You have a new Order request referenced: " + reference + " made on jzofashion.com.");
-
-                        await new AuthMessageSender().SendEmailAsync(admin.email, "Order Request. Reference: " + reference,
-                            "Hi Admin, "+"<br><br>"+
-                              " You have a new Order request referenced: " + reference + " made on jzofashion.com.");
-
-                    }
-                  
-                    //return success page
-                    return View();
-
-                }
-            }
-         }
+        
     }
 }
