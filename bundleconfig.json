@@ -50,5 +50,11 @@
     "inputFiles": [
       "wwwroot/js/landing.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/checkout.min.js",
+    "inputFiles": [
+      "wwwroot/js/checkout.js"
+    ]
   }
 ]
