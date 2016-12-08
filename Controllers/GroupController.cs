@@ -133,6 +133,25 @@ namespace jzo.Controllers
             var cartItems = _context.SelectedItem.Where(x => x.CartId == ShoppingCartId && x.isCheckedOut == false).ToList();
             return View(cartItems);
         }
+
+        /// <summary>
+        /// Get total amount of cart items
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult getTotal()
+        {
+            ShoppingCartId = GetCartId();
+
+            var cartItems = _context.SelectedItem.Where(x => x.CartId == ShoppingCartId && x.isCheckedOut == false).ToList();
+
+            return Json(new { total = cartItems.Select(x => x.totalPrice).Sum(), noOfItems = cartItems.Count });
+        }
+
+        /// <summary>
+        /// returns cart id
+        /// </summary>
+        /// <returns></returns>
         public string GetCartId()
         {
             if (HttpContext.Session.GetString(CartSessionKey) == null)
