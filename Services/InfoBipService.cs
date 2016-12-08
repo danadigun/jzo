@@ -22,24 +22,31 @@ namespace jzo.Services
         }
         public static async  Task<bool> sendMessage(string number, string message)
         {
+           
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://api.infobip.com/sms/1/text/single");
 
                 // Add an Accept header for JSON format.
                 client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //add authorization header for paystack
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _authorization);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "ZGlnaUZvcnRlMTpUZXN0MTIzIQ==");
 
                 //send a POST
-                var content = new FormUrlEncodedContent(new[]
+                var payload = new InfoBipPayload
                 {
-                     new KeyValuePair<string, string>("from", "JZO"),
-                     new KeyValuePair<string, string>("to", number),
-                     new KeyValuePair<string, string>("text", message)
-                });
+                    from = "JZO",
+                    to = number,
+                    text = message
+                };
+
+                //serialize payload to json
+                var stringPayload = await Task.Run(()=> JsonConvert.SerializeObject(payload));
+
+                // Wrap our JSON inside a StringContent which then can be used by the HttpClient class
+                var content = new StringContent(stringPayload, Encoding.UTF8, "application/json");
 
                 //do a POST
                 var response = await client.PostAsync("https://api.infobip.com/sms/1/text/single", content);
@@ -47,10 +54,18 @@ namespace jzo.Services
                 var jsonResponse = await response.Content.ReadAsStringAsync();
                 if(jsonResponse != null)
                 {
-                    var infoBipResponse = JsonConvert.DeserializeObject<SendResponse>(jsonResponse);
-                    if(infoBipResponse.messages != null)
+                    try
                     {
-                        return true;
+                        var infoBipResponse = JsonConvert.DeserializeObject<SendResponse>(jsonResponse);
+                        if (infoBipResponse.messages != null)
+                        {
+                            return true;
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine(e.StackTrace);
+                        return false;
                     }
                 }
                 return false;

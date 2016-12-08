@@ -8,9 +8,10 @@ using jzo.Data;
 namespace jzo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161208173901_update-database-3")]
+    partial class updatedatabase3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -176,7 +177,7 @@ namespace jzo.Migrations
 
                     b.Property<int>("ItemId");
 
-                    b.Property<int>("OrderReferenceId");
+                    b.Property<int>("OrderId");
 
                     b.Property<DateTime>("dateCreated");
 

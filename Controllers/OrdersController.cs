@@ -45,7 +45,7 @@ namespace jzo.Controllers
             }
 
             Order order = await _context.Order.SingleOrDefaultAsync(m => m.Id == id);
-            List<SelectedItems> orderItems = _context.SelectedItem.Where(x => x.order.Id == id).ToList();
+            List<SelectedItems> orderItems = _context.SelectedItem.Where(x => x.OrderReferenceId == id).ToList();
 
             if (order == null)
             {
@@ -143,6 +143,7 @@ namespace jzo.Controllers
                 new KeyValuePair<string, string>("email", User.Identity.Name),
                 new KeyValuePair<string, string>("amount", (amount * 100).ToString()),
                 new KeyValuePair<string, string>("callback_url", $"http://jzofashion.com/Group/paystackCallback?cartId={cartId}&reference={_reference}")
+                //new KeyValuePair<string, string>("callback_url", $"http://localhost:5048/Group/paystackCallback?cartId={cartId}&reference={_reference}")
             });
 
             var response = await client.PostAsync(paymentUrl, content);

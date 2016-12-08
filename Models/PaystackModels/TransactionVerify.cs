@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 namespace jzo.Models.PaystackModels
 {
 
+
     public class TransactionVerify
     {
         public bool status { get; set; }
         public string message { get; set; }
-        public Data data { get; set; }
+        public TransactionVerifyData data { get; set; }
     }
 
     public class TransactionVerifyData
@@ -21,16 +22,21 @@ namespace jzo.Models.PaystackModels
         public string status { get; set; }
         public string reference { get; set; }
         public string domain { get; set; }
-        public int metadata { get; set; }
+        public TransactionVerifyMetadata metadata { get; set; }
         public string gateway_response { get; set; }
         public object message { get; set; }
         public string channel { get; set; }
         public string ip_address { get; set; }
         public TransactionVerifyLog log { get; set; }
-        public object fees { get; set; }
+        public int fees { get; set; }
         public TransactionVerifyAuthorization authorization { get; set; }
-        public Customer customer { get; set; }
-        public string plan { get; set; }
+        public TransactionVerifyCustomer customer { get; set; }
+        public object plan { get; set; }
+    }
+
+    public class TransactionVerifyMetadata
+    {
+        public string referrer { get; set; }
     }
 
     public class TransactionVerifyLog
@@ -57,22 +63,22 @@ namespace jzo.Models.PaystackModels
     {
         public string authorization_code { get; set; }
         public string card_type { get; set; }
+        public string bin { get; set; }
         public string last4 { get; set; }
         public string exp_month { get; set; }
         public string exp_year { get; set; }
-        public string bin { get; set; }
         public string bank { get; set; }
         public string channel { get; set; }
         public bool reusable { get; set; }
         public string country_code { get; set; }
     }
 
-    public class Customer
+    public class TransactionVerifyCustomer
     {
         public int id { get; set; }
         public string customer_code { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
+        public object first_name { get; set; }
+        public object last_name { get; set; }
         public string email { get; set; }
     }
 

@@ -10,6 +10,7 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using jzo.Services;
 using jzo.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace jzo.Controllers
 {
@@ -194,7 +195,7 @@ namespace jzo.Controllers
         public async Task<IActionResult> paystackCallback(string cartId, string reference)
         {
             //verify if reference exists
-            if (await PaystackService.IsPaymentExist(reference) == false)
+            if (PaystackService.IsPaymentExist(reference).Result == false)
             {
                 ViewData["status"] = "invalid transaction";
                 return View();
@@ -203,6 +204,8 @@ namespace jzo.Controllers
             else
             {
                 //verify if the transaction has been checked out
+                //_context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [jzofashion].[dbo].[Order] ON");
+
                 var _cart = _context.SelectedItem.Where(x => x.CartId == cartId).ToList();
                 if (_cart.First().isCheckedOut == true)
                 {
@@ -214,20 +217,29 @@ namespace jzo.Controllers
                 {
                     ViewData["status"] = "valid transaction";
 
+                    
                     //set order reference Id
                     foreach (var item in _cart)
                     {
                         //set isCheckout to true
                         item.isCheckedOut = true;
-                        item.order = new Order
+                        item.OrderReferenceId = Convert.ToInt32(reference);
+
+                        //create new order with reference
+                        var order = new Order
                         {
                             dateCreated = DateTime.Now,
-                            Id = Convert.ToInt32(reference),
+                            referenceId = Convert.ToInt32(reference),
                             isPending = true,
                             isShipped = false,
+                            user = User.Identity.Name,
+                                                        
                         };
+                        _context.Order.Add(order);
 
                     }
+
+                    //create new checkout record for order
                     var checkout = new Checkout
                     {
                         Items = _cart,
@@ -244,9 +256,9 @@ namespace jzo.Controllers
                         .Select(x => x.phone)
                         .FirstOrDefault();
 
-                    await new AuthMessageSender().SendSmsAsync(_phone,
+                  bool status = InfoBipService.sendMessage(_phone,
                         "Hello name, " + "\n\n" +
-                        "Thanks for your Order referenced: " + reference + " made on jzofashion.com.");
+                        "Thanks for your Order referenced: " + reference + " made on jzofashion.com.").Result;
 
 
                     //send email/sms to admin/store manager
@@ -254,8 +266,8 @@ namespace jzo.Controllers
 
                     foreach (var admin in _allAdmins)
                     {
-                        await new AuthMessageSender().SendSmsAsync(admin.phone,
-                              " You have a new Order request referenced: " + reference + " made on jzofashion.com.");
+                      bool status_1 = InfoBipService.sendMessage(admin.phone,
+                              " You have a new Order request referenced: " + reference + " made on jzofashion.com.").Result;
 
                         await new AuthMessageSender().SendEmailAsync(admin.email, "Order Request. Reference: " + reference,
                             "Hi Admin, " + "<br><br>" +
@@ -268,6 +280,18 @@ namespace jzo.Controllers
 
                 }
             }
+        }
+
+        [HttpGet]
+        public IActionResult checkRef(string reference)
+        {
+            return Json(new { status = PaystackService.IsPaymentExist(reference).Result });
+        }
+
+        [HttpGet]
+        public IActionResult send()
+        {
+            return Json(new { status = InfoBipService.sendMessage("2347038025189", "this is test").Result });
         }
     }
 }
