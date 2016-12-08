@@ -75,7 +75,7 @@ namespace jzo
             //Authorization
             //user -> ikejoseph@gmail.com, Pass119#
             services.AddAuthorization(
-                options => options.AddPolicy("CanViewStore",
+                options => options.AddPolicy("CanManageStore",
                 policy => policy.RequireUserName("daniel.adigun@digitalforte.ng")));
 
             //IISOPtions
