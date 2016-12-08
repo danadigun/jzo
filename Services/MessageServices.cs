@@ -16,10 +16,11 @@ namespace jzo.Services
             return Task.FromResult(0);
         }
 
-        public Task SendSmsAsync(string number, string message)
+        public async Task SendSmsAsync(string number, string message)
         {
             // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
+            await InfoBipService.sendMessage(number, message);
+           
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using jzo.Models;
+using jzo.Services;
 
 namespace jzo.Data
 {
@@ -19,7 +20,7 @@ namespace jzo.Data
         public DbSet<ItemGroup> ItemGroup { get; set; }
         public DbSet<Item>Item { get; set; }
         public DbSet<Checkout> Checkout { get; set; }
-
+        public DbSet<Admins> Admins { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

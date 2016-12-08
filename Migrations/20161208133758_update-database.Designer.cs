@@ -8,9 +8,10 @@ using jzo.Data;
 namespace jzo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161208133758_update-database")]
+    partial class updatedatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -205,8 +206,6 @@ namespace jzo.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("email");
-
-                    b.Property<string>("phone");
 
                     b.HasKey("Id");
 
