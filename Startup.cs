@@ -74,16 +74,16 @@ namespace jzo
             services.AddTransient<IWebHostBuilder, WebHostBuilder>();
 
             //Authorization
-            //user -> ikejoseph@gmail.com, Pass119#
-            //services.AddAuthorization(
-            //    options => options.AddPolicy("CanManageStore",
-            //    policy => policy.RequireUserName("daniel.adigun@digitalforte.ng")));
-
+           // user->ikejoseph@gmail.com, Pass119#
             services.AddAuthorization(
-               options => options.AddPolicy("CanManageStore",
-               policy => policy.Requirements.Add(new AdminPolicyRequirement())));
+                options => options.AddPolicy("CanManageStore",
+                policy => policy.RequireUserName("daniel.adigun@digitalforte.ng")));
 
-            services.AddSingleton<IAuthorizationHandler, AdminPolicyHandler>();
+            //services.AddAuthorization(
+            //   options => options.AddPolicy("CanManageStore",
+            //   policy => policy.Requirements.Add(new AdminPolicyRequirement())));
+
+            //services.AddSingleton<IAuthorizationHandler, AdminPolicyHandler>();
 
             //IISOPtions
             services.Configure<IISOptions>(options =>

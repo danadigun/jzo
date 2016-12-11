@@ -14,18 +14,9 @@ namespace jzo.Services
 
     public class AdminPolicyHandler : AuthorizationHandler<AdminPolicyRequirement>
     {
-        
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AdminPolicyRequirement requirement)
         {
-            using(var db = new ApplicationDbContext())
-            {
-                var isAdmin = db.Admins.Where(x => x.email == context.User.Identity.Name).SingleOrDefault();
-                if(isAdmin != null)
-                {
-                    context.Succeed(requirement);
-                }
-                return Task.CompletedTask;
-            }
+            throw new NotImplementedException();
         }
     }
 }
