@@ -14,6 +14,7 @@ using jzo.Models;
 using jzo.Services;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace jzo
 {
@@ -58,6 +59,7 @@ namespace jzo
                     x.Password.RequireLowercase = false;
                     x.Password.RequireDigit = false;
                     x.Password.RequiredLength = 2;
+                    
                 }
             )
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -73,11 +75,11 @@ namespace jzo
             services.AddTransient<InitializeUsers>();
             services.AddTransient<IWebHostBuilder, WebHostBuilder>();
 
-            //Authorization
-           // user->ikejoseph@gmail.com, Pass119#
-            services.AddAuthorization(
-                options => options.AddPolicy("CanManageStore",
-                policy => policy.RequireUserName("daniel.adigun@digitalforte.ng")));
+            //Authorization            
+            services.AddAuthorization(options => options.AddPolicy("CanManageStore",
+                  policy => policy.RequireClaim(ClaimTypes.Name,
+                        new string[] { "daniel.adigun@digitalforte.ng", "ikejoseph@gmail.com" })
+                ));
 
             //services.AddAuthorization(
             //   options => options.AddPolicy("CanManageStore",

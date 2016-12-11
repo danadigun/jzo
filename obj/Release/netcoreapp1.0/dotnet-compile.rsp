@@ -254,6 +254,8 @@ C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Migra
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Migrations\20161208173901_update-database-3.Designer.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Migrations\20161208174208_update-database-4.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Migrations\20161208174208_update-database-4.Designer.cs
+C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Migrations\20161208232058_update-database-5.cs
+C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Migrations\20161208232058_update-database-5.Designer.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\ApplicationUser.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\DatabaseModels.cs
@@ -280,6 +282,7 @@ C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Model
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\ManageViewModels\VerifyPhoneNumberViewModel.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\PaystackModels\TransactionInitialize.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Models\PaystackModels\TransactionVerify.cs
+C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Services\AdminPolicyRequirement.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Services\Admins.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Services\AuthorizationRequirements.cs
 C:\Users\danWin-PC\Desktop\DIGITAL_FORTE\PRODUCTION_CODES\CODE\jzo\src\jzo\Services\FileUploadService.cs
