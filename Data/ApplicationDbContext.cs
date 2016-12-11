@@ -15,6 +15,11 @@ namespace jzo.Data
             : base(options)
         {
         }
+
+        public ApplicationDbContext()
+        {
+        }
+
         public DbSet<Order> Order { get; set; }
         public DbSet<SelectedItems> SelectedItem { get; set; }
         public DbSet<ItemGroup> ItemGroup { get; set; }
