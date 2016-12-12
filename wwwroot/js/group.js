@@ -38,7 +38,7 @@ $(function () {
             next();
             group_id = callback.id;
 
-           
+
 
         }).fail(function (callback) {
 
@@ -52,14 +52,14 @@ $(function () {
         $('.save-changes').hide();
         $('.complete').show();
         $('.item-add').show();
-                $('.drop-message')
-                     .html(
-                         "<div class =\"alert alert-info\">" +
-                         "<b>Step 1 Complete. </b>Next upload group thumbnail image to finish!" +
-                         "</div>" 
-                        
-                     )
-                $('.complete').prop('disabled', true);
+        $('.drop-message')
+             .html(
+                 "<div class =\"alert alert-info\">" +
+                 "<b>Step 1 Complete. </b>Next upload group thumbnail image to finish!" +
+                 "</div>"
+
+             )
+        $('.complete').prop('disabled', true);
 
     }
 
@@ -81,7 +81,7 @@ $(function () {
         $(location).attr("href", "/group");
     }
 
-    
+
     //dropzone
     Dropzone.options.myDropzone = {
 
@@ -92,7 +92,7 @@ $(function () {
         uploadMultiple: false,
 
         init: function () {
-        
+
             this.on('sending', function (data, xhr, formData) {
                 //get form data here 
                 formData.append("group_id", group_id);
@@ -108,9 +108,9 @@ $(function () {
                     .html(
                         "<div class =\"alert alert-success\">" +
                         "<b>Success! </b>You have successfully created a new group. Click <b>exit</b> to finish!" +
-                        "</div>"+
-                        "<div class=\"alert alert-info \">"+
-                        "You can simply replace image by uploading a new one"+
+                        "</div>" +
+                        "<div class=\"alert alert-info \">" +
+                        "You can simply replace image by uploading a new one" +
                         "</div>"
                     )
                 $('.complete').prop('disabled', false);
@@ -122,5 +122,69 @@ $(function () {
         }
     }
 
-   
+
+    //remove group
+    $('.remove-group').click(function (e) {
+        e.preventDefault();
+
+        var groupId = $(this).attr('data-id');
+
+        swal({
+            title: "Remove a group/collection",
+            text: "Are you sure you want to delete this entire collection with all its associated items?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            showLoaderOnConfirm: true,
+        },
+        function () {
+            $.ajax({
+                url: "../api/itemgroups/" + groupId,
+                type: 'DELETE'
+            }).done(function () {
+                swal("success", "successfully removed group/collection with Id: " + groupId, "success");
+                $('#group_' + groupId).fadeOut();
+            }).fail(function (error) {
+                swal("error", "unable to delete group with id:  " + groupId, "error");
+                console.log(error);
+            })
+        });
+
+        //alert('removing group: ' + groupId)
+    })
+
+    //remove item
+    $('.remove-item').click(function (e) {
+        e.preventDefault();
+
+        var itemId = $(this).attr('data-id');
+
+        swal(
+         {
+            title: "Remove an item",
+            text: "Are you sure you want to delete this item from the store?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            showLoaderOnConfirm: true,
+        },
+        function () {
+             $.ajax({
+                 url: "../api/items/" + itemId,
+                 type:'DELETE'
+             }).done(function () {
+                 swal("success", "successfully removed item: " + itemId, "success");
+                 $('#tr_item_' + itemId).fadeOut();
+             }).fail(function (error) {
+                 swal("error", "unable to delete item:  " + itemId, "error");
+                 console.log(error);
+             })
+         }
+       );
+
+    })
 })
