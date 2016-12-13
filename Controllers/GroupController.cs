@@ -98,7 +98,8 @@ namespace jzo.Controllers
                     phone = _user.PhoneNumber,
                     referenceId = order.referenceId,
                     items = actualItemsList,
-                    totalPriceOfOrder = actualItemsList.Select(x=>x.totalPrice).Sum()
+                    totalPriceOfOrder = actualItemsList.Select(x=>x.totalPrice).Sum(),
+                    dateCreated = order.dateCreated
                 };
 
 
