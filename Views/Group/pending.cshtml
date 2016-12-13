@@ -1,0 +1,58 @@
+﻿@model IEnumerable<jzo.Models.OrdersViewModel.PendingOrder>
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var orders = Model.ToList();
+}
+<style>
+    .orders {
+        border-left: 2px solid #0047AB;
+        padding: 1em;
+        background: whitesmoke;
+        color: #0047AB;
+    }
+
+    .no_orders {
+        border-left: 2px solid rgba(0,0,0,0.4);
+        padding: 1em;
+        background: whitesmoke;
+        color: rgba(0,0,0,0.4);
+    }
+</style>
+<div class="container">
+    <h1 style="margin-top:4em; margin-bottom:2em; color:rgba(0,0,0,0.6)">
+        <i class="ion ion-bag"></i>&nbsp;Orders&nbsp;
+      
+        @*<span style="font-size:12pt; margin-left:10px;">
+            <a class="no_orders">
+                stock: 23
+            </a>
+        </span>*@
+        <span style="font-size:12pt; float:right;">
+            <a href="~/group"  class="btn btn-default btn-lg"> Back to store &nbsp;<i class="ion ion-chevron-right"></i></a>
+        </span>
+    </h1>
+    @{
+        foreach (var order in orders)
+        {
+            <a class="orders btn" role="button" data-toggle="collapse" data-target="#orderCollapse_@order.referenceId" aria-expanded="false" aria-controls="orderCollapse_@order.referenceId">
+                Name: @order.Name
+                <b>Total Price: @order.totalPriceOfOrder</b>
+            </a>
+            <div class="collapse" id="#orderCollapse_@order.referenceId">
+                @foreach (var item in order.items)
+                {
+                    <p>
+                        Name: @item.name, Unit price: @item.price, quantity ordered: @item.qty, total: @item.totalPrice;
+                        
+                    </p>
+
+                }
+            </div>
+
+
+        }
+    }
+</div>

@@ -9,5 +9,6 @@ namespace jzo.Models.ItemViewModels
     {
         public ItemGroup group { get; set; }
         public List<Item> items { get; set; }
+        public int newOrders { get; set; }
     }
 }

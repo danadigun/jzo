@@ -1,18 +1,57 @@
 ﻿@model IEnumerable<jzo.Models.ItemViewModels.GetAllItemGroupViewModel>
 @*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+   Manage store, groups and items views
 *@
 @{
+    var orders_count = Model.Select(x => x.newOrders).FirstOrDefault();
 }
-
+<style>
+    .orders{
+        border-left:2px solid #0047AB;
+        padding:1em;
+        background:whitesmoke;
+        color:#0047AB
+    }
+    .no_orders{
+        border-left:2px solid rgba(0,0,0,0.4);
+        padding:1em;
+        background:whitesmoke;
+        color:rgba(0,0,0,0.4)
+    }
+</style>
 <div class="container">
-    <h1 style="margin-top:4em; margin-bottom:2em;">
-        <i class="ion ion-bag"></i>&nbsp;My Store
+    <h1 style="margin-top:4em; margin-bottom:2em; color:rgba(0,0,0,0.6)">
+        <i class="ion ion-bag"></i>&nbsp;My Store&nbsp;
+        <span style="font-size:12pt;">
+
+            @if (orders_count == 0)
+            {
+                <a href="~/group/pending" style="text-decoration:none; " class="no_orders">
+                    You have <b>@orders_count</b> pending orders
+                </a>
+            }
+            else
+            {
+                <a href="~/group/pending" style="text-decoration:none; " class="orders">
+                    You have <b>@orders_count</b> new pending orders
+                    &nbsp;<i class="ion ion-chevron-right"></i>
+
+                </a>
+            }
+
+        </span>
+        <span style="font-size:12pt; margin-left:10px;">
+            <a class="no_orders">
+                stock: 23
+            </a>
+        </span>
         <span style="font-size:12pt; float:right;">
             <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#Create-group-modal">+ Create Group</button>
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-item-group-modal">+ Add new items to store</button>
         </span>
     </h1>
+
+
 
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
