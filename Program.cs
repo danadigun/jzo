@@ -11,13 +11,16 @@ namespace jzo
     {
         public static void Main(string[] args)
         {
+            //add create roles
+
+            //host
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 //.UseEnvironment("Production")
-                .UseEnvironment("Development")
+                //.UseEnvironment("Development")
                 .Build();
 
             host.Run();

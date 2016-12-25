@@ -8,6 +8,10 @@ using jzo.Models.ItemViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using jzo.Services;
+using jzo.Models;
+using Microsoft.EntityFrameworkCore;
+using jzo.Models.OrdersViewModel;
 
 namespace jzo.Controllers
 {
@@ -32,17 +36,79 @@ namespace jzo.Controllers
             var allGroups = _context.ItemGroup.ToList();
             foreach(var group in allGroups)
             {
+                //collections
                 var group_items = _context.Item.Where(x => x.ItemGroupId == group.Id).ToList();
+
+                //new orders
+                var newOrder = _context.Order.Where(x => x.isPending == true).ToList().Count();
+
                 var viewModel = new GetAllItemGroupViewModel
                 {
                     group = group,
-                    items = group_items
+                    items = group_items,
+                    newOrders = newOrder
                 };
                 viewModelList.Add(viewModel);
             }
             return View(viewModelList);
         }
 
+        [Authorize(Policy = "CanManageStore")]
+        public IActionResult pending()
+        {
+            var viemModelList = new List<PendingOrder>();
+
+            //get pending orders
+            var _orders = _context.Order.Where(x => x.isPending == true).ToList();
+
+            //populate pending order details
+            foreach(var order in _orders)
+            {
+                //get user
+                var _user = _context.Users.Where(x => x.UserName == order.user).FirstOrDefault();
+
+                //get shopping cart items for this  order
+                var selectedItems = _context.SelectedItem
+                            .Where(x => x.OrderReferenceId == order.referenceId)
+                            .ToList();
+
+                //get actual item details
+                var actualItemsList = new List<PurchasedItem>();
+                foreach(var item in selectedItems)
+                {
+                    var _item = _context.Item.Where(x => x.Id == item.ItemId).SingleOrDefault();
+
+                    actualItemsList.Add(new PurchasedItem
+                    {
+                        image_url = _item.image_url,
+                        name = _item.name,
+                        price = _item.price,
+                        qty = item.quantity,
+                        size = item.size,
+                        totalPrice = item.totalPrice
+                    });
+                }
+
+                //populate pending order
+                PendingOrder _pendingOrder = new PendingOrder
+                {
+                    Name = _user.firstname + " " + _user.lastname,
+                    address = _user.mailingAddress,
+                    email = _user.UserName,
+                    phone = _user.PhoneNumber,
+                    referenceId = order.referenceId,
+                    items = actualItemsList,
+                    totalPriceOfOrder = actualItemsList.Select(x=>x.totalPrice).Sum(),
+                    dateCreated = order.dateCreated
+                };
+
+
+                //add pending order to viewmodel list
+                viemModelList.Add(_pendingOrder);
+            }
+                     
+            return View(viemModelList);
+        }
         /// <summary>
         /// Vies details of an item to add to cart or order
         /// </summary>
@@ -186,6 +252,132 @@ namespace jzo.Controllers
             var cartItems = _context.SelectedItem.Where(x => x.CartId == ShoppingCartId && x.isCheckedOut == false).ToList();
 
             return Json(new { cartId = ShoppingCartId, noOfItems = cartItems.Count });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> paystackCallback(string cartId, string reference)
+        {
+            //verify if reference exists
+            if (PaystackService.IsPaymentExist(reference).Result == false)
+            {
+                ViewData["status"] = "invalid transaction";
+                return View();
+            }
+
+            else
+            {
+                //verify if the transaction has been checked out
+                //_context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [jzofashion].[dbo].[Order] ON");
+
+                var _cart = _context.SelectedItem.Where(x => x.CartId == cartId).ToList();
+                if (_cart.First().isCheckedOut == true)
+                {
+                    ViewData["status"] = "invalid transaction";
+                    return View();
+                }
+
+                else
+                {
+                    ViewData["status"] = "valid transaction";
+
+                    
+                    //set order reference Id
+                    foreach (var item in _cart)
+                    {
+                        //set isCheckout to true
+                        item.isCheckedOut = true;
+                        item.OrderReferenceId = Convert.ToInt32(reference);
+
+                        //create new order with reference
+                        var order = new Order
+                        {
+                            dateCreated = DateTime.Now,
+                            referenceId = Convert.ToInt32(reference),
+                            isPending = true,
+                            isShipped = false,
+                            user = User.Identity.Name,
+                                                        
+                        };
+                        _context.Order.Add(order);
+
+                    }
+
+                    //create new checkout record for order
+                    var checkout = new Checkout
+                    {
+                        Items = _cart,
+                        dateCreated = DateTime.Now,
+                        isSold = true,
+                        totalPrice = _cart.Select(x => x.totalPrice).Sum()
+                    };
+                    _context.Checkout.Add(checkout);
+                    _context.SaveChanges();
+
+
+                    //send sms to customer
+                    var _user = _context.Users.Where(x => x.UserName == User.Identity.Name)
+                       
+                        .FirstOrDefault();
+
+                  bool status = InfoBipService.sendMessage(_user.PhoneNumber,
+                        $"Hello {_user.firstname}, " + "\n\n" +
+                        "Thanks for your making an Order on jzofashion.com. Here is your reference number: " + reference + " ").Result;
+
+
+                    //send email/sms to admin/store manager
+                    var _allAdmins = _context.Admins.ToList();
+
+                    foreach (var admin in _allAdmins)
+                    {
+                      bool status_1 = InfoBipService.sendMessage(admin.phone,
+                              " You have a new Order request referenced: " + reference + " made on jzofashion.com.").Result;
+
+                        await new AuthMessageSender().SendEmailAsync(admin.email, "Order Request. Reference: " + reference,
+                            "Hi Admin, " + "<br><br>" +
+                              " You have a new Order request referenced: " + reference + " made on jzofashion.com.");
+
+                    }
+
+                    //return success page
+                    return View();
+
+                }
+            }
+        }
+
+        [HttpGet]
+        public IActionResult checkRef(string reference)
+        {
+            return Json(new { status = PaystackService.IsPaymentExist(reference).Result });
+        }
+
+        [HttpGet]
+        public IActionResult send()
+        {
+            return Json(new {
+                status = InfoBipService.sendMessage("2347038025189", "this is test").Result,
+                user = User.Identity.Name,
+                phone = _context.Users.Where(x=>x.UserName == User.Identity.Name).Select(x=>x.PhoneNumber).SingleOrDefault()
+            });
+        }
+
+        [HttpGet]
+        public IActionResult GetShippingDetails(int orderReference)
+        {
+
+            var user_email = _context.Order.Where(x => x.referenceId == orderReference).Select(x => x.user).SingleOrDefault();
+            if (user_email != null)
+            {
+                var user_details = _context.Users.Where(x => x.UserName == user_email).FirstOrDefault();
+                return Json(new { user = user_details });
+
+            }
+            else
+            {
+                return Json(new { erro = "order doesnt exist" });
+
+            }
+
         }
     }
 }

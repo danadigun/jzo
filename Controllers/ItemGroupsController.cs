@@ -146,6 +146,17 @@ namespace jzo.Controllers
             }
 
             _context.ItemGroup.Remove(itemGroup);
+
+            //remove associated items
+            var assoc_items = _context.Item.Where(x => x.ItemGroupId == id);
+            if(assoc_items != null)
+            {
+                foreach (var item in assoc_items)
+                {
+                    _context.Item.Remove(item);
+                }
+            }
+           
             await _context.SaveChangesAsync();
 
             return Ok(itemGroup);

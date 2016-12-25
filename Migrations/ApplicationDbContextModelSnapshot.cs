@@ -156,11 +156,11 @@ namespace jzo.Migrations
 
                     b.Property<bool>("isShipped");
 
-                    b.Property<string>("userId");
+                    b.Property<int>("referenceId");
+
+                    b.Property<string>("user");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("userId");
 
                     b.ToTable("Order");
                 });
@@ -176,11 +176,11 @@ namespace jzo.Migrations
 
                     b.Property<int>("ItemId");
 
+                    b.Property<int>("OrderReferenceId");
+
                     b.Property<DateTime>("dateCreated");
 
                     b.Property<bool>("isCheckedOut");
-
-                    b.Property<int?>("orderId");
 
                     b.Property<int>("quantity");
 
@@ -194,9 +194,21 @@ namespace jzo.Migrations
 
                     b.HasIndex("CheckoutId");
 
-                    b.HasIndex("orderId");
-
                     b.ToTable("SelectedItem");
+                });
+
+            modelBuilder.Entity("jzo.Services.Admins", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("email");
+
+                    b.Property<string>("phone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -313,22 +325,11 @@ namespace jzo.Migrations
                         .HasForeignKey("userId");
                 });
 
-            modelBuilder.Entity("jzo.Models.Order", b =>
-                {
-                    b.HasOne("jzo.Models.ApplicationUser", "user")
-                        .WithMany()
-                        .HasForeignKey("userId");
-                });
-
             modelBuilder.Entity("jzo.Models.SelectedItems", b =>
                 {
                     b.HasOne("jzo.Models.Checkout")
                         .WithMany("Items")
                         .HasForeignKey("CheckoutId");
-
-                    b.HasOne("jzo.Models.Order", "order")
-                        .WithMany()
-                        .HasForeignKey("orderId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

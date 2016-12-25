@@ -103,7 +103,20 @@ namespace jzo.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+
+                    UserName = model.Email,
+                    Email = model.Email,
+                    city = model.city,
+                    country = model.country,
+                    firstname = model.firstname,
+                    PhoneNumber = model.phone,  
+                    phone = model.phone,
+                    lastname = model.lastname,
+                    state = model.state,
+                   
+                    
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -1,18 +1,57 @@
 ﻿@model IEnumerable<jzo.Models.ItemViewModels.GetAllItemGroupViewModel>
 @*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+   Manage store, groups and items views
 *@
 @{
+    var orders_count = Model.Select(x => x.newOrders).FirstOrDefault();
 }
-
+<style>
+    .orders{
+        border-left:2px solid #0047AB;
+        padding:1em;
+        background:whitesmoke;
+        color:#0047AB
+    }
+    .no_orders{
+        border-left:2px solid rgba(0,0,0,0.4);
+        padding:1em;
+        background:whitesmoke;
+        color:rgba(0,0,0,0.4)
+    }
+</style>
 <div class="container">
-    <h1 style="margin-top:4em; margin-bottom:2em;">
-        <i class="ion ion-bag"></i>&nbsp;My Store
+    <h1 style="margin-top:4em; margin-bottom:2em; color:rgba(0,0,0,0.6)">
+        <i class="ion ion-bag"></i>&nbsp;My Store&nbsp;
+        <span style="font-size:12pt;">
+
+            @if (orders_count == 0)
+            {
+                <a href="~/group/pending" style="text-decoration:none; " class="no_orders">
+                    You have <b>@orders_count</b> pending orders
+                </a>
+            }
+            else
+            {
+                <a href="~/group/pending" style="text-decoration:none; " class="orders">
+                    You have <b>@orders_count</b> new pending orders
+                    &nbsp;<i class="ion ion-chevron-right"></i>
+
+                </a>
+            }
+
+        </span>
+        <span style="font-size:12pt; margin-left:10px;">
+            <a class="no_orders">
+                stock: 23
+            </a>
+        </span>
         <span style="font-size:12pt; float:right;">
             <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#Create-group-modal">+ Create Group</button>
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-item-group-modal">+ Add new items to store</button>
         </span>
     </h1>
+
+
 
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -27,7 +66,7 @@
             {
                 foreach (var item in Model)
                 {
-                 <div class="panel panel-default">
+                 <div id="group_@item.group.Id" class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne_@item.group.Id">
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.group.Id" aria-expanded="true" aria-controls="collapseOne">
@@ -46,6 +85,10 @@
                                 <span>
                                     @item.group.description
                                 </span>
+                                <span style="float:right; padding-bottom:2em;">
+                                    <button data-id="@item.group.Id" class="btn btn-danger remove-group">remove group</button>
+                                    <button class="btn btn-default">Edit</button>
+                                </span>
                             </p>
                             <!--table here-->
                             <div style="padding-left:1em;">
@@ -61,15 +104,17 @@
                                     @{
                                         foreach (var store_item in item.items)
                                         {
-                                            <tr>
+                                            <tr id="tr_item_@store_item.Id">
                                                 <td><img src="@store_item.image_url" style="width:50px; height:auto;" /></td>
                                                 <td><a href="~/group/details?itemId=@store_item.Id">@store_item.name</a></td>
                                                 <td>@store_item.description</td>
                                                 <td>@store_item.price</td>
                                                 <td>@store_item.quantity</td>
                                                 <td>
-                                                    <a href="#" style="text-decoration:none; margin-right:1em;"><i class="ion ion-trash-a"></i></a>
-                                                    <a href="#" style="text-decoration:none"><i class="ion ion-edit"></i></a>
+                                                    <button data-id="@store_item.Id" style="text-decoration:none; margin-right:1em;" class="btn btn-warning remove-item" title="remove this item">
+                                                        <i class="ion ion-android-close"></i>
+                                                    </button>
+                                                    <a href="#" style="text-decoration:none" class="btn btn-default" title="edit item"><i class="ion ion-edit"></i></a>
                                                 </td>
                                             </tr>
 

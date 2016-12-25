@@ -7,12 +7,13 @@ namespace jzo.Models
     public class Order
     {
         public int Id { get; set; }
+        public int referenceId { get; set; }
         public string description { get; set; }
         public bool  isPending { get; set; }
         public bool isShipped { get; set; }
         public DateTime dateCreated { get; set; }
         public DateTime dateShipped{ get; set; }
-        public ApplicationUser user { get; set; }
+        public string user { get; set; }
     }
 
     public class ItemGroup
@@ -46,7 +47,7 @@ namespace jzo.Models
         public int quantity { get; set; }     
         public decimal totalPrice { get; set; }
         public bool isCheckedOut{ get; set; }
-        public Order order { get; set; }
+        public int OrderReferenceId { get; set; }
         public string user { get; set; }
 
         //size of dress ordered

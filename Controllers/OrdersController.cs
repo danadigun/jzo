@@ -12,6 +12,7 @@ using System.Net.Http.Headers;
 using jzo.Models.PaystackModels;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using jzo.Services;
 
 namespace jzo.Controllers
 {
@@ -44,7 +45,7 @@ namespace jzo.Controllers
             }
 
             Order order = await _context.Order.SingleOrDefaultAsync(m => m.Id == id);
-            List<SelectedItems> orderItems = _context.SelectedItem.Where(x => x.order.Id == id).ToList();
+            List<SelectedItems> orderItems = _context.SelectedItem.Where(x => x.OrderReferenceId == id).ToList();
 
             if (order == null)
             {
@@ -88,34 +89,6 @@ namespace jzo.Controllers
 
             return NoContent();
         }
-
-        // POST: api/Orders
-        //[HttpPost]
-        //public async Task<IActionResult> PostOrder([FromBody] Order order)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    _context.Order.Add(order);
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (OrderExists(order.Id))
-        //        {
-        //            return new StatusCodeResult(StatusCodes.Status409Conflict);
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //    return Json(new { id = order.Id, status = "success" });
-        //}
 
         // DELETE: api/Orders/5
         [HttpDelete("{id}")]
@@ -163,11 +136,14 @@ namespace jzo.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk_test_f26f77b1e6f0890258f40bec1026de5d9733ca9d");
 
             //post payment request
+            var _reference = new Random().Next().ToString();
             var content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("reference", new Random().Next().ToString()),
+                new KeyValuePair<string, string>("reference", _reference),
                 new KeyValuePair<string, string>("email", User.Identity.Name),
-                new KeyValuePair<string, string>("amount", (amount * 100).ToString())
+                new KeyValuePair<string, string>("amount", (amount * 100).ToString()),
+                new KeyValuePair<string, string>("callback_url", $"http://jzofashion.com/Group/paystackCallback?cartId={cartId}&reference={_reference}")
+                //new KeyValuePair<string, string>("callback_url", $"http://localhost:5048/Group/paystackCallback?cartId={cartId}&reference={_reference}")
             });
 
             var response = await client.PostAsync(paymentUrl, content);
@@ -187,5 +163,8 @@ namespace jzo.Controllers
             }
 
         }
+
+        
+
     }
 }

@@ -1,0 +1,149 @@
+﻿@model IEnumerable<jzo.Models.OrdersViewModel.PendingOrder>
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Order Processing";
+    var orders = Model.ToList();
+}
+<style>
+    .orders {
+        border-left: 2px solid #0047AB;
+        padding: 1em;
+        background: whitesmoke;
+        color: #0047AB;
+    }
+
+    .no_orders {
+        border-left: 2px solid rgba(0,0,0,0.4);
+        padding: 1em;
+        background: whitesmoke;
+        color: rgba(0,0,0,0.4);
+    }
+
+    .well-ref {
+        background: whitesmoke;
+        padding: 0.5em;
+        border-top: 5px dashed #CFCBCC;
+        margin: 30px 0;
+        position: relative;
+        padding-top:1em;
+        padding-left:1em;
+        padding-bottom:1em;
+    }
+
+        .well-ref .ion-android-drafts, .well-ref .ion-android-pin {
+            color: #0047AB;
+            margin-left: 8em;
+        }
+        .well-ref .ion-ios-browsers-outline{
+            color:#0047AB;
+            font-size:25pt;
+            margin-right:0.6em;
+            margin-left:2em;
+        }
+    .cancel-ship {
+        margin-left: 0.5em;
+    }
+</style>
+<div class="container" style="padding-bottom:20em;">
+    <h1 style="margin-top:4em; margin-bottom:2em; color:rgba(0,0,0,0.6)">
+        <i class="ion ion-bag"></i>&nbsp;Orders&nbsp;
+        <span style="font-size:12pt">
+            You have @Model.Count() orders
+        </span>
+        <span style="font-size:12pt; float:right;">
+            <a href="~/group" class="btn btn-default btn-lg"> Back to store &nbsp;<i class="ion ion-chevron-right"></i></a>
+        </span>
+    </h1><hr /><br />
+    @{
+
+        foreach (var order in orders)
+        {
+            <a class="orders btn" role="button" data-toggle="collapse"
+               href="#orderCollapse_@order.referenceId"
+               aria-expanded="false"
+               aria-controls="orderCollapse_@order.referenceId"
+               style="width:100%; text-align:left; margin-bottom:1em;">
+
+
+                + Order Reference: @order.referenceId. &nbsp; <i>Ship to</i> &nbsp; <b>@order.Name</b>
+                <label class="label label-warning" style="float:right; margin-left:10px; font-size:9pt">
+                    Not shipped
+                </label>
+                <label class="label label-success" style="float:right; font-size:9pt">
+                    paid
+                </label>
+            </a>
+            <div class="collapse" id="orderCollapse_@order.referenceId"
+                 style="margin-top:1em; width:100%; padding-left:1em;">
+                <p class="alert alert-info">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Note</strong> Its important to confirm order with customer before processing shipment
+                </p>
+                <span>
+                    <i class="ion ion-calendar"></i>&nbsp;Date Created:
+                    @order.dateCreated
+                    &nbsp;
+                    <i class="ion ion-android-phone-portrait"></i>
+                    &nbsp;Phone: <a href="tel:+@order.phone">@order.phone</a>
+                    &nbsp;
+                </span>
+                <span style="float:right; padding-bottom:1em;">
+                    <button class="btn btn-success ship-to ship_@order.referenceId" data-reference="@order.referenceId">
+                        ship order to customer
+                        <i class="ion ion-chevron-right"></i>
+                    </button>
+                    <button class="btn btn-warning">
+                        Refund customer
+                    </button>
+                </span>
+
+                <!--Confirm Shipping-->
+                <div id="shipping_@order.referenceId" style="padding-top:1em; padding-bottom:1em; width:100%;">
+
+                </div>
+
+                <table class="table table-condensed"
+                       style="border-left:2px solid rgba(0,0,0,0.4); padding-bottom:1em;">
+
+                    <tr style="background-color:#808080; color:white">
+                        <td><b>Item</b></td>
+                        <td><b>Size</b></td>
+                        <td><b>Unit Price</b></td>
+                        <td><b>Quantity ordered</b></td>
+                        <td><b>Amount</b></td>
+
+
+                    </tr>
+                    @foreach (var item in order.items)
+                    {
+                        <tr style="background:#f5f5f5">
+                            <td>@item.name</td>
+                            <td>@item.size</td>
+                            <td>@item.price</td>
+                            <td>@item.qty</td>
+                            <td>@item.totalPrice</td>
+                        </tr>
+
+                    }
+                    <tr style="border-left:none">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td style="background:gainsboro"><b>Grand Total:</b></td>
+                        <td style="background:gainsboro"><b>@order.totalPriceOfOrder</b></td>
+
+                    </tr>
+                </table>
+
+            </div>
+
+
+
+        }
+    }
+</div>

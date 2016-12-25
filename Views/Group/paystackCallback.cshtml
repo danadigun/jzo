@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var status = ViewData["status"].ToString();
+
+    if(status == "invalid transaction")
+    {
+        <h1>@status</h1>
+        //failed transaction
+        <div style="padding:20em;">
+            <p class="alert alert-danger">
+                <b>This transaction is an invalid transaction</b>
+            </p>
+        </div>
+
+    }
+    else
+    {
+        //success
+        <div style="padding:20em;">
+            <p class="alert alert-success">
+                <b>This transaction was successfull. Please return back to store </b>
+            </p>
+        </div>
+
+    }
+}
+
