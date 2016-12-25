@@ -4,6 +4,7 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewBag.Title = "Order Processing";
     var orders = Model.ToList();
 }
 <style>
@@ -19,6 +20,31 @@
         padding: 1em;
         background: whitesmoke;
         color: rgba(0,0,0,0.4);
+    }
+
+    .well-ref {
+        background: whitesmoke;
+        padding: 0.5em;
+        border-top: 5px dashed #CFCBCC;
+        margin: 30px 0;
+        position: relative;
+        padding-top:1em;
+        padding-left:1em;
+        padding-bottom:1em;
+    }
+
+        .well-ref .ion-android-drafts, .well-ref .ion-android-pin {
+            color: #0047AB;
+            margin-left: 8em;
+        }
+        .well-ref .ion-ios-browsers-outline{
+            color:#0047AB;
+            font-size:25pt;
+            margin-right:0.6em;
+            margin-left:2em;
+        }
+    .cancel-ship {
+        margin-left: 0.5em;
     }
 </style>
 <div class="container" style="padding-bottom:20em;">
@@ -44,7 +70,7 @@
 
                 + Order Reference: @order.referenceId. &nbsp; <i>Ship to</i> &nbsp; <b>@order.Name</b>
                 <label class="label label-warning" style="float:right; margin-left:10px; font-size:9pt">
-                    Not shipped 
+                    Not shipped
                 </label>
                 <label class="label label-success" style="float:right; font-size:9pt">
                     paid
@@ -117,7 +143,7 @@
             </div>
 
 
-            
+
         }
     }
 </div>
