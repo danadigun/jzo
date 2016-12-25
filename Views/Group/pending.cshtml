@@ -24,7 +24,9 @@
 <div class="container" style="padding-bottom:20em;">
     <h1 style="margin-top:4em; margin-bottom:2em; color:rgba(0,0,0,0.6)">
         <i class="ion ion-bag"></i>&nbsp;Orders&nbsp;
-
+        <span style="font-size:12pt">
+            You have @Model.Count() orders
+        </span>
         <span style="font-size:12pt; float:right;">
             <a href="~/group" class="btn btn-default btn-lg"> Back to store &nbsp;<i class="ion ion-chevron-right"></i></a>
         </span>
@@ -40,7 +42,10 @@
                style="width:100%; text-align:left; margin-bottom:1em;">
 
 
-                + Order Reference: @order.referenceId &nbsp; for &nbsp; <b>@order.Name</b>
+                + Order Reference: @order.referenceId. &nbsp; <i>Ship to</i> &nbsp; <b>@order.Name</b>
+                <label class="label label-warning" style="float:right; margin-left:10px; font-size:9pt">
+                    Not shipped 
+                </label>
                 <label class="label label-success" style="float:right; font-size:9pt">
                     paid
                 </label>
@@ -62,7 +67,7 @@
                     &nbsp;
                 </span>
                 <span style="float:right; padding-bottom:1em;">
-                    <button class="btn btn-success">
+                    <button class="btn btn-success ship-to ship_@order.referenceId" data-reference="@order.referenceId">
                         ship order to customer
                         <i class="ion ion-chevron-right"></i>
                     </button>
@@ -70,11 +75,18 @@
                         Refund customer
                     </button>
                 </span>
+
+                <!--Confirm Shipping-->
+                <div id="shipping_@order.referenceId" style="padding-top:1em; padding-bottom:1em; width:100%;">
+
+                </div>
+
                 <table class="table table-condensed"
                        style="border-left:2px solid rgba(0,0,0,0.4); padding-bottom:1em;">
 
                     <tr style="background-color:#808080; color:white">
                         <td><b>Item</b></td>
+                        <td><b>Size</b></td>
                         <td><b>Unit Price</b></td>
                         <td><b>Quantity ordered</b></td>
                         <td><b>Amount</b></td>
@@ -85,6 +97,7 @@
                     {
                         <tr style="background:#f5f5f5">
                             <td>@item.name</td>
+                            <td>@item.size</td>
                             <td>@item.price</td>
                             <td>@item.qty</td>
                             <td>@item.totalPrice</td>
@@ -92,6 +105,7 @@
 
                     }
                     <tr style="border-left:none">
+                        <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td style="background:gainsboro"><b>Grand Total:</b></td>
@@ -102,6 +116,8 @@
 
             </div>
 
+
+            
         }
     }
 </div>

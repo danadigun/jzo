@@ -56,5 +56,11 @@
     "inputFiles": [
       "wwwroot/js/checkout.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/ShipToCustomer.min.js",
+    "inputFiles": [
+      "wwwroot/js/ShipToCustomer.js"
+    ]
   }
 ]

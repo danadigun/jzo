@@ -360,5 +360,24 @@ namespace jzo.Controllers
                 phone = _context.Users.Where(x=>x.UserName == User.Identity.Name).Select(x=>x.PhoneNumber).SingleOrDefault()
             });
         }
+
+        [HttpGet]
+        public IActionResult GetShippingDetails(int orderReference)
+        {
+
+            var user_email = _context.Order.Where(x => x.referenceId == orderReference).Select(x => x.user).SingleOrDefault();
+            if (user_email != null)
+            {
+                var user_details = _context.Users.Where(x => x.UserName == user_email).FirstOrDefault();
+                return Json(new { user = user_details });
+
+            }
+            else
+            {
+                return Json(new { erro = "order doesnt exist" });
+
+            }
+
+        }
     }
 }
