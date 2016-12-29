@@ -109,6 +109,40 @@ namespace jzo.Controllers
                      
             return View(viemModelList);
         }
+
+        /// <summary>
+        /// Processes Shipping 
+        /// </summary>
+        /// <param name="refId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize(Policy = "CanManageStore")]
+        public IActionResult ship(int refId)
+        {
+            var order = _context.Order.Where(x => x.referenceId == refId).SingleOrDefault();
+            if(order != null)
+            {
+
+                order.isPending = false;
+                order.isShipped = true;
+
+                _context.SaveChanges();
+
+                var _user = _context.Users.Where(x => x.UserName == order.user).FirstOrDefault();
+
+                //TODO:mail shipping details
+
+                //sms shipping update to customer
+                bool status = InfoBipService.sendMessage(_user.PhoneNumber,
+                       $"Hello {_user.firstname}, " + "\n\n" +
+                       "Your Order on jzofashion.com with reference number: " + refId + " has been shipped.").Result;
+
+
+
+                return Json(new { status = true });
+            }
+            return Json(new { status = false });
+        }
         /// <summary>
         /// Vies details of an item to add to cart or order
         /// </summary>
