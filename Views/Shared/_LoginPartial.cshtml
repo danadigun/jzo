@@ -11,7 +11,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="logged-in nav navbar-nav navbar-right">
             @{
                 if (await AuthorizationService.AuthorizeAsync(User, "CanManageStore"))
                 {
@@ -37,17 +37,21 @@
 
         </ul>
     </form>
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li style="padding-top:1em;">
-            <span>
-                <a style="color:white; text-decoration:none" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
-                 &nbsp;or&nbsp;<a style="color:white; text-decoration:none" asp-area="" asp-controller="Account" asp-action="Register">create an account</a>
-            </span>
-        </li>
+                }
+                else
+                {
+                    <ul class="login nav navbar-nav navbar-right">
+                        <li style="padding-top:1em;">
+                            <span>
+                                <a style="color:white; text-decoration:none" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                                <span class="login_or">
+                                    &nbsp;or&nbsp;
 
-    </ul>
-}
+                                </span>
+                                <a style="color:white; text-decoration:none" asp-area="" asp-controller="Account" asp-action="Register">create an account</a>
+                            </span>
+                        </li>
+
+                    </ul>
+                }
 
