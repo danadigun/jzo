@@ -92,7 +92,18 @@ body {
     text-align: center !important; }
 
   .collection_img a img {
-    min-width: 100%; } }
+    min-width: 100%; }
+
+  .login-view {
+    margin-top: 13em; }
+
+  .login-view form .btn-default {
+    min-width: 100%;
+    margin-bottom: 10px; }
+
+  .login-view .form-control {
+    border-radius: 0;
+    border: 1px solid #0047AB; } }
 /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 @media only screen and (min-width: 40.063em) {
   .error {
