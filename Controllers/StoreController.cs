@@ -23,6 +23,7 @@ namespace jzo.Controllers
                 ViewData["CollectionName"] = _context.ItemGroup.SingleOrDefault(x => x.Id == groupId.Value).name + " collections";
                 return View(_context.Item.Where(x => x.ItemGroupId == groupId.Value).ToList());
             }
+            ViewData["CollectionName"] = "Our collections";
             return View(_context.Item.ToList());
         }
     }
