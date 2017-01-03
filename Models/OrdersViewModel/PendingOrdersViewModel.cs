@@ -16,6 +16,7 @@ namespace jzo.Models.OrdersViewModel
         public string phone { get; set; }
         public string address { get; set; }
         public int referenceId { get; set; }
+        public bool isShipped { get; set; }
         public DateTime dateCreated { get; set; }
 
         //Selected Items from Cart
