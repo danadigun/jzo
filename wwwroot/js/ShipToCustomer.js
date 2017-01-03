@@ -99,6 +99,7 @@ $(function () {
             }).done(function (response) {
                 if (response.status == true) {
                     swal("Order shipping processed");
+                    $(location).attr('href', '../group/pending')
                 } else {
                    alert("This order does not exist")
                 }
