@@ -27,6 +27,14 @@ body {
     border: 2px solid #0047AB;
     color: #0047AB; }
 
+  .also-like {
+    padding-left: 2em; }
+
+  .paystack-callback {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    padding-top: 5em !important; }
+
   .login {
     padding-bottom: 1em;
     padding-left: 1em;
@@ -103,7 +111,51 @@ body {
 
   .login-view .form-control {
     border-radius: 0;
-    border: 1px solid #0047AB; } }
+    border: 1px solid #0047AB; }
+
+  .detail-view {
+    margin-top: -12em !important; }
+
+  .detail_item h3 {
+    padding: 2em;
+    text-align: center; }
+
+  .detail_item img {
+    width: 350px !important;
+    height: auto !important;
+    border-bottom: 3px solid #0047AB;
+    /*margin-left:10px;*/ }
+
+  .detail-controls {
+    padding-top: 2em; }
+
+  .detail-controls .btn {
+    width: 100%;
+    margin-bottom: 1em; }
+
+  .detail-view form[name=add-to-cart] .form-control {
+    border-radius: 0;
+    width: 100% !important;
+    border: 1.5px solid #0047AB;
+    color: #0047AB; }
+
+  .register-view form {
+    width: 85% !important;
+    margin-left: auto !important;
+    margin-right: auto  !important; }
+
+  .register-view .form-control {
+    border-radius: 0;
+    margin-bottom: 1em;
+    border: 1.5px solid #0047AB; }
+
+  .register-view .btn {
+    width: 100%;
+    background: #0047AB;
+    color: white; }
+
+  .register-view h2 {
+    font-size: 15pt; } }
 /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 @media only screen and (min-width: 40.063em) {
   .error {

@@ -90,9 +90,21 @@ $(function () {
             cancelButtonText: "cancel",
         },
         function () {
-            setTimeout(function () {
-                swal("Order shipping processed");
-            }, 2000);
+            //setTimeout(function () {
+            //    swal("Order shipping processed");
+            //}, 2000);
+            $.ajax({
+                type: 'POST',
+                url: '../Group/ship?refId='+ref
+            }).done(function (response) {
+                if (response.status == true) {
+                    swal("Order shipping processed");
+                } else {
+                   alert("This order does not exist")
+                }
+            }).fail(function (error) {
+                alert("unable to processes shipping")
+            })
         });
     }
 })
