@@ -1,4 +1,4 @@
-﻿@model IEnumerable<jzo.Models.OrdersViewModel.PendingOrder>
+@model IEnumerable<jzo.Models.OrdersViewModel.PendingOrder>
 
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,37 +28,36 @@
         border-top: 5px dashed #CFCBCC;
         margin: 30px 0;
         position: relative;
-        padding-top:1em;
-        padding-left:1em;
-        padding-bottom:1em;
+        padding-top: 1em;
+        padding-left: 1em;
+        padding-bottom: 1em;
     }
 
         .well-ref .ion-android-drafts, .well-ref .ion-android-pin {
             color: #0047AB;
             margin-left: 8em;
         }
-        .well-ref .ion-ios-browsers-outline{
-            color:#0047AB;
-            font-size:25pt;
-            margin-right:0.6em;
-            margin-left:2em;
+
+        .well-ref .ion-ios-browsers-outline {
+            color: #0047AB;
+            font-size: 25pt;
+            margin-right: 0.6em;
+            margin-left: 2em;
         }
+
     .cancel-ship {
         margin-left: 0.5em;
     }
 </style>
-
 <div class="container" style="padding-bottom:20em;">
     <h1 style="margin-top:4em; margin-bottom:2em; color:rgba(0,0,0,0.6)">
-        <i class="ion ion-bag"></i>&nbsp;Pending Orders&nbsp;
+        <i class="ion ion-bag"></i>&nbsp;Shipped Orders&nbsp;
         <span style="font-size:12pt">
-            You have @Model.Count() pending orders
+            You have @Model.Count() shipped orders
         </span>
         <span style="font-size:12pt; float:right;">
-            <a href="~/group/shipped" class="btn btn-primary btn-lg"><i class="ion ion-chevron-left"></i>&nbsp;&nbsp;Shipped Orders</a>
-
+            <a href="~/group/pending" class="btn btn-primary btn-lg"><i class="ion ion-chevron-left"></i>&nbsp;&nbsp;Pending Orders</a>
             <a href="~/group" class="btn btn-default btn-lg"> Back to store &nbsp;<i class="ion ion-chevron-right"></i></a>
-            <a href="#search" class="btn btn-default btn-lg">Search</a>
         </span>
     </h1><hr /><br />
     @{
@@ -73,8 +72,8 @@
 
 
                 + Order Reference: @order.referenceId. &nbsp; <i>Ship to</i> &nbsp; <b>@order.Name</b>
-                <label class="label label-warning" style="float:right; margin-left:10px; font-size:9pt">
-                    Not shipped
+                <label class="label label-primary" style="float:right; margin-left:10px; font-size:9pt">
+                     shipped
                 </label>
                 <label class="label label-success" style="float:right; font-size:9pt">
                     paid
@@ -146,7 +145,8 @@
 
             </div>
 
+
+
         }
     }
 </div>
-

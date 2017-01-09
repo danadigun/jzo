@@ -1,0 +1,63 @@
+﻿@import "../_variables.scss";
+
+.login{
+    padding-bottom:1em;
+    padding-left:1em;
+    padding-right:1em;
+     margin-top:-12em;
+}
+
+.login .login_or{
+    visibility:hidden;
+}
+
+.login a{
+    display:block;
+    min-width:100%;
+    border:2px solid white;
+    padding:10px;
+   
+}
+.social{
+ padding-bottom:1em;
+    padding-left:1em;
+    padding-right:1em;
+}
+.social a{
+    display:block;
+    min-width:100%;
+    border:2px solid $primary-color;
+    padding:10px;
+    text-align:center;
+    margin-bottom:10px;
+    background:$primary-color;
+    color:white;
+        
+}
+.social .home{
+    display:block;
+    min-width:100%;
+    border:2px solid white;
+    padding:10px;
+    text-align:center;
+    margin-bottom:10px;
+    background:gray;
+    color:white !important;
+}
+.social a .ion{
+    color:white;
+}
+
+.social .hide-mobile{
+    visibility:hidden;
+}
+
+.logged-in{
+    margin-top:-12em;
+    padding-left:1em;
+    padding-right:1em;
+}
+
+.logged-in a{
+    margin-bottom:10px;
+}

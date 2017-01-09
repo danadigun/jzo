@@ -1,0 +1,22 @@
+﻿@import "../_variables.scss";
+
+.register-view form{
+    width: 85% !important;
+    margin-left:auto !important;
+    margin-right:auto  !important;
+}
+.register-view .form-control{
+    border-radius:0;
+    margin-bottom:1em;
+    border:1.5px solid $primary-color;
+}
+
+.register-view .btn{
+    width:100%;
+    background:$primary-color;
+    color:white;
+}
+
+.register-view h2{
+    font-size:15pt;
+}

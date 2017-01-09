@@ -1,0 +1,32 @@
+﻿@import "../_variables.scss";
+
+.detail-view{
+    margin-top:-12em !important;
+}
+
+.detail_item h3{
+    padding:2em;
+    text-align:center;
+}
+.detail_item img{
+    width:350px !important;
+    height:auto !important;
+    border-bottom:3px solid $primary-color;
+   /*margin-left:10px;*/
+}
+
+.detail-controls{
+    padding-top:2em;
+}
+
+.detail-controls .btn{
+    width:100%;
+    margin-bottom:1em;
+}
+
+.detail-view form[name=add-to-cart] .form-control{
+    border-radius:0;
+    width:100% !important;
+    border:1.5px solid $primary-color;
+    color:$primary-color;
+}

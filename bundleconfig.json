@@ -62,5 +62,11 @@
     "inputFiles": [
       "wwwroot/js/ShipToCustomer.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/SearchOrder.min.js",
+    "inputFiles": [
+      "wwwroot/js/SearchOrder.js"
+    ]
   }
 ]

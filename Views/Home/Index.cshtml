@@ -65,9 +65,9 @@
                     @{
                         foreach (var item in Model.featuredCollections)
                         {
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 featured_img">
                         <a href="~/store?groupId=@item.Id" style="text-decoration:none;">
-                            <img style="width:300px; height:auto;  border-bottom:2px solid #0047AB" src="@item.imageUrl" />
+                            <img style="width:300px; height:auto;  border-bottom:2px solid #0047AB"   src="@item.imageUrl" />
                         </a>
                         <br />
                         <span style="display:block; padding-top:1em;">
@@ -88,7 +88,7 @@
                     @{
                         foreach (var item in Model.featuredItems)
                         {
-                          <div class="col-lg-3" style="padding-top:4em;">
+                          <div class="col-lg-3 featured_img"  style="padding-top:4em;">
                                 <a href="~/group/details?itemId=@item.Id" style="text-decoration:none;">
                                     <img style="width:200px; height:auto; " src="@item.image_url" />
                                 </a>
