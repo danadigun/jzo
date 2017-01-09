@@ -178,6 +178,67 @@ namespace jzo.Controllers
         }
 
         /// <summary>
+        /// View to return all shipped items
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Policy ="CanManageStore")]
+        public IActionResult shipped()
+        {
+            var viemModelList = new List<PendingOrder>();
+
+            //get Shipped orders
+            var _orders = _context.Order.Where(x => x.isShipped == true).ToList();
+
+            //populate pending order details
+            foreach (var order in _orders)
+            {
+                //get user
+                var _user = _context.Users.Where(x => x.UserName == order.user).FirstOrDefault();
+
+                //get shopping cart items for this  order
+                var selectedItems = _context.SelectedItem
+                            .Where(x => x.OrderReferenceId == order.referenceId)
+                            .ToList();
+
+                //get actual item details
+                var actualItemsList = new List<PurchasedItem>();
+                foreach (var item in selectedItems)
+                {
+                    var _item = _context.Item.Where(x => x.Id == item.ItemId).SingleOrDefault();
+
+                    actualItemsList.Add(new PurchasedItem
+                    {
+                        image_url = _item.image_url,
+                        name = _item.name,
+                        price = _item.price,
+                        qty = item.quantity,
+                        size = item.size,
+                        totalPrice = item.totalPrice
+                    });
+                }
+
+                //populate pending order
+                PendingOrder _pendingOrder = new PendingOrder
+                {
+                    Name = _user.firstname + " " + _user.lastname,
+                    address = _user.mailingAddress,
+                    email = _user.UserName,
+                    phone = _user.PhoneNumber,
+                    referenceId = order.referenceId,
+                    items = actualItemsList,
+                    totalPriceOfOrder = actualItemsList.Select(x => x.totalPrice).Sum(),
+                    dateCreated = order.dateCreated,
+                    isShipped = order.isShipped
+                };
+
+
+                //add pending order to viewmodel list
+                viemModelList.Add(_pendingOrder);
+            }
+
+            return View(viemModelList);
+        }
+        /// <summary>
         /// Processes Shipping 
         /// </summary>
         /// <param name="refId"></param>
