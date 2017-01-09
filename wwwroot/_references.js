@@ -4,6 +4,7 @@
 /// <reference path="js/group.js" />
 /// <reference path="js/item.js" />
 /// <reference path="js/landing.js" />
+/// <reference path="js/searchorder.min.js" />
 /// <reference path="js/shiptocustomer.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
