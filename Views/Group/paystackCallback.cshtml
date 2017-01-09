@@ -8,9 +8,10 @@
     {
         <h1>@status</h1>
         //failed transaction
-        <div style="padding:20em;">
+        <div class="paystack-callback" style="padding:20em;">
             <p class="alert alert-danger">
-                <b>This transaction is an invalid transaction</b>
+                <b>This transaction is an invalid transaction</b><br />
+                <a href="~/" class="btn btn-danger">cancel</a>
             </p>
         </div>
 
@@ -18,9 +19,12 @@
     else
     {
         //success
-        <div style="padding:20em;">
+        <div class="paystack-callback" style="padding:20em;">
             <p class="alert alert-success">
-                <b>This transaction was successfull. Please return back to store </b>
+                <b>This transaction was successfull. Please return back to store </b><br />
+                <a href="~/" class="btn btn-default">Home</a>
+                <a href="~/store" class="btn btn-primary">Continue Shopping</a>
+
             </p>
         </div>
 

@@ -24,33 +24,52 @@
         <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
     </environment>
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+    <style>
+        .search-form {
+            width: 430px !important;
+            border-radius: 30px 0px 0px 30px !important;
+        }
+
+        .search-btn {
+            border-radius: 0px 30px 30px 0px !important;
+            cursor: pointer !important;
+            background:#363636 !important;
+            color:white !important;
+            border: 2px solid #363636;
+        }
+    </style>
 </head>
+
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
+                <button style="border:1px solid white; border-radius:0" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span style="color:white">MENU</span>
                 </button>
                 @* <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">jzo</a>*@
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>
+                <ul class="social nav navbar-nav">
+                    <li class="hidden-lg">
+                        <a class="home" asp-area="" asp-controller="Home" asp-action="Index">
+                            Home
+                        </a>
+                    </li>
+                    <li class="hide-mobile">
                         <a asp-area="" asp-controller="Home" asp-action="Index">
                             <i class="ion ion-social-twitter"></i>
                         </a>
                     </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="About">
+                    <li class="hide-mobile">
+                        <a asp-area="" asp-controller="Home" asp-action="Index">
                             <i class="ion ion-social-facebook"></i>
                         </a>
                     </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Contact">
+                    <li class="hide-mobile">
+                        <a asp-area="" asp-controller="Home" asp-action="Index">
                             <i class="ion ion-social-instagram"></i>
                         </a>
                     </li>
@@ -66,7 +85,7 @@
                 <img alt="Logo" src="~/images/JZO-Logo-3-2.jpg" style="width:60px; height:auto">
             </a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right visible-lg visible-md hidden-sm hidden-xs">
             <li><a href="~/">Home</a></li>
             <li><a href="#">Men</a></li>
             <li><a href="#">Women</a></li>
@@ -78,15 +97,15 @@
                 </a>
             </li>
             @*<li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-            </li>*@
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>*@
         </ul>
     </div>
     <div class="body-content">
@@ -124,6 +143,8 @@
         <script src="~/js/landing.js" asp-append-version="true"></script>
         <script src="~/js/checkout.js" asp-append-version="true"></script>
         <script src="~/js/ShipToCustomer.js" asp-append-version="true"></script>
+        <script src="~/js/SearchOrder.js" asp-append-version="true"></script>
+
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -146,6 +167,8 @@
         <script src="~/js/landing.min.js" asp-append-version="true"></script>
         <script src="~/js/checkout.min.js" asp-append-version="true"></script>
         <script src="~/js/ShipToCustomer.min.js" asp-append-version="true"></script>
+        <script src="~/js/SearchOrder.min.js" asp-append-version="true"></script>
+
 
 
     </environment>

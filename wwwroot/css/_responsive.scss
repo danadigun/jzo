@@ -1,28 +1,36 @@
 ﻿
 @media only screen { 
+    /*@import "_mobile.scss";*/
 
 } /* Define mobile styles */
 
 @media only screen and (max-width: 40em) {
-  @import "home/_mobile.scss";
+  @import "_mobile.scss";
+  @import "menu/_menu_mobile.scss";
+  @import "store/_store_mobile.scss";
+  @import "login/_login_mobile.scss";
+  @import "productDetail/_product_detail_mobile.scss";
+  @import "login/_create_account_mobile.scss";
 
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 
 
 // Medium screens
 @media only screen and (min-width: 40.063em) { 
-   
+      @import "General.scss";
+
 } /* min-width 641px, medium screens */
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
-    
+      /*@import "General.scss";*/
+      @import "home/_home_tablet.scss";
 } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
 
 // Large screens
 @media only screen and (min-width: 64.063em) { 
    
-
+  @import "General.scss";
 } /* min-width 1025px, large screens */
 
 @media only screen and (min-width: 64.063em) and (max-width: 90em) {
@@ -32,7 +40,7 @@
 
 // XLarge screens
 @media only screen and (min-width: 90.063em) { 
-    
+    @import "General.scss";
 } /* min-width 1441px, xlarge screens */
 
 @media only screen and (min-width: 90.063em) and (max-width: 120em) {
