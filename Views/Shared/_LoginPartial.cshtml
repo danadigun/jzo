@@ -37,10 +37,26 @@
 
         </ul>
     </form>
-                }
-                else
-                {
-                    <ul class="login nav navbar-nav navbar-right">
+
+    if (await AuthorizationService.AuthorizeAsync(User, "CanManageStore"))
+    {
+       <form action="~/group/find" class="navbar-form navbar-right"  role="search" id="navBarSearchForm">
+        <div class="form-group" style="display:inline;">
+            <div class="input-group" style="display:table;">
+                <input name="refid" type="Search" placeholder="Need to find order? Enter reference Number.." class="form-control search-form" />
+                <div class="input-group-btn ">
+                    <button class="btn search-btn">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </div>
+            </div>
+            </div>
+</form>
+    }
+}
+else
+{
+    <ul class="login nav navbar-nav navbar-right">
                         <li style="padding-top:1em;">
                             <span>
                                 <a style="color:white; text-decoration:none" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
@@ -53,5 +69,6 @@
                         </li>
 
                     </ul>
-                }
+}
+
 

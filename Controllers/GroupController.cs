@@ -116,7 +116,7 @@ namespace jzo.Controllers
 
                 return View(viemModelList);
             }
-            return View();
+            return View(viemModelList);
         }
         
         [Authorize(Policy = "CanManageStore")]

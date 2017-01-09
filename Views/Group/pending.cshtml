@@ -47,6 +47,7 @@
         margin-left: 0.5em;
     }
 </style>
+
 <div class="container" style="padding-bottom:20em;">
     <h1 style="margin-top:4em; margin-bottom:2em; color:rgba(0,0,0,0.6)">
         <i class="ion ion-bag"></i>&nbsp;Pending Orders&nbsp;
@@ -54,7 +55,10 @@
             You have @Model.Count() pending orders
         </span>
         <span style="font-size:12pt; float:right;">
+            <a href="~/group/shipped" class="btn btn-primary btn-lg"><i class="ion ion-chevron-left"></i>&nbsp;&nbsp;Shipped Orders</a>
+
             <a href="~/group" class="btn btn-default btn-lg"> Back to store &nbsp;<i class="ion ion-chevron-right"></i></a>
+            <a href="#search" class="btn btn-default btn-lg">Search</a>
         </span>
     </h1><hr /><br />
     @{
@@ -145,3 +149,4 @@
         }
     }
 </div>
+

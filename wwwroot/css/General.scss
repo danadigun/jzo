@@ -109,16 +109,19 @@
     font-size: 15pt;
     padding: 10px;
 }
+
 .call-to-action-1 .btn:hover, .call-to-action-2 .btn:hover {
     font-size: 15pt;
     padding: 12px;
-    background:gainsboro;
+    background: gainsboro;
 }
+
 .call-to-action-1 .btn-primary:hover, .call-to-action-2 .btn-primary:hover {
-   padding: 12px;
+    padding: 12px;
     color: white;
     background: $primary-color;
 }
+
 .call-to-action-1 .btn-default, .call-to-action-2 .btn-default {
     border: 2px solid $primary-color;
     color: $primary-color;
@@ -135,30 +138,36 @@
 .carousel-control {
     margin-top: -50vh;
 }
-.carousel-control .glyphicon{
-    background:$primary-color; padding:15px; padding-top:30px;  height:100px; width:auto;
+
+.carousel-control .glyphicon {
+    background: $primary-color;
+    padding: 15px;
+    padding-top: 30px;
+    height: 100px;
+    width: auto;
 }
 
-#myCarousel .left{
-    margin-left:-7%;
+#myCarousel .left {
+    margin-left: -7%;
 }
-#myCarousel .right{
-    margin-right:-7%;
+
+#myCarousel .right {
+    margin-right: -7%;
 }
 
 
 /*Featured Collection**/
-.featured-collection{
-    padding-top:8em;
-    min-height:100vh;
+.featured-collection {
+    padding-top: 8em;
+    min-height: 100vh;
 }
 
-hr{
+hr {
     border-top: 3px solid #eee;
 }
 
-.featured-content{
-    padding-top:5em;
+.featured-content {
+    padding-top: 5em;
 }
 
 .image-overlay {
@@ -170,21 +179,24 @@ hr{
     opacity: 0.5;
     /*position: fixed;*/
     margin-top: -350px;
-    display:none;
-
- }
+    display: none;
+}
 
 //forms
-.form-control{
-    border-radius:0px !important;
+.form-control {
+    border-radius: 0px !important;
     border: 2px solid #ccc;
 }
 
 .modal-content {
-    border-radius:0px !important;
+    border-radius: 0px !important;
 }
+
 .featured_img img {
     width: 300px;
     height: auto;
     border-bottom: 2px solid #0047AB;
 }
+
+
+
