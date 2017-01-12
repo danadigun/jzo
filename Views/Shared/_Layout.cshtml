@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization;
+@using jzo.Models
+@using jzo.Data;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IAuthorizationService AuthorizationService
+@inject ApplicationDbContext _context
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,23 +44,101 @@
         .search-btn {
             border-radius: 0px 30px 30px 0px !important;
             cursor: pointer !important;
-            background:#363636 !important;
-            color:white !important;
+            background: #363636 !important;
+            color: white !important;
             border: 2px solid #363636;
         }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #363636;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 20px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+                border-top:1px solid white;
+                border-bottom:1px solid white;
+                text-align:justify;
+                padding-top:15px;
+                padding-bottom:15px;
+
+            }
+
+                .sidenav a:hover, .offcanvas a:focus {
+                    color: #f1f1f1;
+                }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+               
+                right: 0px;
+                font-size: 36px;
+                margin-left: 50px;
+                border:none;
+            }
+            .sidenav .closeArea{
+                /*width:100%;*/
+                background:#111;
+                /*display:block;*/
+                padding:40px;
+                /*position:absolute;*/
+                top:0;
+                right:0;
+               
+            }
+            .sidenav a .ion{
+                font-size:25px;
+                margin-right:20px;
+            }
+
+            .mobileNavTopBar{
+                display: block;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                height: 50px;
+                z-index: 1100;
+                background-color: #373433;
+                box-shadow: 1px -3px 14px rgba(0,0,0,0.4);
+               
+            }
+
+            .sidenav .sign-out{
+                display:block;
+                width:300% !important;
+                margin-left:40%;
+                margin-right:20%;
+            }
+
+           
     </style>
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top visible-lg">
         <div class="container">
             <div class="navbar-header">
 
                 <button style="border:1px solid white; border-radius:0" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span style="color:white">MENU</span>
+                    <span class="sr-only">toggle navigation</span>
+                    <span style="color:white">menu</span>
                 </button>
-                @* <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">jzo</a>*@
+
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="social nav navbar-nav">
@@ -77,9 +166,10 @@
                 @await Html.PartialAsync("_LoginPartial")
             </div>
 
+
         </div>
     </div>
-    <div class="top-bar container">
+    <div class="top-bar container visible-lg">
         <div class="navbar-header">
             <a class="navbar-brand" href="#" style="margin-top:-0.8em;">
                 <img alt="Logo" src="~/images/JZO-Logo-3-2.jpg" style="width:60px; height:auto">
@@ -96,19 +186,89 @@
                     <i class="ion ion-bag"></i>Shop
                 </a>
             </li>
-            @*<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>*@
+
         </ul>
     </div>
-    <div class="body-content">
+    <div id="mySidenav" class="sidenav">
+       
+        <a href="~/" style="margin-top:0.6em; padding-top:40px;"><i class="ion ion-home"></i>Home</a>
+
+        
+          @*  <a href="#"><i class="ion ion-ios-color-filter-outline"></i>collections </a>*@
+
+        <a href="~/store" class="btn"><i class="ion ion-bag"></i>Shop</a>
+        <a href="#"><i class="ion ion-man"></i> men</a>
+
+        <a href="#"><i class="ion ion-woman"></i> women </a>
+
+        <!--Login-->
+        @{
+            if (SignInManager.IsSignedIn(User))
+            {
+                <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                    <div>
+                        @{
+
+                            if (await AuthorizationService.AuthorizeAsync(User, "CanManageStore"))
+                            {
+                                <span>
+                                    <a asp-area="" asp-controller="Group" asp-action="Index" class="btn" style="background:#818181; color:white;">
+                                        Manage store
+                                    </a>
+                                </span>
+                            }
+                        }
+
+                        <a  asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
+                        <span   style="position:absolute; bottom:5%;">                       
+                                <button type="submit" class="btn btn-primary sign-out" style="width:100%">Sign out</button>                     
+                        </span>
+
+                    </div>
+                </form>
+            }
+            else
+            {
+                <span style="position:absolute; bottom:5%; font-size:10pt !important;">
+                                    <a style="color:white; text-decoration:none" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+                                    <span class="login_or">
+                                        &nbsp;or&nbsp;
+
+                                    </span>
+                                    <a style="color:white; text-decoration:none" asp-area="" asp-controller="Account" asp-action="Register">create an account</a>
+                                </span>
+            }
+
+        }
+
+    </div>
+    <div class="hidden-lg mobileNavTopBar" style="padding:20px;padding-bottom:60px;background:#111; color:white;">
+        <span class="openbtn" style="font-size:30px;cursor:pointer; float:right" onclick="openNav()">&#9776;</span>     
+        <span class="closebtn" onclick="closeNav()" style="cursor:pointer; float:right">
+                <i style="font-size:50px; color:#818181" class="ion ion-android-close"></i>
+            </span>
+       
+        <span style="float:left">
+            <a href="~/">
+                <img alt="Logo" src="~/images/JZO-Logo-3-2.jpg" style="width:60px; height:auto">
+            </a>
+        </span>
+        @{
+            if (SignInManager.IsSignedIn(User))
+            {
+                <span style="margin-left:35%;">
+                    <a asp-area="" asp-controller="Group" asp-action="getCartItems" title="GetCartItems" class="btn" style="padding:0; margin-bottom:-20px;">
+                        <i class="ion ion-bag" style="font-size:30px; color:white"></i>
+                        <b id="cart_count_2" style="color:white">
+
+                        </b>
+                    </a>
+                </span>
+            }
+        }
+        
+    </div>
+    <div id="main" class="body-content">
         @RenderBody()
         <hr />
         <footer class="container">
@@ -172,6 +332,24 @@
 
 
     </environment>
+
+    <script>
+        $('.closebtn').hide();
+        /* Open the sidenav */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "70%";
+            $('.closebtn').fadeIn();
+            $('.openbtn').hide();
+            //$(".mobileNavTopBar").css({position:''});
+        }
+
+        /* Close/hide the sidenav */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            $('.openbtn').fadeIn();
+            $('.closebtn').hide();
+        }
+    </script>
 
     @RenderSection("scripts", required: false)
 </body>

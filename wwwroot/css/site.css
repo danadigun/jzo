@@ -89,6 +89,9 @@ body {
   .logged-in a {
     margin-bottom: 10px; }
 
+  #main {
+    margin-top: 5em; }
+
   .categories .btn {
     min-width: 100% !important;
     text-align: left; }
