@@ -68,6 +68,7 @@ $(function () {
                 $('.cart_total_cost').html(callback.total + " [NGN]");
                 $('.count-message').html("You have " + callback.noOfItems + " item(s) in your shopping cart");
                 $('#cart_count').html(callback.noOfItems);
+                $('#cart_count_2').html(callback.noOfItems);
 
             }).fail(function (error) {
 

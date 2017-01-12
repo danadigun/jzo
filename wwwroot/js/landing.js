@@ -49,4 +49,6 @@ $(function () {
             $('.drop-message').html('<p class=\"alert alert-success\"> Successfully sent message </p>')
         }
     })
+
+    
 });

@@ -1,4 +1,4 @@
-.sweet-overlay {
+﻿.sweet-overlay {
   background: rgba(10, 10, 10, 0.6); }
 
 .sweet-alert {
@@ -97,7 +97,6 @@
     transform: rotateX(100deg), scale(0.5);
     -webkit-transform: rotateX(100deg), scale(0.5);
     opacity: 0; }
-
   100% {
     transform: rotateX(0deg), scale(0.5);
     -webkit-transform: rotateX(0deg), scale(0.5);
@@ -108,7 +107,6 @@
     transform: rotateX(100deg), scale(0.5);
     -webkit-transform: rotateX(100deg), scale(0.5);
     opacity: 0; }
-
   100% {
     transform: rotateX(0deg), scale(0.5);
     -webkit-transform: rotateX(0deg), scale(0.5);

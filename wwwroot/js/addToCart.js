@@ -51,6 +51,8 @@ $(function () {
     }).done(function (callback) {
 
         $('#cart_count').html(callback.noOfItems);
+        $('#cart_count_2').html(callback.noOfItems);
+
         console.log(callback);
 
     }).fail(function (error) {

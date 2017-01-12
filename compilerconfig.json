@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/menu/_menu_mobile.css",
+    "inputFile": "wwwroot/css/menu/_menu_mobile.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/General.css",
+    "inputFile": "wwwroot/css/General.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/site.css",
+    "inputFile": "wwwroot/css/site.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_desktop.css",
+    "inputFile": "wwwroot/css/_desktop.scss"
+  }
+]
