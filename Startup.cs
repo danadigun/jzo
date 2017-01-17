@@ -78,7 +78,9 @@ namespace jzo
             //Authorization            
             services.AddAuthorization(options => options.AddPolicy("CanManageStore",
                   policy => policy.RequireClaim(ClaimTypes.Name,
-                        new string[] { "daniel.adigun@digitalforte.ng", "ikejoseph@gmail.com" })
+                        new string[] { "daniel.adigun@digitalforte.ng", "ikejoseph@gmail.com" }
+                        //new AdminPolicy().getAdminEmails()
+                        )
                 ));
 
             //services.AddAuthorization(

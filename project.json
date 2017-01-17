@@ -19,7 +19,8 @@
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
     "Microsoft.AspNetCore.Session": "1.0.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
-    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
+    "Microsoft.EntityFrameworkCore": "1.1.0",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
     "Microsoft.EntityFrameworkCore.SqlServer.Design": {
       "version": "1.0.1",
       "type": "build"
@@ -48,7 +49,6 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     }
-    
   },
 
   "tools": {

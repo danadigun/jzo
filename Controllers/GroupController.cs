@@ -25,7 +25,8 @@ namespace jzo.Controllers
 
         public GroupController(ApplicationDbContext context)
         {
-            _context = context;
+            //_context = context;
+            _context = new ApplicationDbContext();
         }
 
         [Authorize(Policy = "CanManageStore")]
@@ -120,9 +121,9 @@ namespace jzo.Controllers
         }
         
         [Authorize(Policy = "CanManageStore")]
-        public IActionResult pending()
+        public async Task<IActionResult> pending(int? page)
         {
-            var viemModelList = new List<PendingOrder>();
+            var viewModelList = new List<PendingOrder>();
 
             //get pending orders
             var _orders = _context.Order.Where(x => x.isPending == true).ToList();
@@ -171,10 +172,11 @@ namespace jzo.Controllers
 
 
                 //add pending order to viewmodel list
-                viemModelList.Add(_pendingOrder);
+                viewModelList.Add(_pendingOrder);
             }
-                     
-            return View(viemModelList);
+            int pageSize = 3;
+            return View(await PaginatedList<PendingOrder>.CreateAsync(viewModelList.AsQueryable().AsNoTracking(), page ?? 1, pageSize));        
+            //return View(viemModelList);
         }
 
         /// <summary>
