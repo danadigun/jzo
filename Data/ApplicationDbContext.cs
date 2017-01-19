@@ -16,6 +16,7 @@ namespace jzo.Data
         {
         }
 
+        //Application db context controller
         public ApplicationDbContext()
         {
         }
