@@ -62,7 +62,7 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="col-md-5">
-                <input asp-for="phone" placeholder="Phone number" class="form-control" />
+                <input asp-for="phone" placeholder="Phone number" class="form-control phone-register" />
                 <span asp-validation-for="phone" class="text-danger"></span>
             </div>
         </div>
@@ -96,5 +96,17 @@
 
 
 @section Scripts {
+<script>
+    $(function () {
+        $('.phone-register').mask('+234 ' + 'A00 0000 000', 
+
+            {
+                'translation': {
+                    A: { pattern: '^[^0]\d*' }
+                }
+            });
+
+    })
+</script>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
