@@ -481,7 +481,7 @@ namespace jzo.Controllers
                        
                         .FirstOrDefault();
 
-                  bool status = InfoBipService.sendMessage(_user.PhoneNumber,
+                  bool status = InfoBipService.sendMessage(_user.PhoneNumber.Trim(' '),
                         $"Hello {_user.firstname}, " + "\n\n" +
                         "Thanks for making an Order on jzofashion.com. Here is your reference number: " + reference + " ").Result;
 

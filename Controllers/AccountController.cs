@@ -110,8 +110,8 @@ namespace jzo.Controllers
                     city = model.city,
                     country = model.country,
                     firstname = model.firstname,
-                    PhoneNumber = model.phone,  
-                    phone = model.phone,
+                    PhoneNumber = model.phone.Replace(" ", string.Empty),  
+                    phone = model.phone.Replace(" ", string.Empty),
                     lastname = model.lastname,
                     state = model.state,
                    
