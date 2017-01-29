@@ -15,6 +15,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Jzo Fashion Nigeria Limited</title>
+    <link rel="icon" href="~/favicon.jpg">
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -125,7 +126,9 @@
                 margin-right:20%;
             }
 
-           
+           .product-cat-menu{
+               margin-top:6em !important;
+           }
     </style>
 </head>
 
@@ -178,10 +181,13 @@
         </div>
         <ul class="nav navbar-nav navbar-right visible-lg visible-md hidden-sm hidden-xs">
             <li><a href="~/">Home</a></li>
-            <li><a href="#">Men</a></li>
-            <li><a href="#">Women</a></li>
+            @*    <li><a href="#">Men</a></li>*@
+            @*  <li><a href="#">Women</a></li>*@
             <li><a href="#">Collections</a></li>
-            <li class="product-cat"><a href="#">Product Category</a></li>
+            <li class="product-cat">
+                <a href="#">Product Category</a>
+                <div class="popover bottom product-cat-menu"> <div class="arrow"></div> <h3 class="popover-title">Popover bottom</h3> <div class="popover-content"> <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p> </div> </div>
+            </li>
             <li class="store-link">
                 <a href="~/store">
                     <i class="ion ion-bag"></i>Shop
@@ -190,6 +196,7 @@
 
         </ul>
     </div>
+    
     <div id="mySidenav" class="sidenav">
        
         <a href="~/" style="margin-top:0.6em; padding-top:40px;"><i class="ion ion-home"></i>Home</a>
@@ -198,9 +205,9 @@
           @*  <a href="#"><i class="ion ion-ios-color-filter-outline"></i>collections </a>*@
 
         <a href="~/store" class="btn"><i class="ion ion-bag"></i>Shop</a>
-        <a href="#"><i class="ion ion-man"></i> men</a>
+        @*<a href="#"><i class="ion ion-man"></i> men</a>*@
 
-        <a href="#"><i class="ion ion-woman"></i> women </a>
+        @*<a href="#"><i class="ion ion-woman"></i> women </a>*@
 
         <!--Login-->
         @{
