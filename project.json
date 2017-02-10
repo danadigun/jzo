@@ -4,6 +4,7 @@
   "dependencies": {
     "jQuery.Validation": "1.15.1",
     "MailKit": "1.10.2",
+    "Mandrill.net": "3.3.0",
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Authorization": "1.0.0",

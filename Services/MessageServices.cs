@@ -1,5 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
+using Mandrill;
+using Mandrill.Model;
 using MimeKit;
 using System;
 using System.Collections.Generic;
@@ -17,22 +19,10 @@ namespace jzo.Services
     {
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            var emailMessage = new MimeMessage();
-
-            emailMessage.From.Add(new MailboxAddress("Jzo Fashion", "jzofashion@digitalforte.ng"));
-            emailMessage.To.Add(new MailboxAddress("", email));
-            emailMessage.Subject = subject;
-            emailMessage.Body = new TextPart("plain") { Text = message };
-
-            using (var client = new SmtpClient())
-            {
-                client.LocalDomain = "http://localhost:5048/";
-                
-                await client.ConnectAsync("smtp.mandrillapp.com", 587, SecureSocketOptions.None).ConfigureAwait(false);
-                await client.AuthenticateAsync("Digital Forte Enterprise Systems Limited", "Q9V8aMb3pLwJB84giUq1zQ");
-                await client.SendAsync(emailMessage).ConfigureAwait(false);
-                await client.DisconnectAsync(true).ConfigureAwait(false);
-            }
+            var api = new MandrillApi("Q9V8aMb3pLwJB84giUq1zQ");
+            var _message = new MandrillMessage("jzo_account@digitalforte.ng", email,
+                            subject, message);
+            var result = await api.Messages.SendAsync(_message);
         }
 
         public async Task SendSmsAsync(string number, string message)
