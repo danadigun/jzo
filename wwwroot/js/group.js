@@ -155,36 +155,5 @@ $(function () {
         //alert('removing group: ' + groupId)
     })
 
-    //remove item
-    $('.remove-item').click(function (e) {
-        e.preventDefault();
-
-        var itemId = $(this).attr('data-id');
-
-        swal(
-         {
-            title: "Remove an item",
-            text: "Are you sure you want to delete this item from the store?",
-            type: "warning",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            showLoaderOnConfirm: true,
-        },
-        function () {
-             $.ajax({
-                 url: "../api/items/" + itemId,
-                 type:'DELETE'
-             }).done(function () {
-                 swal("success", "successfully removed item: " + itemId, "success");
-                 $('#tr_item_' + itemId).fadeOut();
-             }).fail(function (error) {
-                 swal("error", "unable to delete item:  " + itemId, "error");
-                 console.log(error);
-             })
-         }
-       );
-
-    })
+    
 })

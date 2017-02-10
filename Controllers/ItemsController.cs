@@ -50,9 +50,9 @@ namespace jzo.Controllers
             return Ok(item);
         }
 
-        // PUT: api/Items/5
+        // PUT: api/Items
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutItem([FromRoute] int id, [FromBody] Item item)
+        public async Task<IActionResult> PutItem([FromRoute] int id, [FromBody]Item item)
         {
             if (!ModelState.IsValid)
             {
@@ -64,6 +64,8 @@ namespace jzo.Controllers
                 return BadRequest();
             }
 
+            //add timestamp
+            item.dateModified = DateTime.Now;
             _context.Entry(item).State = EntityState.Modified;
 
             try
@@ -72,7 +74,7 @@ namespace jzo.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ItemExists(id))
+                if (!ItemExists(item.Id))
                 {
                     return NotFound();
                 }

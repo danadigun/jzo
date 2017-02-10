@@ -88,7 +88,7 @@
                                 </span>
                                 <span style="float:right; padding-bottom:2em;">
                                     <button data-id="@item.group.Id" class="btn btn-danger remove-group">remove group</button>
-                                    <button class="btn btn-default">Edit</button>
+                                    <button class="btn btn-default" >Edit</button>
                                 </span>
                             </p>
                             <!--table here-->
@@ -115,7 +115,7 @@
                                                     <button data-id="@store_item.Id" style="text-decoration:none; margin-right:1em;" class="btn btn-warning remove-item" title="remove this item">
                                                         <i class="ion ion-android-close"></i>
                                                     </button>
-                                                    <a href="#" style="text-decoration:none" class="btn btn-default" title="edit item"><i class="ion ion-edit"></i></a>
+                                                    <button style="text-decoration:none" class="btn btn-default" title="edit item" data-toggle="modal" data-target="#EditModal" data-whatever="@store_item.Id"><i class="ion ion-edit"></i></button>
                                                 </td>
                                             </tr>
 
@@ -238,6 +238,73 @@
                 <button type="submit" class="btn btn-primary item_save-changes">Next</button>
                 @*  <button type="button" class="btn btn-success item-add" data-toggle="modal" data-target="#add-item-group-modal">+ add new items to this group</button>*@
                 <button type="button" class="btn btn-primary item_complete">finish</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--Update item modal-->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <form name="update-item" class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">+ Add new items to store</h4>
+            </div>
+            <div class="modal-body">
+                <div class="edit-item-drop-message">
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Item Group</label>
+                    <select name="edit_group_id" class="form-control">
+                        <option selected disabled>Select group </option>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <option value="@item.group.Id">@item.group.name</option>
+
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Title</label>
+                    <input name="edit_name" class="form-control" type="text" placeholder="Item Group title... e.g Tunic Shirts" />
+                    <input name="edit_group_id" class="form-control" type="hidden" />
+                    <input name="edit_img_url" class="form-control" type="hidden" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">description of items</label>
+                    <input name="edit_description" class="form-control" type="text" placeholder="Description... e.g Tunic Shirts for men" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Unit price </label>
+                    <input name="edit_price" class="form-control" type="text" placeholder="unit price" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Quantity</label>
+                    <input name="edit_quantity" class="form-control" type="text" placeholder="quantity of items" />
+                </div>
+                <div class="dropzone col s12" id="edit-item-dropzone" name="itemFileUploader">
+
+                    <div class="dz-message" data-dz-message>
+                        <span style="font-size:10pt; text-align:center">
+                            <i class="ion ion-ios-cloud-upload-outline"></i><br />
+                            Click to upload or drag/drop an image of this item
+                        </span><br />
+                        <span><i>Max file Size: 1.5mb</i></span><br />
+                    </div>
+                    <div class="fallback">
+                        <input name="file" type="file" required />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default item_close-dismiss" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary item_update_changes">Next</button>
+                @*  <button type="button" class="btn btn-success item-add" data-toggle="modal" data-target="#add-item-group-modal">+ add new items to this group</button>*@
+                <button type="button" class="btn btn-primary item_update_complete">finish</button>
             </div>
         </form>
     </div>
