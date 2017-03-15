@@ -1,0 +1,108 @@
+﻿/**
+  Custom Widget styles
+*/
+
+.custom-order-widget{
+    border:2px solid #0047AB;
+   box-shadow: 3px 3px 3px gainsboro;
+}
+
+.custom-order-widget-header{
+    padding:1em;
+    background:#0047AB;
+    color:white;
+    font-weight:lighter;
+    font-size:20pt;
+     border:2px solid #0047AB;
+   /*box-shadow: 3px 3px 3px gainsboro;*/
+}
+
+.custom-order-widget-body{
+    padding:2em;
+    background-color:white !important;
+    padding-right:2.5em;
+    padding-left:2.5em;
+
+}
+
+.custom-order-widget-body p{
+    font-size:9pt;
+}
+
+.custom-order-widget-body input{
+    border: 1px solid #0047AB;
+}
+
+.custom-order-widget-body form .panel-title{
+   width:100% !important;
+   border:1px solid #0047AB;
+   box-shadow: 3px 3px 3px gainsboro;
+   text-align:left;
+   padding:1em;
+}
+
+.custom-order-widget-body form a[data-toggle="collapse"]{
+    text-decoration: none;
+    color:black;
+}
+
+.custom-order-widget-body form label{
+   
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-top: 2em;
+
+}
+
+.custom-order-widget-body .panel-heading{
+    padding:0px !important;
+}
+
+.custom-order-widget-body .panel-body {
+     padding: 0px !important; 
+}
+
+.submit_custom_order{
+    margin-top:2em;
+}
+
+
+/**Products backdrop */
+ ul.products li {
+        width: 250px;
+        display: inline-block;
+        vertical-align: top;
+        *display: inline;
+        *zoom: 1;
+
+    }
+
+   ul.products li img, ul.products li p, .detail_item img, .also-like a img {
+        border-radius: 0px 0px 0px 0px;
+        border-width: 0px 0px 0px 0px;
+        border-style: solid solid solid solid;
+        border-color: rgba(179,102,179,1) rgba(179,102,179,1) rgba(179,102,179,1) rgba(179,102,179,1);
+        -webkit-box-shadow: 2px 0px 46px 0px rgba(50,50,50,0.18);
+        -moz-box-shadow: 2px 0px 46px 0px rgba(50,50,50,0.18);
+        -ms-box-shadow: 2px 0px 46px 0px rgba(50,50,50,0.18);
+        -o-box-shadow: 2px 0px 46px 0px rgba(50,50,50,0.18);
+        box-shadow: 2px 0px 46px 0px rgba(50,50,50,0.18);
+        padding: 1px;
+    }
+
+   ul.products li a{
+       text-decoration:none;
+       color:black;
+   }
+
+   ul.products li p span, ul.products li p b {
+       margin-left:10px;
+   }
+
+    ul.products li a.btn{
+        border:2px solid gray;
+    }
+
+   

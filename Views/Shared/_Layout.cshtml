@@ -14,7 +14,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="6c3dvpOSBr8Klna4tLBLX64ZBEuZY5FIdISLqLNvbp8" />
     <title>@ViewData["Title"] - Jzo Fashion Nigeria Limited</title>
+    <link rel="icon" href="~/favicon.jpg">
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -23,6 +25,8 @@
         <link href="~/lib/ionicons-2.0.1/css/ionicons.css" rel="stylesheet" />
         <link href="~/lib/animate.css/animate.css" rel="stylesheet" />
         <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+        <link href="~/css/customOrder/CustomOrderWidget.min.css" rel="stylesheet" />
+        <link href="~/css/account/passwordReset.min.css" rel="stylesheet" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -33,6 +37,10 @@
         <link href="~/lib/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet" />
         <link href="~/lib/animate.css/animate.min.css" rel="stylesheet" />
         <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+        <link href="~/css/customOrder/CustomOrderWidget.min.css" rel="stylesheet" />
+        <link href="~/css/account/passwordReset.min.css" rel="stylesheet" />
+
+
     </environment>
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
     <style>
@@ -124,7 +132,9 @@
                 margin-right:20%;
             }
 
-           
+           .product-cat-menu{
+               margin-top:6em !important;
+           }
     </style>
 </head>
 
@@ -172,15 +182,18 @@
     <div class="top-bar container visible-lg">
         <div class="navbar-header">
             <a class="navbar-brand" href="#" style="margin-top:-0.8em;">
-                <img alt="Logo" src="~/images/JZO-Logo-3-2.jpg" style="width:60px; height:auto">
+                <img alt="Logo" src="~/images/JZO-Logo-3-2.jpg" style="width:80px; height:auto">
             </a>
         </div>
         <ul class="nav navbar-nav navbar-right visible-lg visible-md hidden-sm hidden-xs">
             <li><a href="~/">Home</a></li>
-            <li><a href="#">Men</a></li>
-            <li><a href="#">Women</a></li>
+            @*    <li><a href="#">Men</a></li>*@
+            @*  <li><a href="#">Women</a></li>*@
             <li><a href="#">Collections</a></li>
-            <li class="product-cat"><a href="#">Product Category</a></li>
+            <li class="product-cat">
+                <a href="#">Product Category</a>
+                <div class="popover bottom product-cat-menu"> <div class="arrow"></div> <h3 class="popover-title">Popover bottom</h3> <div class="popover-content"> <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p> </div> </div>
+            </li>
             <li class="store-link">
                 <a href="~/store">
                     <i class="ion ion-bag"></i>Shop
@@ -189,6 +202,7 @@
 
         </ul>
     </div>
+    
     <div id="mySidenav" class="sidenav">
        
         <a href="~/" style="margin-top:0.6em; padding-top:40px;"><i class="ion ion-home"></i>Home</a>
@@ -197,9 +211,9 @@
           @*  <a href="#"><i class="ion ion-ios-color-filter-outline"></i>collections </a>*@
 
         <a href="~/store" class="btn"><i class="ion ion-bag"></i>Shop</a>
-        <a href="#"><i class="ion ion-man"></i> men</a>
+        @*<a href="#"><i class="ion ion-man"></i> men</a>*@
 
-        <a href="#"><i class="ion ion-woman"></i> women </a>
+        @*<a href="#"><i class="ion ion-woman"></i> women </a>*@
 
         <!--Login-->
         @{
@@ -295,6 +309,7 @@
         <script src="~/lib/jsonSerialize.js"></script>
         <script src="~/lib/dropzone/dist/dropzone.js"></script>
         <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="~/lib/jquery-mask-plugin/dist/jquery.mask.js"></script>
 
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/group.js" asp-append-version="true"></script>
@@ -304,6 +319,7 @@
         <script src="~/js/checkout.js" asp-append-version="true"></script>
         <script src="~/js/ShipToCustomer.js" asp-append-version="true"></script>
         <script src="~/js/SearchOrder.js" asp-append-version="true"></script>
+        <script src="~/js/CustomOrder.js" asp-append-version="true"></script>
 
     </environment>
     <environment names="Staging,Production">
@@ -319,6 +335,7 @@
         <script src="~/lib/jsonSerialize.min.js"></script>
         <script src="~/lib/dropzone/dist/min/dropzone.min.js"></script>
         <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="~/lib/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
 
         <script src="~/js/site.min.js" asp-append-version="true"></script>
         <script src="~/js/group.min.js" asp-append-version="true"></script>
@@ -328,6 +345,7 @@
         <script src="~/js/checkout.min.js" asp-append-version="true"></script>
         <script src="~/js/ShipToCustomer.min.js" asp-append-version="true"></script>
         <script src="~/js/SearchOrder.min.js" asp-append-version="true"></script>
+        <script src="~/js/CustomOrder.min.js" asp-append-version="true"></script>
 
 
 

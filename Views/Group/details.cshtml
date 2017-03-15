@@ -7,12 +7,12 @@
 <div class="container detail-view" style="padding-top:15em;">
     <div class="row">
         <div class="col-lg-7 detail_item">
-           @* <h3 class="visible-sm visible-xs">Your order</h3>*@
+            @* <h3 class="visible-sm visible-xs">Your order</h3>*@
             <div>
                 <img src="@Model.item.image_url" style="width:30em; height:auto;" />
             </div>
         </div>
-        <div class="col-lg-5">
+        <div class="col-lg-5 regular-order-form">
             <div class="detail-controls">
                 <p>
                     <a class="btn btn-default" href="~/store" style="text-decoration:none"><i class="ion ion-reply"></i>&nbsp; Continue shopping</a>
@@ -20,11 +20,11 @@
                 </p>
             </div>
             <div style="margin-top:5em;">
-                <h1>@Model.item.name <br /> <span style="font-size:15pt;">@Model.item.price (NGN)</span></h1><hr />
+                <h1>@Model.item.name <br /> <span style="font-size:15pt; color:#0047AB">N @Model.item.price.ToString("#,##0") (NGN)</span></h1><hr />
                 <p>
                     @Model.item.description
                 </p><hr />
-                <form name="add-to-cart" >
+                <form name="add-to-cart">
                     <div class="form-group">
                         <input type="hidden" name="itemId" value="@Model.item.Id" />
                         <input type="hidden" name="price" value="@Model.item.price" />
@@ -45,6 +45,255 @@
                 </form>
             </div>
         </div>
+
+        <!--Custom Order-->
+        <div class="col-lg-5 custom-order-form">
+            <div class="detail-controls">
+                <p>
+                    <a class="btn btn-default" href="~/store" style="text-decoration:none"><i class="ion ion-reply"></i>&nbsp; Continue shopping</a>
+                    <button class="btn btn-primary regular-order-button" style="text-decoration:none"><i class="ion ion-ios-arrow-back"></i>&nbsp; Back</button>
+                </p>
+            </div>
+            <div class="custom-order-widget">
+                <div class="custom-order-widget-header">Customize Order </div>
+                <div class="custom-order-widget-body">
+
+                    
+                    <form name="CustomOrderForm" class="panel-group" role="tablist" aria-multiselectable="true">
+
+                        <p style="padding:1em;">
+                            <h2>
+                               Top
+                            </h2>
+                        </p>
+                        <!--Neck & Shoulder-->
+                        <div class="panel">
+                            <div class="panel-heading">
+
+                                <a role="button" data-toggle="collapse" data-target="#NeckChest" aria-expanded="false" aria-controls="NeckChest">
+                                    <h4 class="panel-title title_1">
+                                        Neck & Shoulder
+                                    </h4>
+                                </a>
+
+                            </div>
+                            <div class="panel-body">
+                                <div class="panel-collapse collapse" id="NeckChest">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            Neck & Shoulder measurements (inches)
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" name="neck" id="neck" placeholder="neck">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" id="shoulder" name="shoudler" placeholder="shoulder">
+                                        </div>
+
+                                    </div>
+
+                                    <button style="margin:15px 15px 15px 15px;" class="btn btn-default next_1">Next</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--Chest and Mid-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <a role="button" data-toggle="collapse" data-target="#WaistSeat" aria-expanded="false" aria-controls="NeckChest">
+                                    <h4 class="panel-title title_2">
+                                        Chest & Mid
+                                    </h4>
+                                </a>
+                            </div>
+                            <div class="panel-body">
+                                <div id="WaistSeat" class="collapse">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            Chest & Mid measurements in inches
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" id="chest" placeholder="chest">
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" id="seat" placeholder="seat">
+
+                                        </div>
+                                    </div>
+
+                                    <button style="margin:15px 15px 15px 15px;" class="btn btn-default next_2">Next</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Waist & Arms-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <a role="button" data-toggle="collapse" data-target="#shirtShoulder" aria-expanded="false" aria-controls="shirtShoulder">
+                                    <h4 class="panel-title title_3">
+                                        Waist & Arms
+
+                                    </h4>
+                                </a>
+                            </div>
+                            <div class="panel-body">
+                                <div class="collapse" id="shirtShoulder">
+                                    <div class="form-group" >
+                                        <div class="col-md-12">
+                                            <input type="number" class="form-control" id="waist" placeholder="waist" name="waist">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="padding-top:3.5em;">
+
+                                       
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" id="shortSleeve" placeholder="Short Sleeve" name="shortSleeve">
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" id="longSleeve" placeholder="Long Sleeve" name="longSleeve">
+
+
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div class="form-group" style="padding-top:3em;">
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control" id="forearm" placeholder="forearm" name="forearm">
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control" id="wrist" placeholder="wrist" name="wrist">
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="number" class="form-control" id="bicep" placeholder="bicep" name="bicep">
+
+                                        </div>
+
+                                    </div>
+                                    <button style="margin:15px 15px 15px 15px" class="btn btn-default next_3">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                         <!--Length-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <a role="button" data-toggle="collapse" data-target="#armsWrist" aria-expanded="false" aria-controls="armsWrist">
+                                    <h4 class="panel-title title_4">
+                                       Length
+                                    </h4>
+                                </a>
+                            </div>
+                            <div class="panel-body">
+                                <div class="collapse" id="armsWrist">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            Enter body length in inches
+                                        </div>
+                                       <div class="col-md-6">
+                                           <input type="number" class="form-control" id="bodyLength" placeholder="Body Length" name="bodyLength">
+
+                                       </div>
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" id="kaftanLength" placeholder="Kaftan Length" name="kaftanLength">
+
+                                        </div>
+                                    </div>
+                                    
+                                    <button style="margin:15px 15px 15px 15px" class="btn btn-default next_4">Next</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <p style="padding:1em;">
+                            <h2>
+                                Trousers
+
+                            </h2>
+                        </p>
+
+                        <!--Trouser Waist, Hip & Thigh-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title title_5">
+                                    <a role="button" data-toggle="collapse" data-target="#hipInSeam" aria-expanded="false" aria-controls="NeckChest">
+                                        Waist, Hip & Thigh
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="collapse" id="hipInSeam">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            Enter trouser waist, hip & thigh measurement (inches)
+                                        </div>
+                                       <div class="col-md-6">
+                                           <input type="number" class="form-control" id="waist" placeholder="waist" name="waist">
+
+                                       </div>
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" id="hip" placeholder="hip" name="hip">
+
+                                        </div>
+                                        <div class="col-md-12" style="padding-top:3.5em">
+                                            <input type="number" class="form-control" id="thigh" placeholder="thigh" name="thigh">
+
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                    <button style="margin:15px 15px 15px 15px" class="btn btn-default next_5">Next</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!--Knee, feet & trouser Length-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title title_6">
+                                    <a class="custom-order-collapse" role="button" data-toggle="collapse" data-target="#sleaves" aria-expanded="false" aria-controls="NeckChest">
+                                        Knee, feet & trouser Length
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="collapse" id="sleaves">
+                                    <div class="form-group">
+                                       <div class="col-md-12">
+                                           Enter Knee, fit and trouser length measurements(inches)
+                                       </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control" id="coatSleaveLength" placeholder="Coat Sleeve length">
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control" id="coatSleaveLength" placeholder="Coat Sleeve length">
+
+                                    </div>
+                                    <div class="col-md-12" style="padding-top:3.5em;">
+                                        <input type="number" class="form-control" id="coatSleaveLength" placeholder="Coat Sleeve length">
+
+                                    </div>
+                                   
+                                    <button class="btn btn-default next_6">Complete</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <button style="margin-top:2em;" type="submit" class="btn btn-primary submit_custom_order">Submit Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row also-like" style="margin-top:10em;">
         <div>
@@ -53,20 +302,20 @@
                 @{
                     foreach (var _model in Model.relatedItems)
                     {
-                        <div class="col-lg-3">
-                            <div>
-                                @*   <img src="@_model.image_url" style="width:15em; height:auto;" />*@
-                                <a href="~/group/details?itemId=@_model.Id"><img src="@_model.image_url" style="width:200px; height:auto" /></a><br />
-                                <p style="padding-top:2em;">
-                                    <span style="font-size:large">@_model.name</span><br />
-                                    <b style="font-size:larger">
-                                        @_model.price [NGN]<br /><br />
-                                        <a href="~/group/details?itemId=@_model.Id" class="btn btn-default">order <i class="ion ion-chevron-right"></i></a>
-                                    </b>
-                                </p>
+                <div class="col-lg-3">
+                    <div>
+                        @*   <img src="@_model.image_url" style="width:15em; height:auto;" />*@
+                        <a href="~/group/details?itemId=@_model.Id"><img src="@_model.image_url" style="width:200px; height:auto" /></a><br />
+                        <p style="padding-top:2em;">
+                            <span style="font-size:large">@_model.name</span><br />
+                            <b style="font-size:larger; color:#0047AB">
+                                @_model.price.ToString("#,##0") [NGN]<br /><br />
+                                <a href="~/group/details?itemId=@_model.Id" class="btn btn-default">order <i class="ion ion-chevron-right"></i></a>
+                            </b>
+                        </p>
 
-                            </div>
-                        </div>
+                    </div>
+                </div>
                     }
                 }
 
@@ -74,49 +323,4 @@
         </div>
     </div>
 </div>
-@*<h2>details</h2>
 
-    <div>
-        <h4>Item</h4>
-        <hr />
-        <dl class="dl-horizontal">
-
-
-            <dt>
-                @Html.DisplayNameFor(model => model.name)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.description)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.description)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.image_url)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.image_url)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.price)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.price)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.quantity)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.quantity)
-            </dd>
-        </dl>
-    </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-        <a asp-action="Index">Back to List</a>
-    </div>*@

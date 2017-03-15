@@ -20,10 +20,10 @@ namespace jzo.Controllers
             //return all items in store
             if (groupId.HasValue)
             {
-                ViewData["CollectionName"] = _context.ItemGroup.SingleOrDefault(x => x.Id == groupId.Value).name + " collections";
+                ViewData["CollectionName"] = _context.ItemGroup.SingleOrDefault(x => x.Id == groupId.Value).name + " pieces";
                 return View(_context.Item.Where(x => x.ItemGroupId == groupId.Value).ToList());
             }
-            ViewData["CollectionName"] = "Our collections";
+            ViewData["CollectionName"] = "Our Pieces";
             return View(_context.Item.ToList());
         }
     }

@@ -15,9 +15,9 @@
         <div class="item active">
             <img src="~/images/Babatunde-20161120T180657Z/Babatunde/Babatunde2.jpg" alt="BABATUNDE" class="img-responsive" />
             <div class="carousel-caption" role="option">
-                <p class="call-to-action-1 animated slideInDown visible-lg visible-md hidden-sm hidden-xs" >
+                <p class="call-to-action-1 animated slideInDown visible-lg visible-md hidden-sm hidden-xs">
                     <a href="~/store" class="btn btn-default">See collection &nbsp; <i class="ion ion-chevron-right"></i></a>
-                   @* <button class="btn btn-primary">Customize order</button>*@
+                    @* <button class="btn btn-primary">Customize order</button>*@
                 </p>
             </div>
         </div>
@@ -26,7 +26,7 @@
             <div class="carousel-caption" role="option">
                 <p class="call-to-action-2 animated slideInUp visible-lg visible-md hidden-sm hidden-xs">
                     <a href="~/store" class="btn btn-primary">See collection &nbsp;<i class="ion ion-chevron-right"></i></a>
-                  @*  <button class="btn btn-default">Customize order</button>*@
+                    @*  <button class="btn btn-default">Customize order</button>*@
                 </p>
             </div>
         </div>
@@ -60,23 +60,23 @@
         <div class="container featured-collection">
             <h2>Featured Collection</h2><hr />
             <div class="featured-content">
-              
+
                 <div class="row">
                     @{
                         foreach (var item in Model.featuredCollections)
                         {
-                    <div class="col-lg-4 featured_img">
-                        <a href="~/store?groupId=@item.Id" style="text-decoration:none;">
-                            <img style="width:300px; height:auto;  border-bottom:2px solid #0047AB"   src="@item.imageUrl" />
-                        </a>
-                        <br />
-                        <span style="display:block; padding-top:1em;">
-                            <a href="~/store?groupId=@item.Id" class="btn btn-default" style="width:83%">See collection </a>
-                           @* <button class="btn btn-primary">Customize order </button>*@
+                            <div class="col-lg-4 featured_img">
+                                <a href="~/store?groupId=@item.Id" style="text-decoration:none;">
+                                    <img style="width:300px; height:auto;  border-bottom:2px solid #0047AB" src="@item.imageUrl" />
+                                </a>
+                                <br />
+                                <span style="display:block; padding-top:1em;">
+                                    <a href="~/store?groupId=@item.Id" class="btn btn-default" style="width:83%">See collection </a>
+                                    @* <button class="btn btn-primary">Customize order </button>*@
 
-                        </span>
-                        <h3 style="color:#808080">@item.name</h3>
-                    </div>
+                                </span>
+                                <h3 style="color:#808080">@item.name</h3>
+                            </div>
                         }
                     }
                 </div>
@@ -84,29 +84,51 @@
 
             <h2 style="padding-top:4em;">Featured Products</h2><hr />
             <div class="featured-content" style="padding-bottom:15em;">
-                <div class="row">
+                @*<div class="row">
+                        @{
+                            foreach (var item in Model.featuredItems)
+                            {
+                              <div class="col-lg-3 featured_img"  style="padding-top:4em;">
+                                    <a href="~/group/details?itemId=@item.Id" style="text-decoration:none;">
+                                        <img style="width:200px; height:auto; " src="@item.image_url" />
+                                    </a>
+                                    <br />
+                                    <span style="display:block; padding-top:1em; width:200px;">
+                                        <a href="~/group/details?itemId=@item.Id" class="btn btn-default" style="width:100%">Order now <i style="float:right;" class="ion ion-chevron-right"></i> </a>
+
+                                    </span>
+                                    <h3 style="color:#808080">@item.name</h3>
+                             </div>
+                            }
+                        }
+                    </div>*@
+
+                <ul class="products">
                     @{
                         foreach (var item in Model.featuredItems)
                         {
-                          <div class="col-lg-3 featured_img"  style="padding-top:4em;">
-                                <a href="~/group/details?itemId=@item.Id" style="text-decoration:none;">
-                                    <img style="width:200px; height:auto; " src="@item.image_url" />
+
+                            <li style="padding-top:4em;">
+                                <a href="~/group/details?itemId=@item.Id">
+                                    <img class="boxShadowClass" style="width:250px; height:auto;" src="@item.image_url">
+                                    <p style="padding-top:2em; ">
+                                        <span style="font-size:12pt">@item.name</span><br />
+                                        <br /><br />
+                                        <a href="~/group/details?itemId=@item.Id" class="btn">order <i class="ion ion-chevron-right"></i></a>
+
+                                    </p>
                                 </a>
-                                <br />
-                                <span style="display:block; padding-top:1em; width:200px;">
-                                    <a href="~/group/details?itemId=@item.Id" class="btn btn-default" style="width:100%">Order now <i style="float:right;" class="ion ion-chevron-right"></i> </a>
-                                   @* <button class="btn btn-primary" style="width:70%;">Customize order </button>*@
-                                </span>
-                                <h3 style="color:#808080">@item.name</h3>
-                         </div>
+                            </li>
                         }
                     }
-                </div>
+
+
+                </ul>
             </div>
         </div>
 
         <!--View more-->
-        <div style="padding-bottom:20em;">
+                        <div style="padding-bottom:20em;">
                             <p style="text-align:center; font-size:larger">
                                 <i class="ion ion-bag" style="font-size:50pt; color:#0047AB"></i><br /><br /><br />
                                 <span style="font-size:20pt">You are welcome to visit our store for more.. </span><br /><br />
@@ -114,41 +136,42 @@
                             </p>
                         </div>
 
-    }
+                        }
 
     <!-- Create Group Modal -->
-    <div class="modal fade" id="message-group-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-              <form name="send-message" class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">+ Send Message</h4>
-                  </div>
-                  <div class="modal-body">
-                      <div class="drop-message">
+                        <div class="modal fade" id="message-group-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <form name="send-message" class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">+ Send Message</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="drop-message">
 
-                      </div>
-                      <div class="form-group">
-                          <label class="control-label">Email</label>
-                          <input name="email" class="form-control" type="email" placeholder="Email address ...yourname@email.com" />
-                      </div>
-                      <div class="form-group">
-                          <label class="control-label">Phone</label>
-                          <input name="phone" class="form-control" type="text" placeholder="your phone number" />
-                      </div>
-                      <div class="form-group">
-                          <label class="control-label">Message</label>
-                          <textarea name="message" class="form-control" type="text" placeholder="Your message here..."></textarea>
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-default close-dismiss" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary save-changes">Send</button>
-                      @*  <button type="button" class="btn btn-success item-add" data-toggle="modal" data-target="#add-item-group-modal">+ add new items to this group</button>*@
-                      <button type="button" class="btn btn-primary complete">finish</button>
-                  </div>
-              </form>
-           </div>
-     </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Email</label>
+                                            <input name="email" class="form-control" type="email" placeholder="Email address ...yourname@email.com" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Phone</label>
+                                            <input name="phone" class="form-control" type="text" placeholder="your phone number" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Message</label>
+                                            <textarea name="message" class="form-control" type="text" placeholder="Your message here..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default close-dismiss" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary save-changes">Send</button>
+                                        @*  <button type="button" class="btn btn-success item-add" data-toggle="modal" data-target="#add-item-group-modal">+ add new items to this group</button>*@
+                                        <button type="button" class="btn btn-primary complete">finish</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
 
 }
+

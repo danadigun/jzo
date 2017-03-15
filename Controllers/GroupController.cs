@@ -25,8 +25,7 @@ namespace jzo.Controllers
 
         public GroupController(ApplicationDbContext context)
         {
-            //_context = context;
-            _context = new ApplicationDbContext();
+            _context = context;
         }
 
         [Authorize(Policy = "CanManageStore")]
@@ -121,9 +120,9 @@ namespace jzo.Controllers
         }
         
         [Authorize(Policy = "CanManageStore")]
-        public async Task<IActionResult> pending(int? page)
+        public IActionResult pending()
         {
-            var viewModelList = new List<PendingOrder>();
+            var viemModelList = new List<PendingOrder>();
 
             //get pending orders
             var _orders = _context.Order.Where(x => x.isPending == true).ToList();
@@ -172,11 +171,10 @@ namespace jzo.Controllers
 
 
                 //add pending order to viewmodel list
-                viewModelList.Add(_pendingOrder);
+                viemModelList.Add(_pendingOrder);
             }
-            int pageSize = 3;
-            return View(await PaginatedList<PendingOrder>.CreateAsync(viewModelList.AsQueryable().AsNoTracking(), page ?? 1, pageSize));        
-            //return View(viemModelList);
+                     
+            return View(viemModelList);
         }
 
         /// <summary>
@@ -483,7 +481,7 @@ namespace jzo.Controllers
                        
                         .FirstOrDefault();
 
-                  bool status = InfoBipService.sendMessage(_user.PhoneNumber,
+                  bool status = InfoBipService.sendMessage(_user.PhoneNumber.Trim(' '),
                         $"Hello {_user.firstname}, " + "\n\n" +
                         "Thanks for making an Order on jzofashion.com. Here is your reference number: " + reference + " ").Result;
 

@@ -2,14 +2,6 @@
 //addToCart.js
 $(function () {
     
-    //customize order
-    $('.customize-order').click(function () {
-        swal("This feature is comming soon...we're working on it");
-    })
-
-
-
-
     $('form[name=add-to-cart]').validate({
         
         rules: {

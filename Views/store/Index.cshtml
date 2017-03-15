@@ -36,7 +36,7 @@
             <h3 style="text-align:right" class="collection-name">
                 @ViewData["CollectionName"]
             </h3>
-            <div class="row">
+            @*<div class="row">
                 @{
                     foreach (var item in Model)
                     {
@@ -54,7 +54,31 @@
                         </div>
                     }
                 }
-            </div>
+            </div>*@
+            <ul class="products">
+                @{
+                    foreach (var item in Model)
+                    {
+
+                        <li style="padding-top:4em;">
+                            <a href="~/group/details?itemId=@item.Id">
+                                <img  style="width:250px; height:auto; " src="@item.image_url">
+                                <p style="padding-top:2em; ">
+                                    <span style="font-size:12pt">@item.name</span><br />
+                                    <b style="font-size:10pt; color:#0047AB">
+                                        ₦ @item.price.ToString("#,##0") [NGN]<br /><br />
+                                    </b>
+                                    <a href="~/group/details?itemId=@item.Id" class="btn">order <i class="ion ion-chevron-right"></i></a>
+
+                                </p>
+                            </a>
+                        </li>
+                    }
+                }
+
+
+            </ul>
+
         </div>
         <div class="col-md-3 hidden-lg categories">
             <h3>Product Categories</h3><hr />
@@ -85,3 +109,6 @@
         </div>
     </div>
 </div>
+
+
+

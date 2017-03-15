@@ -1,4 +1,4 @@
-.error {
+﻿.error {
   color: red; }
 
 .top-bar {
@@ -57,8 +57,8 @@
   height: auto;
   /* Set up positioning */
   /*position: fixed;
-top: 0;
-left: 0;*/ }
+  top: 0;
+  left: 0;*/ }
 
 /*Button styles*/
 .btn {
@@ -160,4 +160,3 @@ hr {
   height: auto;
   border-bottom: 2px solid #0047AB; }
 
-/*# sourceMappingURL=General.css.map */

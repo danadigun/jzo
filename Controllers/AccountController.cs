@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using jzo.Models;
 using jzo.Models.AccountViewModels;
 using jzo.Services;
+using jzo.Data;
 
 namespace jzo.Controllers
 {
@@ -20,13 +21,15 @@ namespace jzo.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private ApplicationDbContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory, 
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -110,8 +113,8 @@ namespace jzo.Controllers
                     city = model.city,
                     country = model.country,
                     firstname = model.firstname,
-                    PhoneNumber = model.phone,  
-                    phone = model.phone,
+                    PhoneNumber = model.phone.Replace(" ", string.Empty),  
+                    phone = model.phone.Replace(" ", string.Empty),
                     lastname = model.lastname,
                     state = model.state,
                    
@@ -274,7 +277,7 @@ namespace jzo.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(model.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null )
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -282,11 +285,18 @@ namespace jzo.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
-                //var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                //await _emailSender.SendEmailAsync(model.Email, "Reset Password",
-                //   $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
-                //return View("ForgotPasswordConfirmation");
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
+                await _emailSender.SendEmailAsync(model.Email, "Reset Password",
+                 $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+
+                
+
+                // new MandrillService().SendEmail(model.Email, "Reset Password",
+                //  $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+
+                return View("ForgotPasswordConfirmation");
             }
 
             // If we got this far, something failed, redisplay form

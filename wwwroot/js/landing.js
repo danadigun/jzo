@@ -3,6 +3,7 @@
 
 $(function () {
 
+     
     //carousel
     $('.carousel').carousel({
         pause : 'hover'
@@ -50,5 +51,19 @@ $(function () {
         }
     })
 
-    
+
+    //product category dropdown
+
+    $('.product-cat-menu').hide();
+    //$('.product-cat').mouseenter(function () {
+    //    $('.product-cat-menu').show();
+    //})
+    //$('.product-cat-menu').mouseenter(function () {
+    //    $('.product-cat-menu').show();
+    //})
+
+  
+    //$('.product-cat-menu').mouseleave(function () {
+    //    $('.product-cat-menu').hide();
+    //})
 });
