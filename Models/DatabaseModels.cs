@@ -33,6 +33,7 @@ namespace jzo.Models
         public string name { get; set; }
         public string description { get; set; }
         public DateTime dateCreated { get; set; }
+        public DateTime dateModified { get; set; }
         public int ItemGroupId { get; set; }
         public int quantity { get; set; }
 
@@ -63,5 +64,25 @@ namespace jzo.Models
         public decimal totalPrice { get; set; }
         public bool isSold { get; set; }
         public ApplicationUser user { get; set; }
+    }
+
+    public class CustomOrder
+    {
+        public int Id { get; set; }
+        public int OrderId { get; set; }
+        public int ItemId { get; set; }
+        public string ItemName { get; set; }
+        public decimal neck { get; set; }
+        public decimal chest { get; set; } 
+        public decimal seat { get; set; }
+        public decimal shirtLength { get; set; }
+        public decimal shoulderWidth { get; set; }
+        public decimal armLength { get; set; }
+        public decimal wrist { get; set; }
+        public decimal hip { get; set; }
+        public decimal inSeam { get; set; }
+        public decimal coatSleaveLength { get; set; }
+        public decimal sleeveLength { get; set; }
+        public decimal jacketLength { get; set; }
     }
 }

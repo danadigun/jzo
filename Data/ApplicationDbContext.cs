@@ -9,16 +9,17 @@ using jzo.Services;
 
 namespace jzo.Data
 {
-    //public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    //{
-    public class ApplicationDbContext: DbContext
-    { 
-        //public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        //    : base(options)
-        //{
-        //}
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
 
-       
+        //Application db context controller
+        public ApplicationDbContext()
+        {
+        }
 
         public DbSet<Order> Order { get; set; }
         public DbSet<SelectedItems> SelectedItem { get; set; }
@@ -26,6 +27,8 @@ namespace jzo.Data
         public DbSet<Item>Item { get; set; }
         public DbSet<Checkout> Checkout { get; set; }
         public DbSet<Admins> Admins { get; set; }
+        public DbSet<CustomOrder> CustomOrder { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -33,12 +36,6 @@ namespace jzo.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=89.107.58.21,49170;Initial Catalog=jzofashion;User ID=sa;Password=psalm!!9");
-        }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
-
-       
     }
 }
