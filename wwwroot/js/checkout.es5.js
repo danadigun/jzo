@@ -1,10 +1,12 @@
 ﻿//checkout.js
 
+'use strict';
+
 $(function () {
     //checkout
     $('.checkout').click(function () {
-       
-        $('.checkout').html('please wait...')
+
+        $('.checkout').html('please wait...');
 
         $.ajax({
 
@@ -21,24 +23,20 @@ $(function () {
                     type: 'POST'
                 }).done(function (callback) {
                     //callback here
-                    $('.checkout').html('Checkout')
+                    $('.checkout').html('Checkout');
 
                     //redirect to paystack payment url
                     $(location).attr('href', callback.url);
-
                 }).fail(function (error) {
                     //error callbaack here
                     alert(error);
-                })
+                });
             }
-
         }).fail(function (error) {
 
             console.log(error);
-
-        })
-        
-    })
+        });
+    });
 
     //Remove item from cart
     $('.remove-item-cart').click(function (e) {
@@ -49,7 +47,7 @@ $(function () {
         $(this).html('removing...');
 
         $.ajax({
-            url: '../api/SelectedItems/'+id,
+            url: '../api/SelectedItems/' + id,
             type: 'DELETE'
 
         }).done(function (callback) {
@@ -67,12 +65,11 @@ $(function () {
                 $('.count-message').html("You have " + callback.noOfItems + " item(s) in your shopping cart");
                 $('#cart_count').html(callback.noOfItems);
                 $('#cart_count_2').html(callback.noOfItems);
-
             }).fail(function (error) {
 
                 console.log(error);
-            })
-            
-        })
-    })
-})
+            });
+        });
+    });
+});
+
