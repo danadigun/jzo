@@ -14,5 +14,41 @@
   {
     "outputFile": "wwwroot/css/_desktop.css",
     "inputFile": "wwwroot/css/_desktop.scss"
+  },
+  {
+    "outputFile": "wwwroot/js/CustomOrder.es5.js",
+    "inputFile": "wwwroot/js/CustomOrder.js"
+  },
+  {
+    "outputFile": "wwwroot/js/addToCart.es5.js",
+    "inputFile": "wwwroot/js/addToCart.js"
+  },
+  {
+    "outputFile": "wwwroot/js/checkout.es5.js",
+    "inputFile": "wwwroot/js/checkout.js"
+  },
+  {
+    "outputFile": "wwwroot/js/group.es5.js",
+    "inputFile": "wwwroot/js/group.js"
+  },
+  {
+    "outputFile": "wwwroot/js/item.es5.js",
+    "inputFile": "wwwroot/js/item.js"
+  },
+  {
+    "outputFile": "wwwroot/js/landing.es5.js",
+    "inputFile": "wwwroot/js/landing.js"
+  },
+  {
+    "outputFile": "wwwroot/js/SearchOrder.es5.js",
+    "inputFile": "wwwroot/js/SearchOrder.js"
+  },
+  {
+    "outputFile": "wwwroot/js/ShipToCustomer.es5.js",
+    "inputFile": "wwwroot/js/ShipToCustomer.js"
+  },
+  {
+    "outputFile": "wwwroot/js/site.es5.js",
+    "inputFile": "wwwroot/js/site.js"
   }
 ]

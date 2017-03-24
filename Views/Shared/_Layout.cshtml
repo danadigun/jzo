@@ -92,7 +92,7 @@
             .sidenav .closebtn {
                 position: absolute;
                 top: 0;
-               
+
                 right: 0px;
                 font-size: 36px;
                 margin-left: 50px;
@@ -106,7 +106,7 @@
                 /*position:absolute;*/
                 top:0;
                 right:0;
-               
+
             }
             .sidenav a .ion{
                 font-size:25px;
@@ -122,7 +122,7 @@
                 z-index: 1100;
                 background-color: #373433;
                 box-shadow: 1px -3px 14px rgba(0,0,0,0.4);
-               
+
             }
 
             .sidenav .sign-out{
@@ -136,6 +136,19 @@
                margin-top:6em !important;
            }
     </style>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-65950505-3', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 </head>
 
 <body>
@@ -202,13 +215,13 @@
 
         </ul>
     </div>
-    
+
     <div id="mySidenav" class="sidenav">
-       
+
         <a href="~/" style="margin-top:0.6em; padding-top:40px;"><i class="ion ion-home"></i>Home</a>
 
-        
-          @*  <a href="#"><i class="ion ion-ios-color-filter-outline"></i>collections </a>*@
+
+        @*  <a href="#"><i class="ion ion-ios-color-filter-outline"></i>collections </a>*@
 
         <a href="~/store" class="btn"><i class="ion ion-bag"></i>Shop</a>
         @*<a href="#"><i class="ion ion-man"></i> men</a>*@
@@ -233,17 +246,17 @@
                             }
                         }
 
-                        <a  asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
-                        <span   style="position:absolute; bottom:5%;">                       
-                                <button type="submit" class="btn btn-primary sign-out" style="width:100%">Sign out</button>                     
+                        <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
+                        <span style="position:absolute; bottom:5%;">
+                            <button type="submit" class="btn btn-primary sign-out" style="width:100%">Sign out</button>
                         </span>
 
                     </div>
                 </form>
-            }
-            else
-            {
-                <span style="position:absolute; bottom:5%; font-size:10pt !important;">
+                            }
+                            else
+                            {
+                                <span style="position:absolute; bottom:5%; font-size:10pt !important;">
                                     <a style="color:white; border:none; text-decoration:none" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
                                     <span class="login_or">
                                         &nbsp;or&nbsp;
@@ -251,17 +264,17 @@
                                     </span>
                                     <a style="color:white; border:none; text-decoration:none" asp-area="" asp-controller="Account" asp-action="Register">create an account</a>
                                 </span>
-            }
+                            }
 
         }
 
     </div>
     <div class="hidden-lg mobileNavTopBar" style="padding:20px;padding-bottom:60px;background:#111; color:white;">
-        <span class="openbtn" style="font-size:30px;cursor:pointer; float:right" onclick="openNav()">&#9776;</span>     
+        <span class="openbtn" style="font-size:30px;cursor:pointer; float:right" onclick="openNav()">&#9776;</span>
         <span class="closebtn" onclick="closeNav()" style="cursor:pointer; float:right">
-                <i style="font-size:50px; color:#818181" class="ion ion-android-close"></i>
-            </span>
-       
+            <i style="font-size:50px; color:#818181" class="ion ion-android-close"></i>
+        </span>
+
         <span style="float:left">
             <a href="~/">
                 <img alt="Logo" src="~/images/JZO-Logo-3-2.jpg" style="width:60px; height:auto">
@@ -280,7 +293,7 @@
                 </span>
             }
         }
-        
+
     </div>
     <div id="main" class="body-content">
         @RenderBody()
@@ -311,15 +324,15 @@
         <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
         <script src="~/lib/jquery-mask-plugin/dist/jquery.mask.js"></script>
 
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/group.js" asp-append-version="true"></script>
-        <script src="~/js/item.js" asp-append-version="true"></script>
-        <script src="~/js/addToCart.js" asp-append-version="true"></script>
-        <script src="~/js/landing.js" asp-append-version="true"></script>
-        <script src="~/js/checkout.js" asp-append-version="true"></script>
-        <script src="~/js/ShipToCustomer.js" asp-append-version="true"></script>
-        <script src="~/js/SearchOrder.js" asp-append-version="true"></script>
-        <script src="~/js/CustomOrder.js" asp-append-version="true"></script>
+        <script src="~/js/site.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/group.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/item.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/addToCart.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/landing.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/checkout.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/ShipToCustomer.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/SearchOrder.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/CustomOrder.es5.min.js" asp-append-version="true"></script>
 
     </environment>
     <environment names="Staging,Production">
@@ -337,15 +350,15 @@
         <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
         <script src="~/lib/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
 
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-        <script src="~/js/group.min.js" asp-append-version="true"></script>
-        <script src="~/js/item.min.js" asp-append-version="true"></script>
-        <script src="~/js/addToCart.min.js" asp-append-version="true"></script>
-        <script src="~/js/landing.min.js" asp-append-version="true"></script>
-        <script src="~/js/checkout.min.js" asp-append-version="true"></script>
-        <script src="~/js/ShipToCustomer.min.js" asp-append-version="true"></script>
-        <script src="~/js/SearchOrder.min.js" asp-append-version="true"></script>
-        <script src="~/js/CustomOrder.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/group.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/item.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/addToCart.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/landing.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/checkout.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/ShipToCustomer.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/SearchOrder.es5.min.js" asp-append-version="true"></script>
+        <script src="~/js/CustomOrder.es5.min.js" asp-append-version="true"></script>
 
 
 
