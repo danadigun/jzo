@@ -133,10 +133,11 @@ namespace jzo.Controllers
             new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
             //add authorization header for paystack
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk_test_f26f77b1e6f0890258f40bec1026de5d9733ca9d");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk_live_9718c5f6ab2f0186e14358c38f723c8547852c5a");
 
-            //post payment request
-            var _reference = new Random().Next().ToString();
+            
+                        //post payment request
+                        var _reference = new Random().Next().ToString();
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("reference", _reference),

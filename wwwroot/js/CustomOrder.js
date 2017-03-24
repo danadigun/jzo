@@ -20,8 +20,8 @@
 
     //customize order
     $('.customize-order').click(function () {
-         swal("This feature is comming soon...we're working on it");
-        //loadCustomOrder();
+         //swal("This feature is comming soon...we're working on it!");
+        loadCustomOrder();
     });
 
     //regular order
@@ -62,7 +62,7 @@
                 toggle: false
             })
 
-            $('a[data-target='+'\"'+id+'\"'+']').prop("disabled", true);
+            //$('a[data-target='+'\"'+id+'\"'+']').prop("disabled", true);
         },
 
         openOneCloseAll: function(indexToOpen){
@@ -109,13 +109,13 @@
         if (empty.length) {
             //At least one input is empty
             //alert('empty')
-            $('.title_1').html("Neck & Chest  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
+            $('.title_1').html("Neck & Shoulder  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
                 "<i style=\"padding-top:5px; color:red; text-align:center\">One or more fields are still empty</i>")
         }
         else {
 
             //fields are valid
-            $('.title_1').html("Neck & Chest  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
+            $('.title_1').html("Neck & Shoulder  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
 
             //move to step 2 and unlock validated and completed sections
             wizardService.openOneCloseAll(1);
@@ -133,13 +133,13 @@
         if (empty.length) {
             //At least one input is empty
             //alert('empty')
-            $('.title_2').html("Waist and Seat  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
+            $('.title_2').html("Chest & Mid  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
                 "<i style=\"padding-top:5px; color:red; text-align:center\">One or more fields are still empty</i>")
         }
         else {
 
             //fields are valid
-            $('.title_2').html("Waist and Seat  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
+            $('.title_2').html("Chest & Mid  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
 
             //move to step 3 and unlock validated and completed sections
             wizardService.openOneCloseAll(2);
@@ -157,13 +157,13 @@
         if (empty.length) {
             //At least one input is empty
             //alert('empty')
-            $('.title_3').html("Shirt and Shoulder  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
+            $('.title_3').html("Waist & Arms  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
                 "<i style=\"padding-top:5px; color:red; text-align:center\">One or more fields are still empty</i>")
         }
         else {
 
             //fields are valid
-            $('.title_3').html("Shirt and Shoulder  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
+            $('.title_3').html("Waist & Arms  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
 
             //move to step 4 and unlock validated and completed sections
             wizardService.openOneCloseAll(3);
@@ -181,13 +181,13 @@
         if (empty.length) {
             //At least one input is empty
             //alert('empty')
-            $('.title_4').html("Arms and Wrist  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
+            $('.title_4').html("Length <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
                 "<i style=\"padding-top:5px; color:red; text-align:center\">One or more fields are still empty</i>")
         }
         else {
 
             //fields are valid
-            $('.title_4').html("Arms and Wrist  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
+            $('.title_4').html("Length  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
 
             //move to step 4 and unlock validated and completed sections
             wizardService.openOneCloseAll(4);
@@ -205,13 +205,13 @@
         if (empty.length) {
             //At least one input is empty
             //alert('empty')
-            $('.title_5').html("Hip and InSeam  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
+            $('.title_5').html("Waist, Hip & Thigh  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
                 "<i style=\"padding-top:5px; color:red; text-align:center\">One or more fields are still empty</i>")
         }
         else {
 
             //fields are valid
-            $('.title_5').html("Hip and InSeam  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
+            $('.title_5').html("Waist, Hip & Thigh  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
 
             //move to step 4 and unlock validated and completed sections
             wizardService.openOneCloseAll(5);
@@ -229,13 +229,13 @@
         if (empty.length) {
             //At least one input is empty
             //alert('empty')
-            $('.title_6').html("Sleaves  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
+            $('.title_6').html("Knee, feet & trouser Length  <i class=\"ion ion-close-round\" style=\"float:right; color:red\"></i><br>" +
                 "<i style=\"padding-top:5px; color:red; text-align:center\">One or more fields are still empty</i>")
         }
         else {
 
             //fields are valid
-            $('.title_6').html("Sleaves  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
+            $('.title_6').html("Knee, feet & trouser Length  <i class=\"ion ion-checkmark-round\" style=\"float:right; color:green\"></i><br>")
 
             //move to step 4 and unlock validated and completed sections
             $(accordions[5]).collapse('hide');

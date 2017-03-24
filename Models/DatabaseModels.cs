@@ -73,16 +73,22 @@ namespace jzo.Models
         public int ItemId { get; set; }
         public string ItemName { get; set; }
         public decimal neck { get; set; }
-        public decimal chest { get; set; } 
-        public decimal seat { get; set; }
-        public decimal shirtLength { get; set; }
-        public decimal shoulderWidth { get; set; }
-        public decimal armLength { get; set; }
+        public decimal shoudler { get; set; } 
+        public decimal mid { get; set; }
+        public decimal chest { get; set; }
+        public decimal waist { get; set; }
+        public decimal shortSleeve { get; set; }
+        public decimal longSleeve { get; set; }
+        public decimal forearm { get; set; }
         public decimal wrist { get; set; }
+        public decimal bicep { get; set; }
+        public decimal bodyLength { get; set; }
+        public decimal kaftanLength { get; set; }
+        public decimal trouserWaist { get; set; }
         public decimal hip { get; set; }
-        public decimal inSeam { get; set; }
-        public decimal coatSleaveLength { get; set; }
-        public decimal sleeveLength { get; set; }
-        public decimal jacketLength { get; set; }
+        public decimal thigh { get; set; }
+        public decimal knee { get; set; }
+        public decimal feet { get; set; }
+        public decimal trouserLength { get; set; }
     }
 }
