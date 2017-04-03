@@ -416,74 +416,41 @@ namespace jzo.Controllers
             return Json(new { cartId = ShoppingCartId, noOfItems = cartItems.Count });
         }
 
+        /// <summary>
+        /// Handles payment processing callback from paystack
+        /// </summary>
+        /// <param name="cartId"></param>
+        /// <param name="reference"></param>
+        /// <returns></returns>
         [Authorize]
         public async Task<IActionResult> paystackCallback(string cartId, string reference)
         {
-            //verify if reference exists
-            if (PaystackService.IsPaymentExist(reference).Result == false)
+            //if cartId is null, transaction is a custom order
+            if(string.IsNullOrEmpty(cartId))
             {
-                ViewData["status"] = "invalid transaction";
-                return View();
-            }
-
-            else
-            {
-                //verify if the transaction has been checked out
-                //_context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [jzofashion].[dbo].[Order] ON");
-
-                var _cart = _context.SelectedItem.Where(x => x.CartId == cartId).ToList();
-                if (_cart.First().isCheckedOut == true)
+                //verify if reference exists
+                if (PaystackService.IsPaymentExist(reference).Result == false)
                 {
                     ViewData["status"] = "invalid transaction";
                     return View();
                 }
-
                 else
                 {
                     ViewData["status"] = "valid transaction";
+                    //TODO: get custom order from reference
+                    int _refId = Int32.Parse(reference);
+                    var _customOrder = _context.CustomOrder.Where(x => x.referenceId == _refId);
 
-                    
-                    //set order reference Id
-                    foreach (var item in _cart)
-                    {
-                        //set isCheckout to true
-                        item.isCheckedOut = true;
-                        item.OrderReferenceId = Convert.ToInt32(reference);
-
-                        //create new order with reference
-                        var order = new Order
-                        {
-                            dateCreated = DateTime.Now,
-                            referenceId = Convert.ToInt32(reference),
-                            isPending = true,
-                            isShipped = false,
-                            user = User.Identity.Name,
-                                                        
-                        };
-                        _context.Order.Add(order);
-
-                    }
-
-                    //create new checkout record for order
-                    var checkout = new Checkout
-                    {
-                        Items = _cart,
-                        dateCreated = DateTime.Now,
-                        isSold = true,
-                        totalPrice = _cart.Select(x => x.totalPrice).Sum()
-                    };
-                    _context.Checkout.Add(checkout);
-                    _context.SaveChanges();
-
+                    //TODO: Update custom order record for payment success
 
                     //send sms to customer
                     var _user = _context.Users.Where(x => x.UserName == User.Identity.Name)
-                       
+
                         .FirstOrDefault();
 
-                  bool status = InfoBipService.sendMessage(_user.PhoneNumber.Trim(' '),
-                        $"Hello {_user.firstname}, " + "\n\n" +
-                        "Thanks for making an Order on jzofashion.com. Here is your reference number: " + reference + " ").Result;
+                    bool status = InfoBipService.sendMessage(_user.PhoneNumber.Trim(' '),
+                          $"Hello {_user.firstname}, " + "\n\n" +
+                          "Thanks for making a custom order on jzofashion.com. Here is your reference number: " + reference + " ").Result;
 
 
                     //send email/sms to admin/store manager
@@ -491,12 +458,12 @@ namespace jzo.Controllers
 
                     foreach (var admin in _allAdmins)
                     {
-                      bool status_1 = InfoBipService.sendMessage(admin.phone,
-                              $"You have a new Order request referenced: {reference} made on jzofashion.com. click this link to view order http://jzofashion.com/group/find?refid={reference}").Result;
+                        bool status_1 = InfoBipService.sendMessage(admin.phone,
+                                $"You have a new custom order request referenced: {reference} made on jzofashion.com. click this link to view order http://jzofashion.com/group/find?refid={reference}").Result;
 
                         await new AuthMessageSender().SendEmailAsync(admin.email, "Order Request. Reference: " + reference,
                             "Hi Admin, " + "<br><br>" +
-                              " You have a new Order request referenced: " + reference + " made on jzofashion.com.");
+                              " You have a new custom order request referenced: " + reference + " made on jzofashion.com.");
 
                     }
 
@@ -505,6 +472,97 @@ namespace jzo.Controllers
 
                 }
             }
+            else
+            {
+                //verify if reference exists
+                if (PaystackService.IsPaymentExist(reference).Result == false)
+                {
+                    ViewData["status"] = "invalid transaction";
+                    return View();
+                }
+
+                else
+                {
+                    //verify if the transaction has been checked out
+                    //_context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [jzofashion].[dbo].[Order] ON");
+
+                    var _cart = _context.SelectedItem.Where(x => x.CartId == cartId).ToList();
+                    if (_cart.First().isCheckedOut == true)
+                    {
+                        ViewData["status"] = "invalid transaction";
+                        return View();
+                    }
+
+                    else
+                    {
+                        ViewData["status"] = "valid transaction";
+
+
+                        //set order reference Id
+                        foreach (var item in _cart)
+                        {
+                            //set isCheckout to true
+                            item.isCheckedOut = true;
+                            item.OrderReferenceId = Convert.ToInt32(reference);
+
+                            //create new order with reference
+                            var order = new Order
+                            {
+                                dateCreated = DateTime.Now,
+                                referenceId = Convert.ToInt32(reference),
+                                isPending = true,
+                                isShipped = false,
+                                user = User.Identity.Name,
+
+                            };
+                            _context.Order.Add(order);
+
+                        }
+
+                        //create new checkout record for order
+                        var checkout = new Checkout
+                        {
+                            Items = _cart,
+                            dateCreated = DateTime.Now,
+                            isSold = true,
+                            totalPrice = _cart.Select(x => x.totalPrice).Sum()
+                        };
+                        _context.Checkout.Add(checkout);
+                        _context.SaveChanges();
+
+
+                        //send sms to customer
+                        var _user = _context.Users.Where(x => x.UserName == User.Identity.Name)
+
+                            .FirstOrDefault();
+
+                        bool status = InfoBipService.sendMessage(_user.PhoneNumber.Trim(' '),
+                              $"Hello {_user.firstname}, " + "\n\n" +
+                              "Thanks for making an Order on jzofashion.com. Here is your reference number: " + reference + " ").Result;
+
+
+                        //send email/sms to admin/store manager
+                        var _allAdmins = _context.Admins.ToList();
+
+                        foreach (var admin in _allAdmins)
+                        {
+                            bool status_1 = InfoBipService.sendMessage(admin.phone,
+                                    $"You have a new Order request referenced: {reference} made on jzofashion.com. click this link to view order http://jzofashion.com/group/find?refid={reference}").Result;
+
+                            await new AuthMessageSender().SendEmailAsync(admin.email, "Order Request. Reference: " + reference,
+                                "Hi Admin, " + "<br><br>" +
+                                  " You have a new Order request referenced: " + reference + " made on jzofashion.com.");
+
+                        }
+
+                        //return success page
+                        return View();
+
+                    }
+                }
+            }
+
+          
         }
 
         [HttpGet]

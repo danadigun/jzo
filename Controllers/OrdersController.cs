@@ -136,8 +136,8 @@ namespace jzo.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk_live_9718c5f6ab2f0186e14358c38f723c8547852c5a");
 
             
-                        //post payment request
-                        var _reference = new Random().Next().ToString();
+            //post payment request
+            var _reference = new Random().Next().ToString();
             var content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("reference", _reference),
@@ -165,7 +165,85 @@ namespace jzo.Controllers
 
         }
 
-        
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> PostCustomOrder(CustomOrder order)
+        {
+            // get price 
+            var price = _context.Item.Where(x => x.Id == order.ItemId).Select(x => x.price).SingleOrDefault();
+
+           
+            //process Paystack payment
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(paymentUrl);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+            //add authorization header for paystack
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk_live_9718c5f6ab2f0186e14358c38f723c8547852c5a");
+
+
+            //generate request
+            var _reference = new Random().Next().ToString();
+
+            //add a new custom order to db
+            _context.CustomOrder.Add(new CustomOrder
+            {
+                ItemId = order.ItemId,
+                ItemName = order.ItemName,
+                bicep = order.bicep,
+                bodyLength = order.bodyLength,
+                chest = order.chest,
+                feet = order.feet,
+                forearm = order.forearm,
+                hip = order.hip,
+                kaftanLength = order.kaftanLength,
+                knee = order.knee,
+                longSleeve = order.longSleeve,
+                mid = order.mid,
+                neck = order.mid,
+                referenceId = Int32.Parse(_reference),
+                qty = order.qty,
+                shortSleeve = order.shortSleeve,
+                shoudler = order.shoudler,
+                thigh = order.thigh,
+                trouserLength = order.trouserLength,
+                trouserWaist = order.trouserWaist,
+                waist = order.waist,
+                wrist = order.wrist,
+                isPayed = false
+            });
+
+            _context.SaveChanges();
+
+            //initiate a post to paystack with null cartId
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("reference", _reference),
+                new KeyValuePair<string, string>("email", User.Identity.Name),
+                new KeyValuePair<string, string>("amount", (price * order.qty * 100).ToString()),
+                new KeyValuePair<string, string>("callback_url", $"http://jzofashion.com/Group/paystackCallback?cartId={null}&reference={_reference}")
+            });
+
+            var response = await client.PostAsync(paymentUrl, content);
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            if (jsonResponse != null)
+            {
+                var transaction = JsonConvert.DeserializeObject<Jsonresponse>(jsonResponse);
+
+                return Json(new { url = transaction.data.authorization_url });
+
+            }
+            else
+            {
+                return Json(new { message = "unable to generate transaction url" });
+
+            }
+
+        }
 
     }
 }

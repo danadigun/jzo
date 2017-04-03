@@ -5,24 +5,53 @@ $(function () {
 
         rules: {
             neck: { required: true },
-            chest: { required: true }
+            shoulder: { required: true },
+            mid: { required: true },
+            chest: { required: true },
+            waist: { required: true },
+            longSleeve: { required: true },
+            shortSleeve: { required: true },
+            forearm: { required: true },
+            wrist: { required: true },
+            bicep: { required: true },
+            bodyLength: { required: true },
+            kaftanLength: { required: true },
+            trouserWaist: { required: true },
+            hip: { required: true },
+            thigh: { required: true },
+            knee: { required: true },
+            feet: { required: true },
+            trouserLength: { required: true }
+
         },
 
         messages: {
-            neck: {
-                required: 'please enter the neck measurement in inches'
-            },
 
-            chest: {
-                required: 'please enter the chest measurement in inches'
-            }
+            neck: { required: 'neck  is required' },
+            shoulder: { required: 'shoulder is required' },
+            mid: { required: 'mid field is required' },
+            chest: { required: 'chest is required' },
+            waist: { required: 'waist is required' },
+            longSleeve: { required: 'Long Sleeve is required' },
+            shortSleeve: { required: 'short Sleeve is required' },
+            forearm: { required: 'forearm is required' },
+            wrist: { required: 'wrist is required' },
+            bicep: { required: 'bicep is required' },
+            bodyLength: { required: 'body Length is required' },
+            kaftanLength: { required: 'kaftan Length is required' },
+            trouserWaist: { required: 'This field is required' },
+            hip: { required: 'hip field is required' },
+            thigh: { required: 'thigh field is required' },
+            knee: { required: 'knee is required' },
+            feet: { required: 'feet is required' },
+            trouserLength: { required: 'Trouser Length is required' }
         }
     });
     $('.custom-order-form').hide();
 
     //customize order
     $('.customize-order').click(function () {
-        //swal("This feature is comming soon...we're working on it!");
+        // swal("This feature is comming soon...we're working on it!");
         loadCustomOrder();
     });
 
@@ -35,8 +64,19 @@ $(function () {
      * this loads custom order form
      */
     function loadCustomOrder() {
-        $('.regular-order-form').hide();
-        $('.custom-order-form').fadeIn();
+
+        //TODO: if all forms are filled show submit botton
+        if ($('form[name=CustomOrderForm]').valid()) {
+
+            $('.regular-order-form').hide();
+            $('.custom-order-form').fadeIn();
+        } else {
+            $('.regular-order-form').hide();
+            $('.custom-order-form').fadeIn();
+
+            //hide submit button
+            $('.submit_custom_order').hide();
+        }
     }
 
     /**
@@ -230,6 +270,38 @@ $(function () {
             //show submit button
             $('.submit_custom_order').fadeIn();
         }
+    });
+
+    //submit form
+    $('form[name=CustomOrderForm]').submit(function (e) {
+        e.preventDefault();
+
+        //TODO: API post to create custom order
+        var CustomOrder = {
+            ItemId: $('input[name=itemId]').val(),
+            ItemName: $('input[name=itemName]').val(),
+            qty: $('input[name=qty]').val(),
+            neck: $('input[name=neck]').val(),
+            shoulder: $('input[name=shoulder]').val(),
+            mid: $('input[name=mid]').val(),
+            chest: $('input[name=chest]').val(),
+            waist: $('input[name=waist]').val(),
+            longSleeve: $('input[name=longSleeve]').val(),
+            shortSleeve: $('input[name=shortSleeve]').val(),
+            forearm: $('input[name=forearm]').val(),
+            wrist: $('input[name=wrist]').val(),
+            bicep: $('input[name=bicep]').val(),
+            bodyLength: $('input[name=bodyLength]').val(),
+            kaftanLength: $('input[name=kaftanLength]').val(),
+            trouserWaist: $('input[name=trouserWaist]').val(),
+            hip: $('input[name=hip]').val(),
+            thigh: $('input[name=thigh]').val(),
+            knee: $('input[name=knee]').val(),
+            feet: $('input[name=feet]').val(),
+            trouserLength: $('input[name=trouserLength]').val()
+
+        };
+        swal('Order = ' + CustomOrder.ItemName + ', qty=' + CustomOrder.qty + 'pcs');
     });
 });
 

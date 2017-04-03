@@ -17,7 +17,7 @@ namespace jzo.Services
         public PaystackService()
         {
              paystack_uri_header = "https://api.paystack.co/transaction/";
-             paystack_key ="sk_test_f26f77b1e6f0890258f40bec1026de5d9733ca9d";
+             paystack_key = "sk_live_9718c5f6ab2f0186e14358c38f723c8547852c5a";
         }
         public static async Task<bool> IsPaymentExist(string payment_reference)
         {
@@ -31,7 +31,7 @@ namespace jzo.Services
                 new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
                 //add authorization header for paystack
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk_test_f26f77b1e6f0890258f40bec1026de5d9733ca9d");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "sk_live_9718c5f6ab2f0186e14358c38f723c8547852c5a");
 
                 //do a GET
                 var response = await client.GetAsync($"https://api.paystack.co/transaction/verify/{payment_reference}");

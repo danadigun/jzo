@@ -69,9 +69,10 @@ namespace jzo.Models
     public class CustomOrder
     {
         public int Id { get; set; }
-        public int OrderId { get; set; }
+        public int referenceId { get; set; }
         public int ItemId { get; set; }
         public string ItemName { get; set; }
+        public decimal qty { get; set; }
         public decimal neck { get; set; }
         public decimal shoudler { get; set; } 
         public decimal mid { get; set; }
@@ -90,5 +91,6 @@ namespace jzo.Models
         public decimal knee { get; set; }
         public decimal feet { get; set; }
         public decimal trouserLength { get; set; }
+        public bool isPayed { get; set; }
     }
 }
